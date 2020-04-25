@@ -1,0 +1,1 @@
+2020-04-26 09:57:13 -  - lisetIp - PackFunc.Db / org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such table: ip)

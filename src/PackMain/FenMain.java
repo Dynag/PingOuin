@@ -29,7 +29,7 @@ import PackFunc.funcIp;
 import PackFunc.funcLicence;
 import PackFunc.funcMain;
 import PackFunc.funcMiseAJour;
-import static xyz.pingouin.serenity.PingOuin.funcMain.path;
+
 
 /**
  *
@@ -45,7 +45,7 @@ public final class FenMain extends javax.swing.JFrame {
      */
     public FenMain(){
         fun.testOs();
-        File fichier = new File(path+"/db/ip.db");
+        File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
         initComponents();
         fun.dossCree();
@@ -125,6 +125,7 @@ public final class FenMain extends javax.swing.JFrame {
         btnLancer = new javax.swing.JToggleButton();
         progerAjout = new javax.swing.JProgressBar();
         labMaj = new javax.swing.JLabel();
+        comboTri = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -134,8 +135,8 @@ public final class FenMain extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        slidDelaisPing = new javax.swing.JSlider();
         labDelaisPing = new javax.swing.JLabel();
+        slidDelaisPing = new javax.swing.JSpinner();
         jPanel9 = new javax.swing.JPanel();
         listeSite = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
@@ -194,6 +195,19 @@ public final class FenMain extends javax.swing.JFrame {
         labMaj.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labMaj.setText("A jour");
 
+        comboTri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trier par", "IP", "Nom" }));
+        comboTri.setMaximumSize(new java.awt.Dimension(47, 20));
+        comboTri.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTriItemStateChanged(evt);
+            }
+        });
+        comboTri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTriActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,22 +215,24 @@ public final class FenMain extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(btnLancer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboTri, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(progerAjout, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+                .addComponent(progerAjout, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addComponent(labMaj, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnLancer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(comboTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(labMaj, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(progerAjout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(17, 17, 17))
         );
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
@@ -283,16 +299,15 @@ public final class FenMain extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Delais entre 2 pings");
 
-        slidDelaisPing.setMaximum(43200);
-        slidDelaisPing.setMinimum(1);
+        labDelaisPing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labDelaisPing.setText("5 s");
+
+        slidDelaisPing.setValue(5);
         slidDelaisPing.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 slidDelaisPingStateChanged(evt);
             }
         });
-
-        labDelaisPing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labDelaisPing.setText("5 s");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -302,16 +317,19 @@ public final class FenMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(labDelaisPing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(17, 17, 17)
                 .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labDelaisPing)
@@ -414,6 +432,11 @@ public final class FenMain extends javax.swing.JFrame {
         tabPrinc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabPrincMouseClicked(evt);
+            }
+        });
+        tabPrinc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tabPrincPropertyChange(evt);
             }
         });
         jScrollPane1.setViewportView(tabPrinc);
@@ -553,7 +576,7 @@ public final class FenMain extends javax.swing.JFrame {
         jMenuItem1.setText("Imprimer");
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("Enregistrer la plage");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -728,7 +751,7 @@ public final class FenMain extends javax.swing.JFrame {
 
     private void listeSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeSiteActionPerformed
         PackFunc.Var.stopPing = true;
-        PackFunc.Var.dbSite = (String) listeSite.getSelectedItem()+".db";
+        PackFunc.Var.dbSite = (String) listeSite.getSelectedItem()+".pigo";
         btnLancer.setText("Start");
         btnLancer.setBackground(Color.red);
         fun.connectSite();
@@ -786,22 +809,6 @@ public final class FenMain extends javax.swing.JFrame {
             PackFunc.Var.stopPing = true;           
         }
     }//GEN-LAST:event_btnLancerActionPerformed
-
-    private void slidDelaisPingStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slidDelaisPingStateChanged
-        long delaisPause = slidDelaisPing.getValue();
-        if(delaisPause >= 60 && delaisPause < 3600){
-            delaisPause = delaisPause / 60;
-            labDelaisPing.setText(Long.toString(delaisPause)+" min");
-        }
-        else if(delaisPause >= 3600){
-            delaisPause = delaisPause / 3600;
-            labDelaisPing.setText(Long.toString(delaisPause)+" h");
-        }else{
-            labDelaisPing.setText(Long.toString(delaisPause)+" s");
-        }
-        
-        PackFunc.Var.delaisPause = slidDelaisPing.getValue();
-    }//GEN-LAST:event_slidDelaisPingStateChanged
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         FenSiteNouveau psn = new FenSiteNouveau();
@@ -943,6 +950,49 @@ public final class FenMain extends javax.swing.JFrame {
         pap.show();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void slidDelaisPingStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slidDelaisPingStateChanged
+        // TODO add your handling code here:
+        long delaisPause = Long.parseLong(String.valueOf(slidDelaisPing.getValue()));
+        
+        if(delaisPause >= 60 && delaisPause < 3600){
+            delaisPause = delaisPause / 60;
+            labDelaisPing.setText(Long.toString(delaisPause)+" min");
+        }
+        else if(delaisPause >= 3600){
+            delaisPause = delaisPause / 3600;
+            labDelaisPing.setText(Long.toString(delaisPause)+" h");
+        }else if(delaisPause <= 0){
+            PackThread.threadPop tp = new PackThread.threadPop("Veuillez entrer une valeur supérieure à Zéro");
+            tp.start();
+            slidDelaisPing.setValue(5);
+        }else{
+            labDelaisPing.setText(Long.toString(delaisPause)+" s");
+        }
+        
+        PackFunc.Var.delaisPause = (Integer) slidDelaisPing.getValue();
+    }//GEN-LAST:event_slidDelaisPingStateChanged
+
+    private void comboTriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTriItemStateChanged
+        
+    }//GEN-LAST:event_comboTriItemStateChanged
+
+    private void comboTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTriActionPerformed
+        if(comboTri.getSelectedItem().equals("Trier par")){
+            PackFunc.Var.tri = "IP";
+        }else{
+            PackFunc.Var.tri = (String) comboTri.getSelectedItem();
+        }
+        fdb.listeIp();
+        PackFunc.Var.stopPing = true;
+        btnLancer.setText("Start");
+        btnLancer.setBackground(Color.red);
+        System.out.println(PackFunc.Var.tri);
+    }//GEN-LAST:event_comboTriActionPerformed
+
+    private void tabPrincPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tabPrincPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabPrincPropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -985,6 +1035,7 @@ public final class FenMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JToggleButton btnLancer;
     private javax.swing.JComboBox<String> cbTout;
+    private javax.swing.JComboBox<String> comboTri;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1031,7 +1082,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem menEnvoieRapports;
     private javax.swing.JCheckBoxMenuItem menPopup;
     public static javax.swing.JProgressBar progerAjout;
-    public static javax.swing.JSlider slidDelaisPing;
+    private javax.swing.JSpinner slidDelaisPing;
     private javax.swing.JSpinner spinPlage;
     public static javax.swing.JTable tabPrinc;
     public static javax.swing.JTextField tfNom;

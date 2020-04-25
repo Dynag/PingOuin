@@ -12,15 +12,16 @@ import java.sql.Connection;
  * @author Dynaglien
  */
 public class Var {
-    public static String version = "02.02.02";
+    public static String version = "03.01.04";
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;
     public static Connection dbConHist = null;
-    public static String dbSite = "ip.db";
+    public static String dbSite = "ip.pigo";
     public static boolean stopPing = false;
     public static Integer delaisPause = 5;
     public static Integer threadOuvert = 0;
     public static Integer threadFerme = 0;
     public static String os;
     public static String path;
+    public static String tri = "IP";
 }

@@ -37,6 +37,7 @@ public class threadPing implements Runnable{
         pinger();
     }
     public void pinger(){
+System.out.println("Start => "+ip);
         String result = null;
         String ipTest = isAlive(ip);
         Integer ipPresent = Integer.parseInt(fdb.dbIpLire(ip, "etat"));
@@ -68,6 +69,7 @@ public class threadPing implements Runnable{
         }
         try{
             Thread.currentThread().interrupt();
+System.out.println("Stop => "+ip);
         }catch(Exception e){
             fun.ecritLogs(e, " - "+getClass().getName());
         }

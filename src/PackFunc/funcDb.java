@@ -210,7 +210,7 @@ public class funcDb {
     public void ipHistAj(String ip, String etat, String latence){
         String dateJour;
         Date date = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd | hh:mm:ss");
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd | HH:mm:ss");
         dateJour = ft.format(date);
         try{
             String sql = "INSERT INTO '"+ip+"'(date, etat, lat) VALUES(?,?,?)"; //NOI18N
@@ -221,7 +221,7 @@ public class funcDb {
                 ps1.execute();
                 ps1.close();
         }catch(SQLException e){
-        fun.ecritLogs(e, " - ipHistAj - "+ip+" / "+getClass().getName());
+            //fun.ecritLogs(e, " - ipHistAj - "+ip+" / "+getClass().getName());
         }
     }
     
@@ -229,7 +229,7 @@ public class funcDb {
     public void listeIp(){
         try{
             FenMain.tabPrinc.removeAll();
-            String sql = "SELECT ip AS 'ip', nom AS 'Nom', etat AS 'Etat', latence AS 'Latence' FROM ip ORDER BY ip";
+            String sql = "SELECT ip AS 'ip', nom AS 'Nom', etat AS 'Etat', latence AS 'Latence' FROM ip ORDER BY "+PackFunc.Var.tri+"";
             ps1 = PackFunc.Var.dbConSite.prepareStatement(sql);
             rs = ps1.executeQuery();
             FenMain.tabPrinc.setModel(DbUtils.resultSetToTableModel(rs));
@@ -246,7 +246,7 @@ public class funcDb {
     public void dbIpErase() throws ClassNotFoundException{
         try {
             Class.forName("org.sqlite.JDBC"); //NOI18N
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/db/ip.db"); //NOI18N
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/db/ip.pigo"); //NOI18N
             String sq1 = "DELETE FROM ip"; //NOI18N
             ps1 = conn.prepareStatement(sq1);
             ps1.execute();
@@ -292,13 +292,13 @@ public class funcDb {
     
     
     public void siteNouveau(String nom){
-        PackFunc.Var.dbSite = nom+".db";
+        PackFunc.Var.dbSite = nom+".pigo";
         fun.connectSite();
         tableIpCree();
         try{
             String sq1 = "SELECT * FROM ip"; //NOI18N
             Class.forName("org.sqlite.JDBC"); //NOI18N
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/db/ip.db"); //NOI18N
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/db/ip.pigo"); //NOI18N
             ps = conn.createStatement();
             rs = ps.executeQuery(sq1);
             while(rs.next()){

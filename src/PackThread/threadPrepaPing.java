@@ -42,7 +42,7 @@ public class threadPrepaPing extends Thread{
       
         //ScheduledExecutorService execute = Executors.newScheduledThreadPool(20);
         try{
-            String sql = "SELECT * FROM ip ORDER BY ip";
+            String sql = "SELECT * FROM ip ORDER BY "+PackFunc.Var.tri+"";
             
             
             Integer i = 0;

@@ -39,10 +39,10 @@ public class funcMain {
         try {
             Class.forName("org.sqlite.JDBC"); //NOI18N
             if(PackFunc.Var.dbConParam == null){
-                PackFunc.Var.dbConParam = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/pingouin.db"); //NOI18N
+                PackFunc.Var.dbConParam = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/pingouin.pigo"); //NOI18N
             }else{
                 PackFunc.Var.dbConParam.close();
-                PackFunc.Var.dbConParam = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/pingouin.db"); //NOI18N
+                PackFunc.Var.dbConParam = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/pingouin.pigo"); //NOI18N
             }
             
             Class.forName("org.sqlite.JDBC"); //NOI18N
@@ -64,10 +64,10 @@ public class funcMain {
         try {
             Class.forName("org.sqlite.JDBC"); //NOI18N
             if(PackFunc.Var.dbConHist == null){
-                PackFunc.Var.dbConHist = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/db/hist.pig"); //NOI18N
+                PackFunc.Var.dbConHist = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/db/hist.pigo"); //NOI18N
             }else{
                 PackFunc.Var.dbConHist.close();
-                PackFunc.Var.dbConHist = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/db/hist.pig"); //NOI18N
+                PackFunc.Var.dbConHist = DriverManager.getConnection("jdbc:sqlite:"+PackFunc.Var.path+"/db/hist.pigo"); //NOI18N
             }
             
         } catch (SQLException e) {
@@ -140,7 +140,7 @@ public class funcMain {
                     FenMain.listeSite.addItem(listeParse);
                }
            }
-           FenMain.listeSite.setSelectedItem(PackFunc.Var.path+"/ip.db");
+           FenMain.listeSite.setSelectedItem(PackFunc.Var.path+"/ip.pigo");
         }
    }
    
