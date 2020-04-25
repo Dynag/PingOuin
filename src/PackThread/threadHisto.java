@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import PackFunc.funcDb;
 import PackFunc.funcMain;
-import static xyz.pingouin.serenity.PingOuin.funcMain.path;
+
 
 
 
@@ -39,9 +39,14 @@ System.out.println("Thread Hist");
         } catch (SQLException ex) {
             Logger.getLogger(threadHisto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        File fichier = new File(path+"/db/hist.pig");
-        fichier.delete();
+        try{
+            File fichier = new File(PackFunc.Var.path+"/db/hist.pig");
+            fichier.delete();
+        System.out.println("1");
         fun.connectHist();
+        }catch(Exception e){
+            System.out.println(e);
+        }
         if(fdb.paramLire("archives", "param") == "0"){
             
         }else{

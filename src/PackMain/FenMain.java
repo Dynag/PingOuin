@@ -29,7 +29,7 @@ import PackFunc.funcIp;
 import PackFunc.funcLicence;
 import PackFunc.funcMain;
 import PackFunc.funcMiseAJour;
-import static xyz.pingouin.serenity.PingOuin.funcMain.path;
+
 
 /**
  *
@@ -45,7 +45,7 @@ public final class FenMain extends javax.swing.JFrame {
      */
     public FenMain(){
         fun.testOs();
-        File fichier = new File(path+"/db/ip.db");
+        File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
         initComponents();
         fun.dossCree();
@@ -728,7 +728,7 @@ public final class FenMain extends javax.swing.JFrame {
 
     private void listeSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeSiteActionPerformed
         PackFunc.Var.stopPing = true;
-        PackFunc.Var.dbSite = (String) listeSite.getSelectedItem()+".db";
+        PackFunc.Var.dbSite = (String) listeSite.getSelectedItem()+".pigo";
         btnLancer.setText("Start");
         btnLancer.setBackground(Color.red);
         fun.connectSite();
