@@ -16,19 +16,16 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import PackFunc.funcDb;
 import PackFunc.funcIp;
 import PackFunc.funcLicence;
 import PackFunc.funcMain;
 import PackFunc.funcMiseAJour;
+import java.awt.event.KeyEvent;
 
 
 /**
@@ -87,9 +84,14 @@ public final class FenMain extends javax.swing.JFrame {
     if(funDb.paramLire("pop_up", "param").equals("1")){ menPopup.setSelected(true); } else{ menPopup.setSelected(false); }
     if(funDb.paramLire("mail_rapport", "param").equals("1")){ menEnvoieRapports.setSelected(true); } else{ menEnvoieRapports.setSelected(false); }
     if(funDb.paramLire("archives", "param").equals("1")){ menArchives.setSelected(true); } else{ menArchives.setSelected(false); }
-        
+    if(funDb.paramLire("dbExt", "param").equals("1")){ menDbExt.setSelected(true); } else{ menDbExt.setSelected(false); }
+
+    
+    
         fdb.listeIp();
     }
+    
+    
     /**
      * Test de la licence
      */
@@ -100,12 +102,14 @@ public final class FenMain extends javax.swing.JFrame {
                 menEnvoieMail.setVisible(true);
                 menEnvoieRapports.setVisible(true);
                 menArchives.setVisible(true);
+                menDbExt.setVisible(true);
                 
                 
             }else{
                 menEnvoieMail.setVisible(false);
                 menEnvoieRapports.setVisible(false);
                 menArchives.setVisible(false);
+                menDbExt.setVisible(true);
             }
         } catch (SocketException ex) {
             Logger.getLogger(FenMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,9 +172,11 @@ public final class FenMain extends javax.swing.JFrame {
         menEnvoieRapports = new javax.swing.JCheckBoxMenuItem();
         menPopup = new javax.swing.JCheckBoxMenuItem();
         menArchives = new javax.swing.JCheckBoxMenuItem();
+        menDbExt = new javax.swing.JCheckBoxMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -427,16 +433,36 @@ public final class FenMain extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabPrinc.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabPrinc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tabPrincFocusLost(evt);
+            }
+        });
         tabPrinc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabPrincMouseClicked(evt);
             }
         });
-        tabPrinc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                tabPrincPropertyChange(evt);
+        tabPrinc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tabPrincKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(tabPrinc);
@@ -650,6 +676,15 @@ public final class FenMain extends javax.swing.JFrame {
         });
         jMenu2.add(menArchives);
 
+        menDbExt.setSelected(true);
+        menDbExt.setText("Base de donnée externe");
+        menDbExt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menDbExtActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menDbExt);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Paramètres");
@@ -662,13 +697,21 @@ public final class FenMain extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem5);
 
-        jMenuItem6.setText("Page Recap");
+        jMenuItem6.setText("Envoie Recap");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
             }
         });
         jMenu3.add(jMenuItem6);
+
+        jMenuItem11.setText("Db Externe");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem11);
 
         jMenuItem7.setText("License");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -989,9 +1032,36 @@ public final class FenMain extends javax.swing.JFrame {
         System.out.println(PackFunc.Var.tri);
     }//GEN-LAST:event_comboTriActionPerformed
 
-    private void tabPrincPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tabPrincPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tabPrincPropertyChange
+    private void tabPrincFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabPrincFocusLost
+    
+    
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_tabPrincFocusLost
+
+    private void tabPrincKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabPrincKeyPressed
+        if (KeyEvent.VK_ENTER==evt.getKeyCode()){
+            String ob = tabPrinc.getValueAt(tabPrinc.getSelectedRow(),1).toString();
+            String ob1 = tabPrinc.getValueAt(tabPrinc.getSelectedRow(),0).toString();
+            fdb.dbIpEcrit(ob1, ob, "nom");
+            fdb.listeIp();
+        }
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_tabPrincKeyPressed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        FenDbExt fdb = new FenDbExt();
+        fdb.show();  
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void menDbExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menDbExtActionPerformed
+        if(menDbExt.isSelected() == true){
+            fdb.paramEcrit("dbExt", "1", "param"); 
+        }else{ 
+            fdb.paramEcrit("dbExt", "0", "param"); 
+        }
+    }//GEN-LAST:event_menDbExtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1050,6 +1120,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1078,6 +1149,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JLabel labVersion;
     public static javax.swing.JComboBox<String> listeSite;
     private javax.swing.JCheckBoxMenuItem menArchives;
+    private javax.swing.JCheckBoxMenuItem menDbExt;
     private javax.swing.JCheckBoxMenuItem menEnvoieMail;
     private javax.swing.JCheckBoxMenuItem menEnvoieRapports;
     private javax.swing.JCheckBoxMenuItem menPopup;

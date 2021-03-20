@@ -32,7 +32,8 @@ public class funcDb {
 //Table paramètres
         try{
             ps = PackFunc.Var.dbConParam.createStatement();
-            String sq1 = "CREATE TABLE IF NOT EXISTS param (id, site ,smtp_serv, smtp_port, smtp_user, smtp_mail, smtp_pass, mail_envoie, licence, pop_up, mail_rapport, archives, mail)";
+            String sq1 = "CREATE TABLE IF NOT EXISTS param (id, site ,smtp_serv, smtp_port, smtp_user, smtp_mail, smtp_pass, mail_envoie, licence, pop_up, mail_rapport, archives, mail, dbext_adress, dbext_port, "
+                    + "dbext_user, dbext_pass, dbext_delais, dbext_name, dbExt DEFAULT '0')";
             ps.execute(sq1);
             ps.close();
 // Table option

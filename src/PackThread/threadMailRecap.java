@@ -58,7 +58,7 @@ public class threadMailRecap implements Runnable{
     
     public String prepaMessage(){
         String mail = "Etat des périphériques : <br><br>";
-        String sql1 = "SELECT * FROM ip ORDER BY ip;";
+        String sql1 = "SELECT * FROM ip ORDER BY nom;";
         try{
             ps = PackFunc.Var.dbConSite.createStatement();
             rs = ps.executeQuery(sql1);

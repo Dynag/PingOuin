@@ -34,7 +34,7 @@ public class funcMiseAJour {
 	private String lanceurPath = "lanceur.jar";
 	
 	//Chemin vers le fichier xml 
-	private String xmlPath = "http://vps616949.ovh.net/prog/PingOuin/maj.xml";
+	private String xmlPath = "https://hemge.eu/prog/PingOuin/maj.xml";
 	
 	//Version actuelle
 	private String version = PackFunc.Var.version;
