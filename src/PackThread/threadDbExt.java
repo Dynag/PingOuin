@@ -25,6 +25,9 @@ public class threadDbExt implements Runnable{
         testEnvoie();
     }
     public void testEnvoie(){
+        if(fdb.paramLire("dbext_purge", "param").equals("1")){
+            dbc.dbExtPurge();
+        }
         String sql1 = "SELECT * FROM ip ORDER BY nom;";
         try{
             ps = PackFunc.Var.dbConSite.createStatement();

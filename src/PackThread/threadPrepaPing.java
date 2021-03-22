@@ -37,10 +37,6 @@ public class threadPrepaPing extends Thread{
     }
     @Override
     public void run(){
-        //Cette instruction permet de lister le nombre de processeurs disponibles
-      //sur la machine exécutant le programme      
-      
-        //ScheduledExecutorService execute = Executors.newScheduledThreadPool(20);
         try{
             String sql = "SELECT * FROM ip ORDER BY "+PackFunc.Var.tri+"";
             

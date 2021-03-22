@@ -63,7 +63,7 @@ public class DbConnect {
         }
 
     }
-    public void dbParamCreate(){
+    public void dbExtRecapCreate(){
         
         try {
             String nomSite = fdb.paramLire("site", "param");
@@ -76,9 +76,22 @@ public class DbConnect {
             System.out.println(ex);
         }
     }
+    public void dbExtPerteCreate(){
+        
+        try {
+            String nomSite = fdb.paramLire("site", "param");
+            ps1 = PackFunc.Var.conn.createStatement();
+            String sq1 = "CREATE TABLE IF NOT EXISTS `"+nomSite+"_perte` (`id` INTEGER NOT NULL AUTO_INCREMENT , `date` TEXT, `ip` TEXT, `nom` TEXT, `etat` TEXT, PRIMARY KEY(`id`));";
+            ps1.execute(sq1);
+            ps1.close();
+        } catch (SQLException ex) {
+            fun.ecritLogs(ex, " - creerTables dist - "+getClass().getName());
+            System.out.println(ex);
+        }
+    }
     public void dbExtEcrire(String ip, String nom, String etat){
         DbConnectDist();
-        dbParamCreate();
+        dbExtRecapCreate();
         String date = null;
         Date date1 = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd-HH:mm:ss");  
@@ -88,6 +101,39 @@ public class DbConnect {
             String nomSite = fdb.paramLire("site", "param");
             ps1 = PackFunc.Var.conn.createStatement();
             String sq1 = "INSERT INTO `"+nomSite+"` (`date`, `ip`, `nom`, `etat`) VALUES ('"+date+"', '"+ip+"', '"+nom+"', '"+etat+"');";
+            ps1.execute(sq1);
+            ps1.close();
+        } catch (SQLException ex) {
+            fun.ecritLogs(ex, " - creerTables dist - "+getClass().getName());
+            System.out.println(ex);
+        }
+    }
+    public void dbExtPerteEcrire(String ip, String nom, String etat){
+        DbConnectDist();
+        dbExtPerteCreate();
+        String date = null;
+        Date date1 = Calendar.getInstance().getTime();  
+        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd-HH:mm:ss");  
+        date= dateFormat.format(date1);  
+        
+        try {
+            String nomSite = fdb.paramLire("site", "param");
+            ps1 = PackFunc.Var.conn.createStatement();
+            String sq1 = "INSERT INTO `"+nomSite+"_perte` (`date`, `ip`, `nom`, `etat`) VALUES ('"+date+"', '"+ip+"', '"+nom+"', '"+etat+"');";
+            ps1.execute(sq1);
+            ps1.close();
+        } catch (SQLException ex) {
+            fun.ecritLogs(ex, " - creerTables dist - "+getClass().getName());
+            System.out.println(ex);
+        }
+    }
+    public void dbExtPurge(){
+        DbConnectDist();
+        
+        try {
+            String nomSite = fdb.paramLire("site", "param");
+            ps1 = PackFunc.Var.conn.createStatement();
+            String sq1 = "TRUNCATE TABLE `"+nomSite+"` ";
             ps1.execute(sq1);
             ps1.close();
         } catch (SQLException ex) {

@@ -30,6 +30,7 @@ public class threadLanceMailRecap extends Thread{
     static ScheduledFuture<?> q;
     static ScheduledFuture<?> r;
     static ScheduledFuture<?> s;
+    static ScheduledFuture<?> u;
     
     public threadLanceMailRecap(){
         
@@ -50,6 +51,9 @@ public class threadLanceMailRecap extends Thread{
                 if(fdb.paramLire("pop_up", "param").equals("1")){
                     r = execute.scheduleAtFixedRate( new threadPopUp(), 0, 60, TimeUnit.SECONDS);
                 }
+                if(fdb.paramLire("dbext_perte", "param").equals("1")){
+                    u = execute.scheduleAtFixedRate(new threadDbExtPerte(),0 , 60, TimeUnit.SECONDS);
+                }
                 if(fdb.paramLire("dbExt", "param").equals("1")){
                     System.out.println(fdb.paramLire("dbext_delais", "param"));
                     System.out.println(Integer.parseInt(fdb.paramLire("dbext_delais", "param")));
@@ -66,6 +70,7 @@ public class threadLanceMailRecap extends Thread{
                         q.cancel(true);
                         r.cancel(true);
                         s.cancel(true);
+                        u.cancel(true);
                         execute.shutdown();
                         Thread.currentThread().interrupt();
                     }

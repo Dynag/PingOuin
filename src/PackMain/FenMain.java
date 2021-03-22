@@ -84,7 +84,8 @@ public final class FenMain extends javax.swing.JFrame {
     if(funDb.paramLire("pop_up", "param").equals("1")){ menPopup.setSelected(true); } else{ menPopup.setSelected(false); }
     if(funDb.paramLire("mail_rapport", "param").equals("1")){ menEnvoieRapports.setSelected(true); } else{ menEnvoieRapports.setSelected(false); }
     if(funDb.paramLire("archives", "param").equals("1")){ menArchives.setSelected(true); } else{ menArchives.setSelected(false); }
-    if(funDb.paramLire("dbExt", "param").equals("1")){ menDbExt.setSelected(true); } else{ menDbExt.setSelected(false); }
+    if(funDb.paramLire("dbext", "param").equals("1")){ menDbExt.setSelected(true); } else{ menDbExt.setSelected(false); }
+    if(funDb.paramLire("dbext_perte", "param").equals("1")){ menDbExtPerte.setSelected(true); } else{ menDbExtPerte.setSelected(false); }
 
     
     
@@ -103,13 +104,15 @@ public final class FenMain extends javax.swing.JFrame {
                 menEnvoieRapports.setVisible(true);
                 menArchives.setVisible(true);
                 menDbExt.setVisible(true);
+                menDbExtPerte.setVisible(true);
                 
                 
             }else{
                 menEnvoieMail.setVisible(false);
                 menEnvoieRapports.setVisible(false);
                 menArchives.setVisible(false);
-                menDbExt.setVisible(true);
+                menDbExt.setVisible(false);
+                menDbExtPerte.setVisible(false);
             }
         } catch (SocketException ex) {
             Logger.getLogger(FenMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -170,9 +173,12 @@ public final class FenMain extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         menEnvoieMail = new javax.swing.JCheckBoxMenuItem();
         menEnvoieRapports = new javax.swing.JCheckBoxMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         menPopup = new javax.swing.JCheckBoxMenuItem();
         menArchives = new javax.swing.JCheckBoxMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         menDbExt = new javax.swing.JCheckBoxMenuItem();
+        menDbExtPerte = new javax.swing.JCheckBoxMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -657,6 +663,7 @@ public final class FenMain extends javax.swing.JFrame {
             }
         });
         jMenu2.add(menEnvoieRapports);
+        jMenu2.add(jSeparator3);
 
         menPopup.setSelected(true);
         menPopup.setText("PopUp");
@@ -675,15 +682,25 @@ public final class FenMain extends javax.swing.JFrame {
             }
         });
         jMenu2.add(menArchives);
+        jMenu2.add(jSeparator2);
 
         menDbExt.setSelected(true);
-        menDbExt.setText("Base de donnée externe");
+        menDbExt.setText("Base de donnée externe rapport");
         menDbExt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menDbExtActionPerformed(evt);
             }
         });
         jMenu2.add(menDbExt);
+
+        menDbExtPerte.setSelected(true);
+        menDbExtPerte.setText("Base de donnée externe perte");
+        menDbExtPerte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menDbExtPerteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menDbExtPerte);
 
         jMenuBar1.add(jMenu2);
 
@@ -1063,6 +1080,14 @@ public final class FenMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menDbExtActionPerformed
 
+    private void menDbExtPerteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menDbExtPerteActionPerformed
+        if(menDbExtPerte.isSelected() == true){
+            fdb.paramEcrit("dbext_perte", "1", "param"); 
+        }else{ 
+            fdb.paramEcrit("dbext_perte", "0", "param"); 
+        }
+    }//GEN-LAST:event_menDbExtPerteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1141,6 +1166,8 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     public static javax.swing.JLabel labDelaisPing;
     public static javax.swing.JLabel labIp;
     private javax.swing.JLabel labMaj;
@@ -1150,6 +1177,7 @@ public final class FenMain extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> listeSite;
     private javax.swing.JCheckBoxMenuItem menArchives;
     private javax.swing.JCheckBoxMenuItem menDbExt;
+    private javax.swing.JCheckBoxMenuItem menDbExtPerte;
     private javax.swing.JCheckBoxMenuItem menEnvoieMail;
     private javax.swing.JCheckBoxMenuItem menEnvoieRapports;
     private javax.swing.JCheckBoxMenuItem menPopup;

@@ -38,7 +38,12 @@ public class FenDbExt extends javax.swing.JFrame {
         else if(fdb.paramLire("dbext_delais", "param").equals("604800")){ delais = "7 jours"; }
         else { delais = "5 min"; }
         tfDelais.setSelectedItem(delais);
-        
+        if(fdb.paramLire("dbext_purge", "param").equals("1")){
+            cbPurge.setSelected(true);
+        }
+        else{
+            cbPurge.setSelected(false);
+        }
     }
 
     /**
@@ -64,6 +69,7 @@ public class FenDbExt extends javax.swing.JFrame {
         tfDelais = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         tfDbNom = new javax.swing.JTextField();
+        cbPurge = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -97,6 +103,8 @@ public class FenDbExt extends javax.swing.JFrame {
 
         jLabel8.setText("Db Nom :");
 
+        cbPurge.setText("Purger la base");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,7 +131,11 @@ public class FenDbExt extends javax.swing.JFrame {
                             .addComponent(tfDbNom)
                             .addComponent(tfAdDb)
                             .addComponent(tfPortDb)
-                            .addComponent(tfUser))))
+                            .addComponent(tfUser)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(cbPurge)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,6 +165,8 @@ public class FenDbExt extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tfDelais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(cbPurge)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -183,7 +197,7 @@ public class FenDbExt extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,8 +217,12 @@ public class FenDbExt extends javax.swing.JFrame {
         else if(tfDelais.getSelectedItem().equals("24 h")){ delais = "86400"; }
         else if(tfDelais.getSelectedItem().equals("2 jours")){ delais = "172800"; }
         else if(tfDelais.getSelectedItem().equals("7 jours")){ delais = "604800"; }
-        
+        String purge;
+        if(cbPurge.isSelected()){
+            purge = "1";
+        }else{  purge = "0"; }
         fdb.paramEcrit("dbext_delais", delais, "param");
+        fdb.paramEcrit("dbext_purge", purge, "param");
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -263,6 +281,7 @@ public class FenDbExt extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox cbPurge;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

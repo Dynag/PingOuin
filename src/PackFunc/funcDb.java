@@ -29,13 +29,17 @@ public class funcDb {
     PreparedStatement ps1 = null;
     public void creerTables()
     {
+
 //Table paramètres
         try{
             ps = PackFunc.Var.dbConParam.createStatement();
+System.out.println("1");
             String sq1 = "CREATE TABLE IF NOT EXISTS param (id, site ,smtp_serv, smtp_port, smtp_user, smtp_mail, smtp_pass, mail_envoie, licence, pop_up, mail_rapport, archives, mail, dbext_adress, dbext_port, "
-                    + "dbext_user, dbext_pass, dbext_delais, dbext_name, dbExt DEFAULT '0')";
+                    + "dbext_user, dbext_pass, dbext_delais, dbext_name, dbext DEFAULT '0', dbext_purge DEFAULT '0', dbext_perte DEFAULT '0')";
             ps.execute(sq1);
+System.out.println("2");
             ps.close();
+            System.out.println("123");
 // Table option
             ps = PackFunc.Var.dbConParam.createStatement();
             String sq2 = "CREATE TABLE IF NOT EXISTS options ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,'EnvoieMail' TEXT DEFAULT '0', 'MailPeriode' TEXT DEFAULT '0', 'PeriodeJour' TEXT DEFAULT '1', 'PeriodeHeure' TEXT DEFAULT '00:00',"
@@ -43,6 +47,7 @@ public class funcDb {
             ps.execute(sq2);
             ps.close();
         }catch (SQLException e) {
+System.out.println(e);
             fun.ecritLogs(e, " - creerTables - "+getClass().getName());
         }
     }
