@@ -22,6 +22,8 @@ public class threadDbExt implements Runnable{
     Statement ps = null;
     
     public void run(){
+        dbc.DbConnectDist();
+        dbc.dbExtRecapCreate();
         testEnvoie();
     }
     public void testEnvoie(){

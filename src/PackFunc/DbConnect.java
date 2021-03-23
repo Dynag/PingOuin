@@ -64,7 +64,7 @@ public class DbConnect {
 
     }
     public void dbExtRecapCreate(){
-        
+System.out.println("01");
         try {
             String nomSite = fdb.paramLire("site", "param");
             ps1 = PackFunc.Var.conn.createStatement();
@@ -90,8 +90,6 @@ public class DbConnect {
         }
     }
     public void dbExtEcrire(String ip, String nom, String etat){
-        DbConnectDist();
-        dbExtRecapCreate();
         String date = null;
         Date date1 = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd-HH:mm:ss");  
@@ -109,8 +107,6 @@ public class DbConnect {
         }
     }
     public void dbExtPerteEcrire(String ip, String nom, String etat){
-        DbConnectDist();
-        dbExtPerteCreate();
         String date = null;
         Date date1 = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd-HH:mm:ss");  

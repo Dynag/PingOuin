@@ -999,7 +999,7 @@ public final class FenMain extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler \"https://prog.serenity.xyz/\""); //NOI18N
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler \"https://prog.hemge.eu/\""); //NOI18N
         } catch (IOException ex) {
             fun.ecritLogs(ex, " - "+getClass().getName());
         }

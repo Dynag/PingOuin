@@ -30,6 +30,8 @@ public class threadDbExtPerte implements Runnable{
     
     @Override
     public void run(){
+        dbc.DbConnectDist();
+        dbc.dbExtPerteCreate();
         Integer nbr = 0;
 System.out.println("perte depart");
         try{
