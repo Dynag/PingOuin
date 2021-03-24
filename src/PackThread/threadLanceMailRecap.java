@@ -52,7 +52,7 @@ public class threadLanceMailRecap extends Thread{
                     r = execute.scheduleAtFixedRate( new threadPopUp(), 0, 60, TimeUnit.SECONDS);
                 }
                 if(fdb.paramLire("dbext_perte", "param").equals("1")){
-                    u = execute.scheduleAtFixedRate(new threadDbExtPerte(),0 , 60, TimeUnit.SECONDS);
+                    u = execute.scheduleAtFixedRate(new threadDbExtPerte(),2 , 60, TimeUnit.SECONDS);
                 }
                 if(fdb.paramLire("dbExt", "param").equals("1")){
                     System.out.println(fdb.paramLire("dbext_delais", "param"));

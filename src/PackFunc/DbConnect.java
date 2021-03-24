@@ -5,17 +5,15 @@
  */
 package PackFunc;
 
-import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,7 +70,7 @@ System.out.println("01");
             ps1.execute(sq1);
             ps1.close();
         } catch (SQLException ex) {
-            fun.ecritLogs(ex, " - creerTables dist - "+getClass().getName());
+            fun.ecritLogs(ex, " - creerTables dist recap - "+getClass().getName());
             System.out.println(ex);
         }
     }
@@ -85,7 +83,7 @@ System.out.println("01");
             ps1.execute(sq1);
             ps1.close();
         } catch (SQLException ex) {
-            fun.ecritLogs(ex, " - creerTables dist - "+getClass().getName());
+            fun.ecritLogs(ex, " - creerTables dist perte - "+getClass().getName());
             System.out.println(ex);
         }
     }
@@ -102,7 +100,7 @@ System.out.println("01");
             ps1.execute(sq1);
             ps1.close();
         } catch (SQLException ex) {
-            fun.ecritLogs(ex, " - creerTables dist - "+getClass().getName());
+            fun.ecritLogs(ex, " - Ecrire dist recap - "+getClass().getName());
             System.out.println(ex);
         }
     }
@@ -119,7 +117,7 @@ System.out.println("01");
             ps1.execute(sq1);
             ps1.close();
         } catch (SQLException ex) {
-            fun.ecritLogs(ex, " - creerTables dist - "+getClass().getName());
+            fun.ecritLogs(ex, " - Ecrire dist Perte - "+getClass().getName());
             System.out.println(ex);
         }
     }
@@ -133,7 +131,7 @@ System.out.println("01");
             ps1.execute(sq1);
             ps1.close();
         } catch (SQLException ex) {
-            fun.ecritLogs(ex, " - creerTables dist - "+getClass().getName());
+            fun.ecritLogs(ex, " - dbExt purge dist - "+getClass().getName());
             System.out.println(ex);
         }
     }
