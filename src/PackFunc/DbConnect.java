@@ -69,6 +69,7 @@ System.out.println("01");
             String sq1 = "CREATE TABLE IF NOT EXISTS `"+nomSite+"` (`id` INTEGER NOT NULL AUTO_INCREMENT , `date` TEXT, `ip` TEXT, `nom` TEXT, `etat` TEXT, PRIMARY KEY(`id`));";
             ps1.execute(sq1);
             ps1.close();
+            
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - creerTables dist recap - "+getClass().getName());
             System.out.println(ex);

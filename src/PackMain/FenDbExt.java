@@ -28,15 +28,13 @@ public class FenDbExt extends javax.swing.JFrame {
         tfDbNom.setText(fdb.paramLire("dbext_name", "param"));
         tfUser.setText(fdb.paramLire("dbext_user", "param"));
         tfPass.setText(fdb.paramLire("dbext_pass", "param"));
-        String delais;
-        if(fdb.paramLire("dbext_delais", "param") == null){ delais = "5 min"; }
-        else if(fdb.paramLire("dbext_delais", "param").equals("300")){ delais = "5 min"; }
+        String delais = "5 min";
+        if(fdb.paramLire("dbext_delais", "param").equals("300")){ delais = "5 min"; }
         else if(fdb.paramLire("dbext_delais", "param").equals("3600")){ delais = "1 h"; }
         else if(fdb.paramLire("dbext_delais", "param").equals("21600")){ delais = "6 h"; }
         else if(fdb.paramLire("dbext_delais", "param").equals("86400")){ delais = "24 h"; }
         else if(fdb.paramLire("dbext_delais", "param").equals("172800")){ delais = "2 jours"; }
         else if(fdb.paramLire("dbext_delais", "param").equals("604800")){ delais = "7 jours"; }
-        else { delais = "5 min"; }
         tfDelais.setSelectedItem(delais);
         if(fdb.paramLire("dbext_purge", "param").equals("1")){
             cbPurge.setSelected(true);
@@ -94,7 +92,7 @@ public class FenDbExt extends javax.swing.JFrame {
 
         jLabel7.setText("Délais :");
 
-        tfDelais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 min", "1 h", "6h", "24h", "2 jours", "7 jours" }));
+        tfDelais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 min", "1 h", "6 h", "24 h", "2 jours", "7 jours" }));
         tfDelais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDelaisActionPerformed(evt);
@@ -205,6 +203,7 @@ public class FenDbExt extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+System.out.println(tfDelais.getSelectedItem());
         fdb.paramEcrit("dbext_adress", tfAdDb.getText(), "param");
         fdb.paramEcrit("dbext_port", tfPortDb.getText(), "param");
         fdb.paramEcrit("dbext_name", tfDbNom.getText(), "param");

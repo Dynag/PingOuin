@@ -184,10 +184,10 @@ public final class FenMain extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PingOuin");
@@ -742,14 +742,6 @@ public final class FenMain extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem11);
 
-        jMenuItem7.setText("License");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem7);
-
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("?");
@@ -769,6 +761,14 @@ public final class FenMain extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem10);
+
+        jMenuItem7.setText("License");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem7);
 
         jMenuBar1.add(jMenu4);
 
