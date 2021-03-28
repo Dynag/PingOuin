@@ -125,7 +125,7 @@ public class funcMiseAJour {
 	 * Cette méthode va chercher sur internet les versions disponibles pour l'application
 	 * @return les versions disponibles
 	 */
-	private ArrayList<String> getVersions(){
+	public ArrayList<String> getVersions(){
 		ArrayList<String> versions = new ArrayList<String>();
 		
 		try {
@@ -160,8 +160,10 @@ public class funcMiseAJour {
 				Element version = (Element)iteratorVersions.next();
 				
 				Element elementNom = version.getChild("nom");
-				
+                                versions.add(elementNom.getText());
+                                
 				versions.add(elementNom.getText());
+                                
 			}
 			
 			//On trie la liste
@@ -261,4 +263,57 @@ public class funcMiseAJour {
             }
             return majOk;
         }
+        
+        private ArrayList<String> getChangelog(){
+		ArrayList<String> versions = new ArrayList<String>();
+		
+		try {
+			URL xmlUrl = new URL(xmlPath);
+			
+			//On ouvre une connections ur la page
+			URLConnection urlConnection = xmlUrl.openConnection();
+			urlConnection.setUseCaches(false);
+			
+			//On se connecte sur cette page
+			urlConnection.connect();
+			
+			//On récupère le fichier XML sous forme de flux
+			InputStream stream = urlConnection.getInputStream();
+						
+			SAXBuilder sxb = new SAXBuilder();
+						
+			//On crée le document xml avec son flux
+			try {xmlDocument = sxb.build(stream);
+			} catch (JDOMException e) {e.printStackTrace();
+			} catch (IOException e) {e.printStackTrace();}
+			
+			//On récupère la racine
+			Element racine = xmlDocument.getRootElement();
+			
+			//On liste toutes les versions
+			List listVersions = racine.getChildren("version");
+			Iterator iteratorVersions = listVersions.iterator();
+			
+			//On parcourt toutes les versions
+			while(iteratorVersions.hasNext()){
+				Element version = (Element)iteratorVersions.next();
+				
+				if(version.getChild("change") != null){
+                                    Element elementChange = version.getChild("change");
+                                    versions.add(elementChange.getText());
+                                }
+			}
+			
+			//On trie la liste
+			Collections.sort(versions);
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return versions;
+	}
+        
 }

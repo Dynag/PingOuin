@@ -185,9 +185,12 @@ public final class FenMain extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PingOuin");
@@ -746,6 +749,15 @@ public final class FenMain extends javax.swing.JFrame {
 
         jMenu4.setText("?");
 
+        jMenuItem7.setText("License");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem7);
+        jMenu4.add(jSeparator4);
+
         jMenuItem9.setText("A propos");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -761,14 +773,15 @@ public final class FenMain extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem10);
+        jMenu4.add(jSeparator5);
 
-        jMenuItem7.setText("License");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem12.setText("Changelog");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                jMenuItem12ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem7);
+        jMenu4.add(jMenuItem12);
 
         jMenuBar1.add(jMenu4);
 
@@ -1100,6 +1113,11 @@ public final class FenMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menDbExtPerteActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        FenChange fenc = new FenChange();
+        fenc.show();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1159,6 +1177,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1181,6 +1200,8 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     public static javax.swing.JLabel labDelaisPing;
     public static javax.swing.JLabel labIp;
     private javax.swing.JLabel labMaj;

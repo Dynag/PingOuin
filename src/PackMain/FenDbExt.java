@@ -35,6 +35,7 @@ public class FenDbExt extends javax.swing.JFrame {
         else if(fdb.paramLire("dbext_delais", "param").equals("86400")){ delais = "24 h"; }
         else if(fdb.paramLire("dbext_delais", "param").equals("172800")){ delais = "2 jours"; }
         else if(fdb.paramLire("dbext_delais", "param").equals("604800")){ delais = "7 jours"; }
+        else { delais = "5 min"; }
         tfDelais.setSelectedItem(delais);
         if(fdb.paramLire("dbext_purge", "param").equals("1")){
             cbPurge.setSelected(true);
@@ -216,6 +217,7 @@ System.out.println(tfDelais.getSelectedItem());
         else if(tfDelais.getSelectedItem().equals("24 h")){ delais = "86400"; }
         else if(tfDelais.getSelectedItem().equals("2 jours")){ delais = "172800"; }
         else if(tfDelais.getSelectedItem().equals("7 jours")){ delais = "604800"; }
+        
         String purge;
         if(cbPurge.isSelected()){
             purge = "1";

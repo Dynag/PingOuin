@@ -62,13 +62,14 @@ public class DbConnect {
 
     }
     public void dbExtRecapCreate(){
-System.out.println("01");
+        DbConnectDist();
         try {
             String nomSite = fdb.paramLire("site", "param");
             ps1 = PackFunc.Var.conn.createStatement();
             String sq1 = "CREATE TABLE IF NOT EXISTS `"+nomSite+"` (`id` INTEGER NOT NULL AUTO_INCREMENT , `date` TEXT, `ip` TEXT, `nom` TEXT, `etat` TEXT, PRIMARY KEY(`id`));";
             ps1.execute(sq1);
             ps1.close();
+            Var.conn.close();
             
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - creerTables dist recap - "+getClass().getName());
@@ -76,19 +77,21 @@ System.out.println("01");
         }
     }
     public void dbExtPerteCreate(){
-        
+        DbConnectDist();
         try {
             String nomSite = fdb.paramLire("site", "param");
             ps1 = PackFunc.Var.conn.createStatement();
             String sq1 = "CREATE TABLE IF NOT EXISTS `"+nomSite+"_perte` (`id` INTEGER NOT NULL AUTO_INCREMENT , `date` TEXT, `ip` TEXT, `nom` TEXT, `etat` TEXT, PRIMARY KEY(`id`));";
             ps1.execute(sq1);
             ps1.close();
+            Var.conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - creerTables dist perte - "+getClass().getName());
             System.out.println(ex);
         }
     }
     public void dbExtEcrire(String ip, String nom, String etat){
+        DbConnectDist();
         String date = null;
         Date date1 = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd-HH:mm:ss");  
@@ -100,12 +103,14 @@ System.out.println("01");
             String sq1 = "INSERT INTO `"+nomSite+"` (`date`, `ip`, `nom`, `etat`) VALUES ('"+date+"', '"+ip+"', '"+nom+"', '"+etat+"');";
             ps1.execute(sq1);
             ps1.close();
+            Var.conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - Ecrire dist recap - "+getClass().getName());
             System.out.println(ex);
         }
     }
     public void dbExtPerteEcrire(String ip, String nom, String etat){
+        DbConnectDist();
         String date = null;
         Date date1 = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd-HH:mm:ss");  
@@ -117,6 +122,7 @@ System.out.println("01");
             String sq1 = "INSERT INTO `"+nomSite+"_perte` (`date`, `ip`, `nom`, `etat`) VALUES ('"+date+"', '"+ip+"', '"+nom+"', '"+etat+"');";
             ps1.execute(sq1);
             ps1.close();
+            Var.conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - Ecrire dist Perte - "+getClass().getName());
             System.out.println(ex);
@@ -131,6 +137,7 @@ System.out.println("01");
             String sq1 = "TRUNCATE TABLE `"+nomSite+"` ";
             ps1.execute(sq1);
             ps1.close();
+            Var.conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - dbExt purge dist - "+getClass().getName());
             System.out.println(ex);
