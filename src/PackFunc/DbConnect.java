@@ -5,6 +5,7 @@
  */
 package PackFunc;
 
+import com.mysql.jdbc.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -142,5 +143,20 @@ public class DbConnect {
             fun.ecritLogs(ex, " - dbExt purge dist - "+getClass().getName());
             System.out.println(ex);
         }
+    }
+    
+    public boolean testTable(String table){
+        DbConnectDist();
+        boolean tableExist = false;
+        try {
+            boolean exists = PackFunc.Var.conn.getMetaData().getTables(null, null, table, null).next();
+            if(!exists){
+                tableExist = true;
+                System.out.println("Created table " + table);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tableExist;
     }
 }

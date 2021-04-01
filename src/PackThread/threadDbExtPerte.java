@@ -31,7 +31,13 @@ public class threadDbExtPerte implements Runnable{
     @Override
     public void run(){
         dbc.DbConnectDist();
-        dbc.dbExtPerteCreate();
+        String table = fdb.paramLire("site", "param");
+        table = table+"_perte";
+        boolean tableCree = dbc.testTable(table);
+        if(tableCree = true){ dbc.dbExtPerteCreate(); }
+        ecriture();
+    }
+    public void ecriture(){
         Integer nbr = 0;
 System.out.println("perte depart");
         try{
@@ -50,10 +56,13 @@ System.out.println("perte depart");
                }
             }
             ps.close();
+            Thread.currentThread().interrupt();
         }catch(SQLException e){
+            ecriture();
             fun.ecritLogs(e, " - "+getClass().getName());
         }
 System.out.println("perte fin");        
-        Thread.currentThread().interrupt();
+        
     }
+
 }

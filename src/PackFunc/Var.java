@@ -12,7 +12,7 @@ import java.sql.Connection;
  * @author Dynaglien
  */
 public class Var {
-    public static String version = "03.02.06";
+    public static String version = "03.02.07";
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;
     public static Connection dbConHist = null;

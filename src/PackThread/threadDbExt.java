@@ -23,7 +23,8 @@ public class threadDbExt implements Runnable{
     
     public void run(){
         dbc.DbConnectDist();
-        dbc.dbExtRecapCreate();
+        boolean tableCree = dbc.testTable(fdb.paramLire("site", "param"));
+        if(tableCree = true){ dbc.dbExtRecapCreate(); }
         testEnvoie();
     }
     public void testEnvoie(){
@@ -46,11 +47,15 @@ public class threadDbExt implements Runnable{
             }
             dbc.dbExtEcrire(ip, nom, etatIp);
             }
+            ps.close();
+            Thread.currentThread().interrupt();
+System.out.println("Fin du Thread eriture");
         }catch(Exception e){
             System.out.println(e);
             fun.ecritLogs(e, " - "+getClass().getName());
+            testEnvoie();
         }
-            Thread.currentThread().interrupt();
+            
         }
     
 }
