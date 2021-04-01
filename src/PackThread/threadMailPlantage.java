@@ -39,6 +39,7 @@ public class threadMailPlantage implements Runnable{
             while(rs.next()){
                 if(Integer.parseInt(rs.getString("etat")) == 3){
                     ipHsMail = ipHsMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
+                    
                     fdb.dbIpEcrit(rs.getString("ip"), "4", "etat");
                 }
                 if(Integer.parseInt(rs.getString("etat")) == 5)

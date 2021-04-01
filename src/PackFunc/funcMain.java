@@ -7,7 +7,6 @@ package PackFunc;
 
 import PackMain.FenMain;
 import PackThread.threadPop;
-import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -181,6 +180,7 @@ public class funcMain {
        try{
        File file = new File(PackFunc.Var.path+"/db");
        if (file.exists()) {
+           
         } else {
             if (file.mkdir()) {
             } else {

@@ -5,6 +5,7 @@
  */
 package PackFunc;
 
+
 import PackMain.FenMain;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.proteanit.sql.DbUtils;
@@ -27,23 +30,39 @@ public class funcDb {
     ResultSet rs = null;
     Statement ps = null;
     PreparedStatement ps1 = null;
+    
+    public boolean testTable(String table){
+        boolean tableExist = true;
+        try {
+            boolean exists = PackFunc.Var.dbConParam.getMetaData().getTables(null, null, table, null).next();
+            if(!exists){
+                tableExist = false;
+                System.out.println("Created table " + table);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tableExist;
+    }
+    
     public void creerTables()
     {
 
 //Table paramètres
         try{
             ps = PackFunc.Var.dbConParam.createStatement();
-System.out.println("1");
-            String sq1 = "CREATE TABLE IF NOT EXISTS param (id, site ,smtp_serv, smtp_port, smtp_user, smtp_mail, smtp_pass, mail_envoie, licence, pop_up, mail_rapport, archives, mail, dbext_adress, dbext_port, "
-                    + "dbext_user, dbext_pass, dbext_delais, dbext_name, dbext DEFAULT '0', dbext_purge DEFAULT '0', dbext_perte DEFAULT '0')";
+            String listColParam = listeCol("param");
+System.out.println(listColParam);
+            String sq1 = "CREATE TABLE IF NOT EXISTS param ("+listColParam+")";
             ps.execute(sq1);
 System.out.println("2");
             ps.close();
             System.out.println("123");
 // Table option
+            String listColOptions = listeCol("options");
+System.out.println(listColOptions);
             ps = PackFunc.Var.dbConParam.createStatement();
-            String sq2 = "CREATE TABLE IF NOT EXISTS options ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,'EnvoieMail' TEXT DEFAULT '0', 'MailPeriode' TEXT DEFAULT '0', 'PeriodeJour' TEXT DEFAULT '1', 'PeriodeHeure' TEXT DEFAULT '00:00',"
-                    + "'PeriodeLun' TEXT DEFAULT '0', 'PeriodeMar' TEXT DEFAULT '0', 'PeriodeMerc' TEXT DEFAULT '0', 'PeriodeJeu' TEXT DEFAULT '0', 'PeriodeVen' TEXT DEFAULT '0', 'PeriodeSam' TEXT DEFAULT '0', 'PeriodeDim' TEXT DEFAULT '0')"; //NOI18N
+            String sq2 = "CREATE TABLE IF NOT EXISTS options ("+listColOptions+")"; //NOI18N
             ps.execute(sq2);
             ps.close();
         }catch (SQLException e) {
@@ -163,6 +182,26 @@ System.out.println(e);
             fun.ecritLogs(e, " - tableIpCree - "+getClass().getName());
         }
     }
+    
+    public String listeCol(String table){
+        String listeCol = "";
+        Integer i = 0;
+        ArrayList<String> liCol;
+        if(table.equals("param")){ liCol = PackFunc.Var.bddParam; }else{ liCol = PackFunc.Var.bddOptions; }
+        for (String col : liCol) {
+            if(i==0){
+                listeCol = listeCol+col+", ";
+            }else if(i==liCol.size()-1){
+                listeCol = listeCol+col+" DEFAULT '0'";
+            }else{
+                listeCol = listeCol+col+" DEFAULT '0', ";
+            }
+            i++;
+        }
+        
+        return listeCol;
+    }
+    
     /***************************************************************************
     *****   DB une IP                                                      *****
     ***************************************************************************/

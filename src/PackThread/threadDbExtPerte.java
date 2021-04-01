@@ -8,8 +8,6 @@ package PackThread;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import PackFunc.funcDb;
 import PackFunc.funcMain;
 
@@ -22,7 +20,7 @@ public class threadDbExtPerte implements Runnable{
     funcDb fdb = new funcDb();
     ResultSet rs = null;
     Statement ps = null;
-    PackFunc.DbConnect dbc = new PackFunc.DbConnect();
+    PackFunc.funcDbConnect dbc = new PackFunc.funcDbConnect();
     public threadDbExtPerte(){
         
     }
@@ -33,34 +31,42 @@ public class threadDbExtPerte implements Runnable{
         dbc.DbConnectDist();
         String table = fdb.paramLire("site", "param");
         table = table+"_perte";
-        boolean tableCree = dbc.testTable(table);
+        boolean tableCree = dbc.testTableDist(table);
         if(tableCree = true){ dbc.dbExtPerteCreate(); }
         ecriture();
     }
     public void ecriture(){
         Integer nbr = 0;
+        String ipHsMail = "";
+        String ipOkMail = "";
 System.out.println("perte depart");
         try{
             String sql1 = "SELECT * FROM 'ip';";
             ps = PackFunc.Var.dbConSite.createStatement();
             rs = ps.executeQuery(sql1);
             while(rs.next()){
-                if(Integer.parseInt(rs.getString("etat")) == 3){
+                if(Integer.parseInt(rs.getString("popup")) == 3){
+                    ipHsMail = ipHsMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
+                    fdb.dbIpEcrit(rs.getString("ip"), "4", "popup");
                     dbc.dbExtPerteEcrire(rs.getString("ip"), rs.getString("nom"), "HS");
-                    fdb.dbIpEcrit(rs.getString("ip"), "4", "etat");
+System.out.println("Ecrit HS");
                 }
-                if(Integer.parseInt(rs.getString("etat")) == 5)
+                if(Integer.parseInt(rs.getString("popup")) == 5)
                {
+                    ipOkMail = ipOkMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
+                    fdb.dbIpEcrit(rs.getString("ip"), "0", "popup");
                     dbc.dbExtPerteEcrire(rs.getString("ip"), rs.getString("nom"), "OK");
-                    fdb.dbIpEcrit(rs.getString("ip"), "0", "etat");
+System.out.println("Ecrit OK");
                }
-            }
+                
+           }
             ps.close();
-            Thread.currentThread().interrupt();
+            
         }catch(SQLException e){
             ecriture();
-            fun.ecritLogs(e, " - "+getClass().getName());
+            //fun.ecritLogs(e, " - "+getClass().getName());
         }
+        Thread.currentThread().interrupt();
 System.out.println("perte fin");        
         
     }

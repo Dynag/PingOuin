@@ -17,13 +17,13 @@ import PackFunc.funcMain;
 public class threadDbExt implements Runnable{
     funcMain fun = new funcMain();
     funcDb fdb = new funcDb();
-    PackFunc.DbConnect dbc = new PackFunc.DbConnect();
+    PackFunc.funcDbConnect dbc = new PackFunc.funcDbConnect();
     ResultSet rs = null;
     Statement ps = null;
     
     public void run(){
         dbc.DbConnectDist();
-        boolean tableCree = dbc.testTable(fdb.paramLire("site", "param"));
+        boolean tableCree = dbc.testTableDist(fdb.paramLire("site", "param"));
         if(tableCree = true){ dbc.dbExtRecapCreate(); }
         testEnvoie();
     }
@@ -52,7 +52,7 @@ public class threadDbExt implements Runnable{
 System.out.println("Fin du Thread eriture");
         }catch(Exception e){
             System.out.println(e);
-            fun.ecritLogs(e, " - "+getClass().getName());
+            //fun.ecritLogs(e, " - "+getClass().getName());
             testEnvoie();
         }
             

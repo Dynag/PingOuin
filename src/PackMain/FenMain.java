@@ -36,6 +36,7 @@ public final class FenMain extends javax.swing.JFrame {
     funcMain fun = new funcMain();
     funcIp funIp = new funcIp();
     funcDb fdb = new funcDb();
+    PackFunc.Var funVar = new PackFunc.Var();
     
     /**
      * Creates new form mainAcc
@@ -57,21 +58,19 @@ public final class FenMain extends javax.swing.JFrame {
         
         
 // Test mise à jour
-        funcMiseAJour maj = new funcMiseAJour();
-        if(maj.majDispo() == true){
-            labMaj.setText("Mise a jour disponible");
-            labMaj.setForeground(Color.red);
-        }else{
-            labMaj.setText("A jour");
-            labMaj.setForeground(Color.white);
-        }
+        PackThread.threadMiseAJour tMaJ = new PackThread.threadMiseAJour();
+        tMaJ.start();
         
 // Création des tables
-
+        funVar.remplireListeParam();
+        funVar.remplireListeOptions();
+        
         funcDb funDb = new funcDb();
         fun.connectHist();
-        funDb.creerTables();
-        funDb.tablesRemplir();
+        if(fdb.testTable("param")==false || fdb.testTable("options")==false){ funDb.creerTables(); }
+        //funDb.tablesRemplir();
+        PackFunc.funcRepareSql rep = new PackFunc.funcRepareSql();
+        rep.testDbOk("param");
         funDb.tableIpCree();
         licence();
         tfPremIp.setText(funIp.ipPc());
@@ -86,10 +85,7 @@ public final class FenMain extends javax.swing.JFrame {
     if(funDb.paramLire("archives", "param").equals("1")){ menArchives.setSelected(true); } else{ menArchives.setSelected(false); }
     if(funDb.paramLire("dbext", "param").equals("1")){ menDbExt.setSelected(true); } else{ menDbExt.setSelected(false); }
     if(funDb.paramLire("dbext_perte", "param").equals("1")){ menDbExtPerte.setSelected(true); } else{ menDbExtPerte.setSelected(false); }
-
-    
-    
-        fdb.listeIp();
+    fdb.listeIp();
     }
     
     
@@ -186,6 +182,7 @@ public final class FenMain extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
@@ -756,6 +753,14 @@ public final class FenMain extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem7);
+
+        jMenuItem13.setText("Updater BDD");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem13);
         jMenu4.add(jSeparator4);
 
         jMenuItem9.setText("A propos");
@@ -1118,6 +1123,12 @@ public final class FenMain extends javax.swing.JFrame {
         fenc.show();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        PackFunc.funcRepareSql prsql = new PackFunc.funcRepareSql();
+        prsql.dbRepare("param");
+        prsql.dbRepare("options");
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1178,6 +1189,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1204,7 +1216,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator5;
     public static javax.swing.JLabel labDelaisPing;
     public static javax.swing.JLabel labIp;
-    private javax.swing.JLabel labMaj;
+    public static javax.swing.JLabel labMaj;
     public static javax.swing.JLabel labThreadFerme;
     public static javax.swing.JLabel labThreadOuvert;
     private javax.swing.JLabel labVersion;

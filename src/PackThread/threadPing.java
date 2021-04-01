@@ -41,21 +41,34 @@ public class threadPing implements Runnable{
         String ipTest = isAlive(ip);
         Integer ipPresent = Integer.parseInt(fdb.dbIpLire(ip, "etat"));
         Integer ipPopup = Integer.parseInt(fdb.dbIpLire(ip, "popup"));
+        Integer ipDbExt = Integer.parseInt(fdb.dbIpLire(ip, "popup"));
         if(ipTest == "500"){
             result = "HS";
             if(ipPresent <= 2){
                 ipPresent = ipPresent+1;
+            }
+            if(ipPopup <= 2){
                 ipPopup = ipPopup+1;
             }
-        }else{
+            if(ipDbExt <= 2){
+                ipDbExt = ipDbExt+1;
+            }
+            
+            }else{
             result = "OK";
-                if(ipPresent == 4){
+            if(ipPresent == 4){
                 ipPresent = 5;
-                ipPopup = 5;
             }else if(ipPresent <= 3 || ipPresent == 5){
                 ipPresent = 0;
+            }
+            
+            if(ipPresent == 4){
+                ipPresent = 5;
+            }else if(ipPopup <= 3 || ipPopup == 5){
                 ipPopup = 0;
             }
+
+                
         }
         FenMain.tabPrinc.setValueAt(result, i3, 2);
         FenMain.tabPrinc.getColumnModel().getColumn(2).setCellRenderer(new cellRendererPing());

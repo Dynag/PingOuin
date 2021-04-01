@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author Dynaglien
  */
-public class DbConnect {
+public class funcDbConnect {
     ResultSet rs = null;
     PreparedStatement ps = null;
     Statement ps1 = null;
@@ -56,9 +56,9 @@ public class DbConnect {
               Var.conn = DriverManager.getConnection("jdbc:mysql://"+addresse+":"+port+"/"+nom+"?useUnicode=true&characterEncoding=utf8", user, pass);
           }
         } catch (SQLException ex) {
-            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -121,6 +121,7 @@ public class DbConnect {
             String nomSite = fdb.paramLire("site", "param");
             ps1 = PackFunc.Var.conn.createStatement();
             String sq1 = "INSERT INTO `"+nomSite+"_perte` (`date`, `ip`, `nom`, `etat`) VALUES ('"+date+"', '"+ip+"', '"+nom+"', '"+etat+"');";
+System.out.println(sq1);
             ps1.execute(sq1);
             ps1.close();
             Var.conn.close();
@@ -145,7 +146,7 @@ public class DbConnect {
         }
     }
     
-    public boolean testTable(String table){
+    public boolean testTableDist(String table){
         DbConnectDist();
         boolean tableExist = false;
         try {
@@ -155,8 +156,9 @@ public class DbConnect {
                 System.out.println("Created table " + table);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DbConnect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
         return tableExist;
     }
+    
 }

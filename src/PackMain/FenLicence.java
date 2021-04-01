@@ -10,6 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import PackFunc.funcDb;
 import PackFunc.funcLicence;
+import java.awt.Desktop;
+import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +21,7 @@ import PackFunc.funcLicence;
 public class FenLicence extends javax.swing.JFrame {
     funcLicence fl = new funcLicence();
     funcDb fdb = new funcDb();
+    private String lanceurPath = "lanceur.jar";
     /**
      * Creates new form pageLicence
      */
@@ -145,6 +149,20 @@ public class FenLicence extends javax.swing.JFrame {
         FenMain ma = new FenMain();
         ma.licence();
         dispose();
+        JOptionPane.showMessageDialog(null,"La licence à été mise à jour, "  + 
+						"le programme va être relancé");
+					
+					File lanceur = new File(lanceurPath);
+					
+					try {
+						//On lance le lanceur
+						Desktop.getDesktop().open(lanceur);
+						
+						//On quitte le programme				
+						System.exit(0);
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null,"Impossible de relancer le programme");
+					}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
