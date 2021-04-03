@@ -41,7 +41,7 @@ public class threadPing implements Runnable{
         String ipTest = isAlive(ip);
         Integer ipPresent = Integer.parseInt(fdb.dbIpLire(ip, "etat"));
         Integer ipPopup = Integer.parseInt(fdb.dbIpLire(ip, "popup"));
-        Integer ipDbExt = Integer.parseInt(fdb.dbIpLire(ip, "popup"));
+        Integer ipDbExt = Integer.parseInt(fdb.dbIpLire(ip, "bdext_perte"));
         if(ipTest == "500"){
             result = "HS";
             if(ipPresent <= 2){
@@ -67,15 +67,24 @@ public class threadPing implements Runnable{
             }else if(ipPopup <= 3 || ipPopup == 5){
                 ipPopup = 0;
             }
+            
+            if(ipDbExt == 4){
+                ipDbExt = 5;
+            }else if(ipDbExt <= 3 || ipDbExt == 5){
+                ipDbExt = 0;
+            }
+            
 
                 
         }
-        FenMain.tabPrinc.setValueAt(result, i3, 2);
-        FenMain.tabPrinc.getColumnModel().getColumn(2).setCellRenderer(new cellRendererPing());
-        FenMain.tabPrinc.setValueAt(ipTest+" ms", i3, 3);
-        FenMain.tabPrinc.getColumnModel().getColumn(3).setCellRenderer(new cellRendererTime());
+        FenMain.tabPrinc.setValueAt(result, i3, 3);
+        FenMain.tabPrinc.getColumnModel().getColumn(3).setCellRenderer(new cellRendererPing());
+        FenMain.tabPrinc.setValueAt(ipTest+" ms", i3, 4);
+        FenMain.tabPrinc.getColumnModel().getColumn(4).setCellRenderer(new cellRendererTime());
         fdb.dbIpEcrit(ip, Integer.toString(ipPresent), "etat");
         fdb.dbIpEcrit(ip, Integer.toString(ipPopup), "popup");
+        fdb.dbIpEcrit(ip, Integer.toString(ipDbExt), "bdext_perte");
+        
         if(fdb.paramLire("archives", "param").equals("1")){
             fdb.ipHistAj(ip, result, ipTest);
         }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Var {
     // Version
-    public static String version = "03.02.09";
+    public static String version = "03.03.01";
     //Connections postgrsql
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;
@@ -32,6 +32,7 @@ public class Var {
     // Modeles de tables
     public static ArrayList<String> bddParam = new ArrayList<>();
     public static ArrayList<String> bddOptions = new ArrayList<>();
+    public static ArrayList<String> bddIp = new ArrayList<>();
     
     /***************************************************************************
      * Modele de la table Param
@@ -77,5 +78,21 @@ public class Var {
         bddOptions.add("PeriodeVen");
         bddOptions.add("PeriodeSam");
         bddOptions.add("PeriodeDim");
+    }
+    /***************************************************************************
+     * Modele de la table Ip
+     **************************************************************************/
+    /**
+     * 
+     */
+    public void remplireListeIp(){
+        bddIp.add("id");
+        bddIp.add("ip");
+        bddIp.add("nom");
+        bddIp.add("latence");
+        bddIp.add("etat");
+        bddIp.add("popup");
+        bddIp.add("mac");
+        bddIp.add("bdext_perte");
     }
 }

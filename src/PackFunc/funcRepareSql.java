@@ -32,7 +32,14 @@ public class funcRepareSql {
 
         
     }
+    /***************************************************************************
+     * Tables Param
+     ***************************************************************************/
     
+    /**
+     * Créer la liste des colones
+     * @param nomTable 
+     */
     public void creeArray(String nomTable){
         listCol.clear();
         try {
@@ -52,6 +59,11 @@ public class funcRepareSql {
             Logger.getLogger(funcRepareSql.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /**
+     * Tester si une réparation est nécessaire
+     * @param nomTable
+     * @return 
+     */
         public boolean testDb(String nomTable){
             
             boolean dbOk = true;
@@ -64,6 +76,10 @@ public class funcRepareSql {
             }
             return dbOk;
         }
+        /**
+         * Réparer la table
+         * @param table 
+         */
         public void dbRepare(String table){
             creeArray(table);
             // Afficher les noms et les types des colonne sur le console
@@ -87,7 +103,11 @@ public class funcRepareSql {
                 
             }
     }
-    
+    /**
+     * Créer la colone manquante
+     * @param nomTable
+     * @param nomColone 
+     */
     public void creeColone(String nomTable, String nomColone){
         try {
             String sql = "ALTER TABLE "+nomTable+" ADD "+nomColone+" TEXT DEFAULT '0';";
@@ -100,4 +120,92 @@ public class funcRepareSql {
         }
         
     }
+    /***************************************************************************
+     * Tables IP
+     **************************************************************************/
+    
+    /**
+     * Créer la liste des colones
+     * @param nomTable 
+     */
+    public void creeArrayIp(String nomTable){
+        listCol.clear();
+        try {
+            String sql = "SELECT * FROM ip;";
+            ps = PackFunc.Var.dbConSite.createStatement();
+            rs = ps.executeQuery(sql);
+            ResultSetMetaData rsMetaData=rs.getMetaData();
+            int nbrColonne = rsMetaData.getColumnCount();
+            for (int i = 1; i <= nbrColonne; i++)
+            {
+                // Retourner le nom de la colonne
+                String nom=rsMetaData.getColumnName(i);
+                // Retourner le type de la colonne
+                 listCol.add(nom);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(funcRepareSql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /**
+     * Tester si une réparation est nécessaire
+     * @param nomTable
+     * @return 
+     */
+        public boolean testDbIp(String nomTable){
+            
+            boolean dbOk = true;
+            ArrayList<String> bddOptimal=new ArrayList();
+            if(listCol.equals(PackFunc.Var.bddIp)){
+                dbOk=true;
+            }else{
+                dbOk=false;
+            }
+            return dbOk;
+        }
+        /**
+         * Réparer la table
+         * @param table 
+         */
+        public void dbRepareIp(String table){
+            creeArrayIp(table);
+System.out.println("Repare maison ");
+            // Afficher les noms et les types des colonne sur le console
+            ArrayList<String> bddOptimal=new ArrayList();
+            bddOptimal = PackFunc.Var.bddIp;
+            if(listCol.equals(PackFunc.Var.bddIp)){
+System.out.println("Tout OK ");
+System.out.println(listCol);
+System.out.println(bddOptimal);
+            }else{
+                for (String col : bddOptimal) 
+                {
+                    if(listCol.contains(col)==false){
+System.out.println("Repare necessaire ");
+                        String colAjout = col;
+                        System.out.println(col);
+                        creeColoneIp(table, col);
+                    }
+                }
+            }
+    }
+    /**
+     * Créer la colone manquante
+     * @param nomTable
+     * @param nomColone 
+     */
+    public void creeColoneIp(String nomTable, String nomColone){
+        try {
+            String sql = "ALTER TABLE ip ADD "+nomColone+" TEXT DEFAULT '0';";
+            ps = PackFunc.Var.dbConSite.createStatement();
+            ps.execute(sql);
+            System.out.println("2");
+            ps.close();
+System.out.println("Col ajoutée "+nomColone);
+        } catch (SQLException ex) {
+            Logger.getLogger(funcRepareSql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
 }

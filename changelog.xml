@@ -1,0 +1,43 @@
+<?xml version = "1.0"?>
+<class>
+   
+   
+   <Version number = "03.03.01">
+	  <Ameliorations>Ajout de l'adresse MAC lors d'une recherche. \n Ajout de la possibilité d'exporter la table dans un fichier excel.</Ameliorations>
+      <Bugs>Correction de bug mineu</Bugs>
+   </Version>
+
+   <Version number = "03.02.09">
+	  <Ameliorations></Ameliorations>
+      <Bugs>Correction du bug sur l'écriture des pertes sur une BDD externe</Bugs>
+   </Version>
+
+
+   <Version number = "03.02.08">
+	  <Ameliorations>Ajout de la réparation des tables pour de futurs mises à jour</Ameliorations>
+      <Bugs></Bugs>
+   </Version>
+
+   <Version number = "03.02.07">
+	  <Ameliorations></Ameliorations>
+      <Bugs>Correction de bugs mineurs</Bugs>
+   </Version>
+
+   <Version number = "03.02.06">
+	  <Ameliorations>Ajout du changelog</Ameliorations>
+      <Bugs>Correction de bugs mineurs</Bugs>
+   </Version>
+   <Version number = "03.02.02">
+      <Ameliorations></Ameliorations>
+      <Bugs>Correction d'un bug sur les ecritures en base de donnée externe</Bugs>
+   </Version>
+
+   <Version number = "03.02.01">
+      <Ameliorations>Ajout d'une option pour enregistrer les résultats sur une base de donnée externe les pertes de connexion et les rapports</Ameliorations>
+      <Bugs></Bugs>
+   </Version>
+   
+
+</class>
+
+

@@ -21,7 +21,7 @@ import PackFunc.funcMain;
  *
  * @author Dynaglien
  */
-public class threadLanceMailRecap extends Thread{
+public class lanceThread extends Thread{
     funcLicence fl = new funcLicence();
     funcDb fdb = new funcDb();
     int corePoolSize = Runtime.getRuntime().availableProcessors();
@@ -31,8 +31,9 @@ public class threadLanceMailRecap extends Thread{
     static ScheduledFuture<?> r;
     static ScheduledFuture<?> s;
     static ScheduledFuture<?> u;
+    static ScheduledFuture<?> v;
     
-    public threadLanceMailRecap(){
+    public lanceThread(){
         
     }
     
@@ -55,12 +56,12 @@ public class threadLanceMailRecap extends Thread{
                     u = execute.scheduleAtFixedRate(new threadDbExtPerte(),2 , 60, TimeUnit.SECONDS);
                 }
                 if(fdb.paramLire("dbExt", "param").equals("1")){
-                    System.out.println(fdb.paramLire("dbext_delais", "param"));
-                    System.out.println(Integer.parseInt(fdb.paramLire("dbext_delais", "param")));
+
                     s = execute.scheduleAtFixedRate( new threadDbExt(), 0, Integer.parseInt(fdb.paramLire("dbext_delais", "param")), TimeUnit.SECONDS);
                     
                 }
             }
+            v = execute.scheduleAtFixedRate(new threadMiseAJour(),0 , 86400, TimeUnit.SECONDS);
             ScheduledExecutorService  queueCancelCheckExecutor = Executors.newSingleThreadScheduledExecutor();
             queueCancelCheckExecutor.scheduleAtFixedRate(new Runnable(){
                 @Override
@@ -71,13 +72,14 @@ public class threadLanceMailRecap extends Thread{
                         r.cancel(true);
                         s.cancel(true);
                         u.cancel(true);
+                        v.cancel(true);
                         execute.shutdown();
                         Thread.currentThread().interrupt();
                     }
                 }
             },1,1,TimeUnit.SECONDS);
         } catch (SocketException ex) {
-            Logger.getLogger(threadLanceMailRecap.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(lanceThread.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
     

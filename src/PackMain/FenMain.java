@@ -7,7 +7,7 @@ package PackMain;
 
 import PackThread.threadHisto;
 import PackThread.threadPrepaPing;
-import PackThread.threadLanceMailRecap;
+import PackThread.lanceThread;
 import PackThread.threadPrepaAj;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -37,15 +37,19 @@ public final class FenMain extends javax.swing.JFrame {
     funcIp funIp = new funcIp();
     funcDb fdb = new funcDb();
     PackFunc.Var funVar = new PackFunc.Var();
+    funcDb funDb = new funcDb();
+    PackFunc.funcRepareSql rep = new PackFunc.funcRepareSql();
     
     /**
      * Creates new form mainAcc
      */
     public FenMain(){
+    
         fun.testOs();
         File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
         initComponents();
+menTest.setVisible(false);
         fun.dossCree();
         labVersion.setText("PingOuin version "+PackFunc.Var.version);
         try {
@@ -64,13 +68,15 @@ public final class FenMain extends javax.swing.JFrame {
 // Création des tables
         funVar.remplireListeParam();
         funVar.remplireListeOptions();
+        funVar.remplireListeIp();
         
-        funcDb funDb = new funcDb();
+        
         fun.connectHist();
         if(fdb.testTable("param")==false || fdb.testTable("options")==false){ funDb.creerTables(); }
         //funDb.tablesRemplir();
-        PackFunc.funcRepareSql rep = new PackFunc.funcRepareSql();
+        
         rep.testDbOk("param");
+        rep.testDbOk("options");
         funDb.tableIpCree();
         licence();
         tfPremIp.setText(funIp.ipPc());
@@ -187,6 +193,7 @@ public final class FenMain extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        menTest = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -617,7 +624,13 @@ public final class FenMain extends javax.swing.JFrame {
 
         jMenu1.setText("Fichier");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem1.setText("Imprimer");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -780,6 +793,14 @@ public final class FenMain extends javax.swing.JFrame {
         jMenu4.add(jMenuItem10);
         jMenu4.add(jSeparator5);
 
+        menTest.setText("Test");
+        menTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menTestActionPerformed(evt);
+            }
+        });
+        jMenu4.add(menTest);
+
         jMenuItem12.setText("Changelog");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -845,6 +866,7 @@ public final class FenMain extends javax.swing.JFrame {
         btnLancer.setText("Start");
         btnLancer.setBackground(Color.red);
         fun.connectSite();
+        rep.dbRepareIp("ip");
         fdb.listeIp();
         //threadHisto th = new threadHisto();
         //th.start();
@@ -891,7 +913,7 @@ public final class FenMain extends javax.swing.JFrame {
             
             PackFunc.Var.stopPing = false;
             tpp.start();
-            threadLanceMailRecap tpmr = new threadLanceMailRecap();
+            lanceThread tpmr = new lanceThread();
             tpmr.start();
         }else{
             FenMain.btnLancer.setText("Start");
@@ -1129,6 +1151,17 @@ public final class FenMain extends javax.swing.JFrame {
         prsql.dbRepare("options");
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
+    private void menTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menTestActionPerformed
+        PackFunc.Test test = new PackFunc.Test();
+            //test.main();
+
+    }//GEN-LAST:event_menTestActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        PackFunc.funcExportXls export = new PackFunc.funcExportXls();
+        export.main();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1227,6 +1260,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem menEnvoieMail;
     private javax.swing.JCheckBoxMenuItem menEnvoieRapports;
     private javax.swing.JCheckBoxMenuItem menPopup;
+    private javax.swing.JMenuItem menTest;
     public static javax.swing.JProgressBar progerAjout;
     private javax.swing.JSpinner slidDelaisPing;
     private javax.swing.JSpinner spinPlage;

@@ -9,6 +9,9 @@ import PackFunc.funcDb;
 import PackFunc.funcIp;
 import PackFunc.funcMain;
 import PackMain.FenMain;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,10 +32,15 @@ public class threadAjIpRepond implements Runnable{
     }
     public void test(){
         if(funIp.isAlive(ip) != "500"){
-            Integer idIp = funcIp.idIp;
-            String hostName = funIp.threadHostName(ip);
-            fdb.ipAjDb(ip, hostName, idIp);
-            funcIp.idIp = funcIp.idIp + 1;
+            try {
+                Integer idIp = funcIp.idIp;
+                String hostName = funIp.threadHostName(ip);
+                String mac = funIp.getMac("arp -a " +ip);
+                fdb.ipAjDb(ip, hostName, idIp, mac);
+                funcIp.idIp = funcIp.idIp + 1;
+            } catch (IOException ex) {
+                Logger.getLogger(threadAjIpRepond.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         PackFunc.Var.threadFerme = PackFunc.Var.threadFerme + 1;
         funIp.avanceThread(PackFunc.Var.threadFerme);

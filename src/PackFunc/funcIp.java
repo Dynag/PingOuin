@@ -7,7 +7,9 @@ package PackFunc;
 
 import PackMain.FenMain;
 import PackThread.threadPop;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.Duration;
@@ -100,4 +102,36 @@ public class funcIp {
             }
         return name;
     }
+    
+    public static String getMac(String param) throws IOException{
+          String mac1 = null;
+          
+        Process p = Runtime.getRuntime().exec(param);
+        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        String line;
+        while ((line = input.readLine()) != null) {
+            if (!line.trim().equals("")) {
+                // keep only the process name
+                line = line.substring(1);
+                String mac = extractMacAddr(line);
+                if (mac.isEmpty() == false) {
+                    return mac;
+                }
+            }
+
+        }
+        return "";
+
+      }
+        
+      public static String extractMacAddr(String str) {
+        String arr[] = str.split("   ");
+        for (String string : arr) {
+            if (string.trim().length() == 17) {
+                return string.trim().toUpperCase();
+            }
+        }
+        return "";
+    }
+    
 }

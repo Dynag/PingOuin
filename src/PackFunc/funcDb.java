@@ -173,9 +173,12 @@ System.out.println(e);
         }
     }
     public void tableIpCree(){
+        
+
         try{
+            String listColIp = listeCol("ip");
             ps = PackFunc.Var.dbConSite.createStatement();
-            String sq1 = "CREATE TABLE IF NOT EXISTS ip (id integer, ip ,nom, etat, latence, popup)";
+            String sq1 = "CREATE TABLE IF NOT EXISTS ip ("+listColIp+")";
             ps.execute(sq1);
             ps.close();
         }catch (SQLException e) {
@@ -187,7 +190,7 @@ System.out.println(e);
         String listeCol = "";
         Integer i = 0;
         ArrayList<String> liCol;
-        if(table.equals("param")){ liCol = PackFunc.Var.bddParam; }else{ liCol = PackFunc.Var.bddOptions; }
+        if(table.equals("param")){ liCol = PackFunc.Var.bddParam; }else if(table.equals("options")){ liCol = PackFunc.Var.bddOptions; } else { liCol = PackFunc.Var.bddIp; }
         for (String col : liCol) {
             if(i==0){
                 listeCol = listeCol+col+", ";
@@ -206,9 +209,10 @@ System.out.println(e);
     *****   DB une IP                                                      *****
     ***************************************************************************/
 // Ajouter une IP
-    public void ipAjDb(String ip, String nom, Integer id){
+    public void ipAjDb(String ip, String nom, Integer id, String mac){
         try{
-            String sql = "INSERT INTO ip(id, ip, nom, latence, etat, popup) VALUES(?,?,?,?,?,?)"; //NOI18N
+            
+            String sql = "INSERT INTO ip(id, ip, nom, latence, etat, popup, mac) VALUES(?,?,?,?,?,?,?)"; //NOI18N
                 ps1 = PackFunc.Var.dbConSite.prepareStatement(sql);
                 ps1.setInt(1,id); //NOI18N
                 ps1.setString(2,ip); //NOI18N
@@ -216,6 +220,7 @@ System.out.println(e);
                 ps1.setString(4,"0"); //NOI18N
                 ps1.setString(5,"0"); //NOI18N
                 ps1.setString(6,"0"); //NOI18N
+                ps1.setString(7,mac); //NOI18N
                 ps1.execute();
                 ps1.close();
         }catch(SQLException e){
@@ -274,12 +279,12 @@ System.out.println(e);
     public void listeIp(){
         try{
             FenMain.tabPrinc.removeAll();
-            String sql = "SELECT ip AS 'ip', nom AS 'Nom', etat AS 'Etat', latence AS 'Latence' FROM ip ORDER BY "+PackFunc.Var.tri+"";
+            String sql = "SELECT ip AS 'ip', nom AS 'Nom', mac AS 'Mac', etat AS 'Etat', latence AS 'Latence' FROM ip ORDER BY "+PackFunc.Var.tri+"";
             ps1 = PackFunc.Var.dbConSite.prepareStatement(sql);
             rs = ps1.executeQuery();
             FenMain.tabPrinc.setModel(DbUtils.resultSetToTableModel(rs));
-            FenMain.tabPrinc.getColumnModel().getColumn(2).setMaxWidth(50);
             FenMain.tabPrinc.getColumnModel().getColumn(3).setMaxWidth(50);
+            FenMain.tabPrinc.getColumnModel().getColumn(4).setMaxWidth(50);
 
             rs.close();
             ps1.close();
@@ -340,6 +345,7 @@ System.out.println(e);
         PackFunc.Var.dbSite = nom+".pigo";
         fun.connectSite();
         tableIpCree();
+        
         try{
             String sq1 = "SELECT * FROM ip"; //NOI18N
             Class.forName("org.sqlite.JDBC"); //NOI18N
