@@ -73,7 +73,7 @@ menTest.setVisible(false);
         
         fun.connectHist();
         if(fdb.testTable("param")==false || fdb.testTable("options")==false){ funDb.creerTables(); }
-        //funDb.tablesRemplir();
+        funDb.tablesRemplir();
         
         rep.testDbOk("param");
         rep.testDbOk("options");

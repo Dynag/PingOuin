@@ -97,19 +97,9 @@ System.out.println(e);
             if(rs.next()){
 
             }else{
-                String sq7 = "INSERT INTO param(id, site, smtp_serv, smtp_port, smtp_user, smtp_mail, smtp_pass, mail_envoie, pop_up, mail_rapport, archives) VALUES(?,?,?,?,?,?,?,?,?,?,?)"; //NOI18N
+                String sq7 = "INSERT INTO param(id) VALUES(?)"; //NOI18N
                 ps1 = PackFunc.Var.dbConParam.prepareStatement(sq7);
                 ps1.setString(1,"1"); //NOI18N
-                ps1.setString(2,"1"); //NOI18N
-                ps1.setString(3,"1"); //NOI18N
-                ps1.setString(4,"1"); //NOI18N
-                ps1.setString(5,"1"); //NOI18N
-                ps1.setString(6,"1"); //NOI18N
-                ps1.setString(7,"1"); //NOI18N
-                ps1.setString(8,"0"); //NOI18N
-                ps1.setString(9,"0"); //NOI18N
-                ps1.setString(10,"0"); //NOI18N
-                ps1.setString(11,"0"); //NOI18N
                 ps1.execute();
                 ps1.close();
             }
@@ -119,19 +109,10 @@ System.out.println(e);
             if(rs.next()){
 
             }else{
-                String sq8 = "INSERT INTO options(EnvoieMail, MailPeriode, PeriodeJour, PeriodeHeure, PeriodeLun, PeriodeMar, PeriodeMerc, PeriodeJeu, PeriodeVen, PeriodeSam, PeriodeDim) VALUES(?,?,?,?,?,?,?,?,?,?,?)"; //NOI18N
+                String sq8 = "INSERT INTO options(PeriodeHeure, id) VALUES(?,?)"; //NOI18N
                 ps1 = PackFunc.Var.dbConParam.prepareStatement(sq8);
                 ps1.setString(1,"0"); //NOI18N
-                ps1.setString(2,"0"); //NOI18N
-                ps1.setString(3,"1"); //NOI18N
-                ps1.setString(4,"00:00"); //NOI18N
-                ps1.setString(5,"0"); //NOI18N
-                ps1.setString(6,"0"); //NOI18N
-                ps1.setString(7,"0"); //NOI18N
-                ps1.setString(8,"0"); //NOI18N
-                ps1.setString(9,"0"); //NOI18N
-                ps1.setString(10,"0"); //NOI18N
-                ps1.setString(11,"0"); //NOI18N
+                ps1.setString(2,"1"); //NOI18N
                 ps1.execute();
                 ps1.close();
             }
