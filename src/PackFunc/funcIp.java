@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.time.Duration;
 import java.time.Instant;
@@ -133,5 +135,18 @@ public class funcIp {
         }
         return "";
     }
+      
+    public static boolean testPort(Integer port, String ip){
+        boolean ouvert = false;
+        try {
+                Socket soc = new Socket (ip,port);
+                ouvert = true;
+        } catch(SocketException e){
+                ouvert = false;
+        } catch (IOException e) {
+                e.printStackTrace();
+} 
+          return ouvert;
+      }
     
 }

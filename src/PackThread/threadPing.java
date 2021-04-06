@@ -77,10 +77,10 @@ public class threadPing implements Runnable{
 
                 
         }
-        FenMain.tabPrinc.setValueAt(result, i3, 3);
-        FenMain.tabPrinc.getColumnModel().getColumn(3).setCellRenderer(new cellRendererPing());
-        FenMain.tabPrinc.setValueAt(ipTest+" ms", i3, 4);
-        FenMain.tabPrinc.getColumnModel().getColumn(4).setCellRenderer(new cellRendererTime());
+        FenMain.tabPrinc.setValueAt(result, i3, 4);
+        FenMain.tabPrinc.getColumnModel().getColumn(4).setCellRenderer(new cellRendererPing());
+        FenMain.tabPrinc.setValueAt(ipTest+" ms", i3, 5);
+        FenMain.tabPrinc.getColumnModel().getColumn(5).setCellRenderer(new cellRendererTime());
         fdb.dbIpEcrit(ip, Integer.toString(ipPresent), "etat");
         fdb.dbIpEcrit(ip, Integer.toString(ipPopup), "popup");
         fdb.dbIpEcrit(ip, Integer.toString(ipDbExt), "bdext_perte");

@@ -92,6 +92,9 @@ System.out.println("You selected the directory: " + jfc.getSelectedFile());
             cell.setCellValue("Adresse Mac");
             cell = rowhead.createCell((short) 3);
             cell.setCellStyle(style);
+            cell.setCellValue("Port");
+            cell = rowhead.createCell((short) 4);
+            cell.setCellStyle(style);
             cell.setCellValue("Etat");
             freezeSheet(sheet);
             Class.forName("com.mysql.jdbc.Driver");
@@ -114,26 +117,32 @@ System.out.println("You selected the directory: " + jfc.getSelectedFile());
                 cell.setCellStyle(style1);
                 cell.setCellValue(rs.getString("mac"));
                 cell = row.createCell((short) 3);
+                cell.setCellStyle(style1);
+                cell.setCellValue(rs.getString("port"));
+                cell = row.createCell((short) 4);
                 if(rs.getString("etat").equals("0")){
+                    cell.setCellValue("OK");
                     cell.setCellStyle(styleOk);
                 }else{
+                    cell.setCellValue("HS");
                     cell.setCellStyle(styleHs);
                 }
-                cell.setCellValue(rs.getString("etat"));
                 j=0;
             }else{
 
                 row.createCell((short) 0).setCellValue(rs.getString("ip"));
                 row.createCell((short) 1).setCellValue(rs.getString("nom"));
                 row.createCell((short) 2).setCellValue(rs.getString("mac"));
-System.out.println(rs.getString("etat"));
-                cell = row.createCell((short) 3);
+                row.createCell((short) 3).setCellValue(rs.getString("port"));
+                cell = row.createCell((short) 4);
                 if(rs.getString("etat").equals("0")){
+                    cell.setCellValue("OK");
                     cell.setCellStyle(styleOk);
                 }else{
+                    cell.setCellValue("HS");
                     cell.setCellStyle(styleHs);
                 }
-                cell.setCellValue(rs.getString("etat"));
+                
                 
                 j=1;
             }

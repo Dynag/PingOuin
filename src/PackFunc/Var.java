@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Var {
     // Version
-    public static String version = "03.03.01";
+    public static String version = "03.03.02";
     //Connections postgrsql
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;
@@ -94,5 +94,6 @@ public class Var {
         bddIp.add("popup");
         bddIp.add("mac");
         bddIp.add("bdext_perte");
+        bddIp.add("port");
     }
 }

@@ -190,10 +190,10 @@ System.out.println(e);
     *****   DB une IP                                                      *****
     ***************************************************************************/
 // Ajouter une IP
-    public void ipAjDb(String ip, String nom, Integer id, String mac){
+    public void ipAjDb(String ip, String nom, Integer id, String mac, String port){
         try{
             
-            String sql = "INSERT INTO ip(id, ip, nom, latence, etat, popup, mac) VALUES(?,?,?,?,?,?,?)"; //NOI18N
+            String sql = "INSERT INTO ip(id, ip, nom, latence, etat, popup, mac, port) VALUES(?,?,?,?,?,?,?,?)"; //NOI18N
                 ps1 = PackFunc.Var.dbConSite.prepareStatement(sql);
                 ps1.setInt(1,id); //NOI18N
                 ps1.setString(2,ip); //NOI18N
@@ -202,6 +202,7 @@ System.out.println(e);
                 ps1.setString(5,"0"); //NOI18N
                 ps1.setString(6,"0"); //NOI18N
                 ps1.setString(7,mac); //NOI18N
+                ps1.setString(8,port); //NOI18N
                 ps1.execute();
                 ps1.close();
         }catch(SQLException e){
@@ -260,7 +261,7 @@ System.out.println(e);
     public void listeIp(){
         try{
             FenMain.tabPrinc.removeAll();
-            String sql = "SELECT ip AS 'ip', nom AS 'Nom', mac AS 'Mac', etat AS 'Etat', latence AS 'Latence' FROM ip ORDER BY "+PackFunc.Var.tri+"";
+            String sql = "SELECT ip AS 'ip', nom AS 'Nom', mac AS 'Mac', port AS 'Port', etat AS 'Etat', latence AS 'Latence' FROM ip ORDER BY "+PackFunc.Var.tri+"";
             ps1 = PackFunc.Var.dbConSite.prepareStatement(sql);
             rs = ps1.executeQuery();
             FenMain.tabPrinc.setModel(DbUtils.resultSetToTableModel(rs));

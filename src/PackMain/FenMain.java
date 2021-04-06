@@ -49,7 +49,7 @@ public final class FenMain extends javax.swing.JFrame {
         File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
         initComponents();
-menTest.setVisible(false);
+//menTest.setVisible(false);
         fun.dossCree();
         labVersion.setText("PingOuin version "+PackFunc.Var.version);
         try {
@@ -1153,7 +1153,7 @@ menTest.setVisible(false);
 
     private void menTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menTestActionPerformed
         PackFunc.Test test = new PackFunc.Test();
-            //test.main();
+        test.main();
 
     }//GEN-LAST:event_menTestActionPerformed
 
