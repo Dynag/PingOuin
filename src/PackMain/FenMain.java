@@ -168,8 +168,11 @@ public final class FenMain extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -625,13 +628,22 @@ public final class FenMain extends javax.swing.JFrame {
         jMenu1.setText("Fichier");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem1.setText("Imprimer");
+        jMenuItem1.setText("Exporter en xls");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem14.setText("Importer depuis un xls");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem14);
+        jMenu1.add(jSeparator6);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("Enregistrer la plage");
@@ -649,6 +661,7 @@ public final class FenMain extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem8);
+        jMenu1.add(jSeparator7);
 
         jMenuItem3.setText("Mise a jour");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -874,8 +887,14 @@ public final class FenMain extends javax.swing.JFrame {
     }//GEN-LAST:event_listeSiteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        threadPrepaAj tpaj = new threadPrepaAj(tfPremIp.getText(), (String) cbTout.getSelectedItem(), (Integer) spinPlage.getValue());
-        tpaj.start();
+        if((Integer) spinPlage.getValue() > 255){
+            PackThread.threadPop tpop = new PackThread.threadPop("Veuillez entrer une valeur inférieure à 255");
+            tpop.start();
+        }else{
+            threadPrepaAj tpaj = new threadPrepaAj(tfPremIp.getText(), (String) cbTout.getSelectedItem(), (Integer) spinPlage.getValue());
+            tpaj.start();
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbToutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbToutActionPerformed
@@ -1162,6 +1181,11 @@ public final class FenMain extends javax.swing.JFrame {
         export.main();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        PackFunc.funcImportXls Import = new PackFunc.funcImportXls();
+        Import.main();
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1223,6 +1247,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1247,6 +1272,8 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
     public static javax.swing.JLabel labDelaisPing;
     public static javax.swing.JLabel labIp;
     public static javax.swing.JLabel labMaj;

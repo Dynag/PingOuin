@@ -265,8 +265,8 @@ System.out.println(e);
             ps1 = PackFunc.Var.dbConSite.prepareStatement(sql);
             rs = ps1.executeQuery();
             FenMain.tabPrinc.setModel(DbUtils.resultSetToTableModel(rs));
-            FenMain.tabPrinc.getColumnModel().getColumn(3).setMaxWidth(50);
             FenMain.tabPrinc.getColumnModel().getColumn(4).setMaxWidth(50);
+            FenMain.tabPrinc.getColumnModel().getColumn(5).setMaxWidth(50);
 
             rs.close();
             ps1.close();

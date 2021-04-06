@@ -34,7 +34,7 @@ public class funcExportXls {
         String path="";
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jfc.setDialogTitle("Choisissez ou enregistrer votre fichier : ");
-        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
         int returnValue = jfc.showSaveDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -53,10 +53,7 @@ System.out.println("You selected the directory: " + jfc.getSelectedFile());
      
     public void export(String path) throws FileNotFoundException, IOException {
         try{
-            
-            
-            
-            
+
             String filename=path+"\\export.xls" ;
             HSSFWorkbook hwb=new HSSFWorkbook();
             

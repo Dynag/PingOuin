@@ -5,15 +5,18 @@
  */
 package PackFunc;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author mgand
  */
 public class Test {
       public static void main() {
-          boolean ouvert = funcIp.testPort(80, "192.168.1.64");
-          System.out.println(ouvert);
-
+          funcImportXls.main();
+          
       }
         
       
