@@ -59,16 +59,15 @@ public class funcImportXls {
             Integer c = 0;
             while (iterator.hasNext()) {
                 Integer i = 0;
-                if(c != 0){
+System.out.println(c);
+                
                     String ip = null;
                     String nom = null;
                     String mac = null;
                     String port = null;
                     Row currentRow = (Row) iterator.next();
                     Iterator cellIterator = currentRow.iterator();
-
                     while (cellIterator.hasNext()) {
-
                         Cell currentCell = (Cell) cellIterator.next();
                         if(i == 0){ ip = currentCell.getStringCellValue(); }
                         if(i == 1){ nom = currentCell.getStringCellValue(); }
@@ -76,7 +75,8 @@ public class funcImportXls {
                         if(i == 3){ port = currentCell.getStringCellValue(); }
                         i++;
                     }
-                    System.out.println("ip : "+ip+" nom : "+nom+" mac : "+mac+" Port : "+port);
+                    if(c > 0){
+                    
                     funDb.ipAjDb(ip, nom, c, mac, port);
                 }
                 c++;

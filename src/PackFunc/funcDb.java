@@ -271,7 +271,7 @@ System.out.println(e);
             rs.close();
             ps1.close();
         }catch(SQLException e){
-            fun.ecritLogs(e, " - lisetIp - "+getClass().getName());
+            //fun.ecritLogs(e, " - lisetIp - "+getClass().getName());
         }
     }
 // Effacer la table Ip
@@ -335,7 +335,7 @@ System.out.println(e);
             ps = conn.createStatement();
             rs = ps.executeQuery(sq1);
             while(rs.next()){
-                String sql2 = "INSERT INTO ip(id, ip, nom, latence, etat, popup) VALUES(?,?,?,?,?,?)"; //NOI18N
+                String sql2 = "INSERT INTO ip(id, ip, nom, latence, etat, popup, mac, port) VALUES(?,?,?,?,?,?,?,?)"; //NOI18N
                 ps1 = PackFunc.Var.dbConSite.prepareStatement(sql2);
                 ps1.setInt(1,rs.getInt("id")); //NOI18N
                 ps1.setString(2,rs.getString("ip")); //NOI18N
@@ -343,6 +343,8 @@ System.out.println(e);
                 ps1.setString(4,"0"); //NOI18N
                 ps1.setString(5,"0"); //NOI18N
                 ps1.setString(6,"0"); //NOI18N
+                ps1.setString(7,rs.getString("mac")); //NOI18N
+                ps1.setString(8,rs.getString("port")); //NOI18N
                 ps1.execute();
                 ps1.close();
             }

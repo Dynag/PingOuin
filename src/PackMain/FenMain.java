@@ -49,7 +49,7 @@ public final class FenMain extends javax.swing.JFrame {
         File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
         initComponents();
-//menTest.setVisible(false);
+menTest.setVisible(false);
         fun.dossCree();
         labVersion.setText("PingOuin version "+PackFunc.Var.version);
         try {
@@ -636,6 +636,7 @@ public final class FenMain extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem14.setText("Importer depuis un xls");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

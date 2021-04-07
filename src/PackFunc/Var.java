@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Var {
     // Version
-    public static String version = "03.03.02";
+    public static String version = "03.03.03";
     //Connections postgrsql
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;
