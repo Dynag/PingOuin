@@ -32,7 +32,7 @@ public class funcImportXls {
     public static void main(){
         String path="";
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        jfc.setDialogTitle("Choisissez ou enregistrer votre fichier : ");
+        jfc.setDialogTitle(PackFunc.Var.bundle.getString("func.import.choix"));
         //jfc.setFileSelectionMode(JFileChooser.);
 
         int returnValue = jfc.showSaveDialog(null);

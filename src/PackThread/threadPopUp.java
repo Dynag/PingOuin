@@ -51,11 +51,11 @@ public class threadPopUp implements Runnable{
         fun.ecritLogs(e, " - "+getClass().getName());
         }
         if(ipHsMail != ""){
-            threadPop tpop = new threadPop("Sont HS : \n"+ipHsMail);
+            threadPop tpop = new threadPop(PackFunc.Var.bundle.getString("thread.popup.hs")+ipHsMail);
             tpop.start();
         }
         if(ipOkMail != ""){
-            threadPop tpop = new threadPop("Sont OK : \n"+ipOkMail);
+            threadPop tpop = new threadPop(PackFunc.Var.bundle.getString("thread.popup.ok")+ipOkMail);
             tpop.start();
         }
         

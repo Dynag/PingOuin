@@ -12,6 +12,7 @@ import PackFunc.funcDb;
 import PackFunc.funcLicence;
 import java.awt.Desktop;
 import java.io.File;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,19 +22,26 @@ import javax.swing.JOptionPane;
 public class FenLicence extends javax.swing.JFrame {
     funcLicence fl = new funcLicence();
     funcDb fdb = new funcDb();
+ 
+    
     private String lanceurPath = "lanceur.jar";
     /**
      * Creates new form pageLicence
      */
     public FenLicence() {
+        initComponents();
+        labTitre.setText(PackFunc.Var.bundle.getString("param.licence.titre"));
+        labCode.setText(PackFunc.Var.bundle.getString("param.licence.code"));
+        labLicence.setText(PackFunc.Var.bundle.getString("param.licence.licence"));
+        
         try {
-            initComponents();
+            
             tfCde.setText(Long.toString(fl.recupCode()));
             tfLicence.setText(fdb.paramLire("licence", "param"));
             if(fl.validLicense() == true){
-                labLicence.setText("Votre logiciel est activé.");
+                labActive.setText(PackFunc.Var.bundle.getString("param.licence.active"));
             }else{
-                labLicence.setText("Vous n'avez pas de licence valide.");
+                labActive.setText(PackFunc.Var.bundle.getString("param.licence.inactive"));
             }
         } catch (SocketException ex) {
             Logger.getLogger(FenLicence.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,32 +57,33 @@ public class FenLicence extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labTitre = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        labCode = new javax.swing.JLabel();
+        labLicence = new javax.swing.JLabel();
         tfLicence = new javax.swing.JTextField();
         tfCde = new javax.swing.JTextField();
-        labLicence = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        labActive = new javax.swing.JLabel();
+        btnValid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
 
-        jLabel1.setBackground(new java.awt.Color(51, 102, 255));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Licence");
-        jLabel1.setOpaque(true);
+        labTitre.setBackground(new java.awt.Color(51, 102, 255));
+        labTitre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labTitre.setForeground(new java.awt.Color(255, 255, 255));
+        labTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labTitre.setText("Licence");
+        labTitre.setOpaque(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setText("Code PC");
+        labCode.setText("Code PC");
 
-        jLabel3.setText("Code Licence");
+        labLicence.setText("Code Licence");
 
-        labLicence.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labLicence.setText("jLabel4");
+        labActive.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labActive.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,11 +92,11 @@ public class FenLicence extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labLicence, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labActive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(labLicence)
+                            .addComponent(labCode))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfCde)
@@ -98,22 +107,22 @@ public class FenLicence extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labLicence)
+                .addComponent(labActive)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(labCode)
                     .addComponent(tfCde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(labLicence)
                     .addComponent(tfLicence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
 
-        jButton1.setText("Valider");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnValid.setText("Valider");
+        btnValid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnValidActionPerformed(evt);
             }
         });
 
@@ -121,22 +130,22 @@ public class FenLicence extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+            .addComponent(labTitre, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnValid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnValid)
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
@@ -144,13 +153,12 @@ public class FenLicence extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnValidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidActionPerformed
         fdb.paramEcrit("licence", tfLicence.getText(), "param");
-        FenMain ma = new FenMain();
-        ma.licence();
+        //FenMain ma = new FenMain();
+        //ma.licence();
         dispose();
-        JOptionPane.showMessageDialog(null,"La licence à été mise à jour, "  + 
-						"le programme va être relancé");
+        JOptionPane.showMessageDialog(null,PackFunc.Var.bundle.getString("param.licence.pop"));
 					
 					File lanceur = new File(lanceurPath);
 					
@@ -161,9 +169,9 @@ public class FenLicence extends javax.swing.JFrame {
 						//On quitte le programme				
 						System.exit(0);
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null,"Impossible de relancer le programme");
+						JOptionPane.showMessageDialog(null,PackFunc.Var.bundle.getString("pop.relance.prog"));
 					}
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnValidActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,12 +212,12 @@ public class FenLicence extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton btnValid;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labActive;
+    private javax.swing.JLabel labCode;
     private javax.swing.JLabel labLicence;
+    private javax.swing.JLabel labTitre;
     private javax.swing.JTextField tfCde;
     private javax.swing.JTextField tfLicence;
     // End of variables declaration//GEN-END:variables

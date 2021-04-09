@@ -19,6 +19,8 @@ public class FenGestionSite extends javax.swing.JFrame {
      */
     public FenGestionSite() {
         initComponents();
+        labTitre.setText(PackFunc.Var.bundle.getString("sites.titre"));
+        btnSupr.setText(PackFunc.Var.bundle.getString("btn.supr"));
         String[] listeSites = null;
        File repertoire = new File("db");
         String liste[] = repertoire.list();
@@ -41,19 +43,19 @@ public class FenGestionSite extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labTitre = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         cbSite = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        btnSupr = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setBackground(new java.awt.Color(51, 102, 255));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Gestion des sites");
-        jLabel1.setOpaque(true);
+        labTitre.setBackground(new java.awt.Color(51, 102, 255));
+        labTitre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labTitre.setForeground(new java.awt.Color(255, 255, 255));
+        labTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labTitre.setText("Gestion des sites");
+        labTitre.setOpaque(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -63,10 +65,10 @@ public class FenGestionSite extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Supprimer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSupr.setText("Supprimer");
+        btnSupr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSuprActionPerformed(evt);
             }
         });
 
@@ -78,7 +80,7 @@ public class FenGestionSite extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbSite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSupr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -87,7 +89,7 @@ public class FenGestionSite extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(cbSite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnSupr)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -95,7 +97,7 @@ public class FenGestionSite extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+            .addComponent(labTitre, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -104,7 +106,7 @@ public class FenGestionSite extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
@@ -114,11 +116,11 @@ public class FenGestionSite extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSuprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuprActionPerformed
         funcMain fun = new funcMain();
         fun.siteSupp((String) cbSite.getSelectedItem());
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSuprActionPerformed
 
     private void cbSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSiteActionPerformed
         // TODO add your handling code here:
@@ -163,9 +165,9 @@ public class FenGestionSite extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSupr;
     private javax.swing.JComboBox cbSite;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labTitre;
     // End of variables declaration//GEN-END:variables
 }

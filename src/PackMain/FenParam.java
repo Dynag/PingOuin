@@ -6,6 +6,13 @@
 package PackMain;
 
 import PackFunc.funcDb;
+import PackFunc.funcLicence;
+import PackThread.threadPop;
+import java.net.SocketException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,22 +20,31 @@ import PackFunc.funcDb;
  */
 public class FenParam extends javax.swing.JFrame {
     funcDb fdb = new funcDb();
+    funcLicence fl = new funcLicence();
     /**
      * Creates new form pageParam
      */
     public FenParam() {
         initComponents();
+        labParam.setText(PackFunc.Var.bundle.getString("param.titre"));
+        labSite.setText(PackFunc.Var.bundle.getString("param.site"));
+        labMail.setText(PackFunc.Var.bundle.getString("param.mail"));
+        
+        btnValid.setText(PackFunc.Var.bundle.getString("btn.valid"));
+        
+        btnMailParam.setText(PackFunc.Var.bundle.getString("param.mail.param"));
+        btnRecap.setText(PackFunc.Var.bundle.getString("param.recap"));
+        btnDbExt.setText(PackFunc.Var.bundle.getString("param.dbext"));
+        btnLi.setText(PackFunc.Var.bundle.getString("param.licen"));
+        labAutre.setText(PackFunc.Var.bundle.getString("param.autre"));
+        
         paramAffiche();
     }
     
     public void paramAffiche(){
         tfSite.setText(fdb.paramLire("site", "param"));
         tfMail.setText(fdb.paramLire("mail", "param"));
-        tfSmtpServ.setText(fdb.paramLire("smtp_serv", "param"));
-        tfSmtpPort.setText(fdb.paramLire("smtp_port", "param"));
-        tfSmtpUser.setText(fdb.paramLire("smtp_user", "param"));
-        tfSmtpPass.setText(fdb.paramLire("smtp_pass", "param"));
-        tfSmtpMail.setText(fdb.paramLire("smtp_mail", "param"));
+        
     }
 
     /**
@@ -40,42 +56,37 @@ public class FenParam extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labParam = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        labSite = new javax.swing.JLabel();
+        labMail = new javax.swing.JLabel();
         tfMail = new javax.swing.JTextField();
         tfSite = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        tfSmtpServ = new javax.swing.JTextField();
-        tfSmtpPort = new javax.swing.JTextField();
-        tfSmtpUser = new javax.swing.JTextField();
-        tfSmtpMail = new javax.swing.JTextField();
-        tfSmtpPass = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        labAutre = new javax.swing.JLabel();
+        btnMailParam = new javax.swing.JButton();
+        btnRecap = new javax.swing.JButton();
+        btnDbExt = new javax.swing.JButton();
+        btnLi = new javax.swing.JButton();
+        btnValid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(153, 204, 255));
         setLocationByPlatform(true);
 
-        jLabel1.setBackground(new java.awt.Color(51, 102, 255));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Paramètres");
-        jLabel1.setOpaque(true);
+        labParam.setBackground(new java.awt.Color(51, 102, 255));
+        labParam.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labParam.setForeground(new java.awt.Color(255, 255, 255));
+        labParam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labParam.setText("Paramètres");
+        labParam.setOpaque(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setText("Site");
+        labSite.setText("Site");
 
-        jLabel3.setText("Mail à envoyer");
+        labMail.setText("Mail à envoyer");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,11 +95,11 @@ public class FenParam extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(labSite)
+                    .addComponent(labMail))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfMail, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                    .addComponent(tfMail, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                     .addComponent(tfSite))
                 .addContainerGap())
         );
@@ -97,86 +108,84 @@ public class FenParam extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(labSite)
                     .addComponent(tfSite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(labMail)
                     .addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel4.setText("Serveur SMTP");
+        labAutre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labAutre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labAutre.setText("jLabel1");
 
-        jLabel5.setText("User SMTP");
+        btnMailParam.setText("Envoie de mails");
+        btnMailParam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMailParamActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("Port SMTP");
+        btnRecap.setText("Envoie de recap");
+        btnRecap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecapActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setText("Mail SMTP");
+        btnDbExt.setText("Db Externe");
+        btnDbExt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDbExtActionPerformed(evt);
+            }
+        });
 
-        jLabel8.setText("Pass SMTP");
+        btnLi.setText("Licence");
+        btnLi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labAutre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfSmtpServ))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(34, 34, 34)
-                        .addComponent(tfSmtpPass))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(36, 36, 36)
-                        .addComponent(tfSmtpPort))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(34, 34, 34)
-                        .addComponent(tfSmtpUser))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(38, 38, 38)
-                        .addComponent(tfSmtpMail)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnDbExt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMailParam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRecap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLi, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(labAutre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfSmtpServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnMailParam)
+                    .addComponent(btnRecap))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(tfSmtpPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfSmtpUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(tfSmtpMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(tfSmtpPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDbExt)
+                    .addComponent(btnLi))
+                .addGap(0, 64, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Valider");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnValid.setText("Valider");
+        btnValid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnValidActionPerformed(evt);
             }
         });
 
@@ -184,42 +193,66 @@ public class FenParam extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labParam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnValid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labParam, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addComponent(btnValid)
+                .addGap(13, 13, 13)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 42, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnValidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidActionPerformed
         fdb.paramEcrit("site", tfSite.getText(), "param");
         fdb.paramEcrit("mail", tfMail.getText(), "param");
-        fdb.paramEcrit("smtp_serv", tfSmtpServ.getText(), "param");
-        fdb.paramEcrit("smtp_port", tfSmtpPort.getText(), "param");
-        fdb.paramEcrit("smtp_user", tfSmtpUser.getText(), "param");
-        fdb.paramEcrit("smtp_pass", tfSmtpPass.getText(), "param");
-        fdb.paramEcrit("smtp_mail", tfSmtpMail.getText(), "param");
+        
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnValidActionPerformed
+
+    private void btnMailParamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMailParamActionPerformed
+
+                FenParamMail pr = new FenParamMail();
+                pr.show();
+                dispose();
+    }//GEN-LAST:event_btnMailParamActionPerformed
+
+    private void btnRecapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecapActionPerformed
+        
+                FenRecap pr = new FenRecap();
+                pr.show();
+                dispose();
+    }//GEN-LAST:event_btnRecapActionPerformed
+
+    private void btnDbExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDbExtActionPerformed
+        
+                FenDbExt pr = new FenDbExt();
+                pr.show();
+            dispose();
+    }//GEN-LAST:event_btnDbExtActionPerformed
+
+    private void btnLiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLiActionPerformed
+        
+                FenLicence pr = new FenLicence();
+                pr.show();
+            dispose();
+    }//GEN-LAST:event_btnLiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,23 +293,18 @@ public class FenParam extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton btnDbExt;
+    private javax.swing.JButton btnLi;
+    private javax.swing.JButton btnMailParam;
+    private javax.swing.JButton btnRecap;
+    private javax.swing.JButton btnValid;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labAutre;
+    private javax.swing.JLabel labMail;
+    private javax.swing.JLabel labParam;
+    private javax.swing.JLabel labSite;
     private javax.swing.JTextField tfMail;
     private javax.swing.JTextField tfSite;
-    private javax.swing.JTextField tfSmtpMail;
-    private javax.swing.JTextField tfSmtpPass;
-    private javax.swing.JTextField tfSmtpPort;
-    private javax.swing.JTextField tfSmtpServ;
-    private javax.swing.JTextField tfSmtpUser;
     // End of variables declaration//GEN-END:variables
 }

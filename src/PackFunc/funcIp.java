@@ -66,7 +66,7 @@ public class funcIp {
         if(PackFunc.Var.threadOuvert == ferme){
             idIp = 1;
             FenMain.progerAjout.setValue(1);
-            threadPop t2 = new threadPop("La plage IP à bien été ajoutée");
+            threadPop t2 = new threadPop(PackFunc.Var.bundle.getString("func.ip.ajoutok"));
             t2.start();
             FenMain.progerAjout.setVisible(false);
         }

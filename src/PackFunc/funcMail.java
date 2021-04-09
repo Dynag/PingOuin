@@ -25,6 +25,7 @@ public class funcMail {
     funcMain fun = new funcMain();
     funcDb fdb = new funcDb();
     public void envoieMail(String objet, String message) throws MessagingException{
+System.out.println("mail_start");
         Properties properties = new Properties();
         properties.setProperty("mail.transport.protocol", "smtp");
         properties.setProperty("mail.smtp.host", fdb.paramLire("smtp_serv", "param"));
@@ -54,14 +55,28 @@ public class funcMail {
             String mess = stringToHTML.stringToHTML(message);
             message1.setContent(mess, "text/html; charset=utf-8");
             message1.setSubject(objet);
+            message1.setHeader("Content-Type", "text/html; charset=UTF-8");
+            message1.setFrom(new InternetAddress(fdb.paramLire("smtp_mail", "param")));
+            /*message1.setReplyTo(new javax.mail.Address[]
+            {
+                new javax.mail.internet.InternetAddress(fdb.paramLire("mail", "param"))
+            });*/
             Transport transport=null;
             transport = session.getTransport("smtp");
             transport.connect(fdb.paramLire("smtp_user", "param"), fdb.paramLire("smtp_pass", "param"));   
-            transport.sendMessage(message1, toClient);   
+            try{
+                transport.sendMessage(message1, toClient); 
+                System.out.println("mail_ok");
+            }catch(Exception e){ 
+            System.out.println(e);
+            }
             transport.close();
+            
+System.out.println("mail_Stop");
     }
     
     public boolean envoieJour(){
+System.out.println("201");
         boolean test = false;
         long currentTimestamp = System.currentTimeMillis();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
@@ -103,6 +118,7 @@ public class funcMail {
                 }
             }
         }
+System.out.println(test);
         return test;
     }
      public boolean testJourSemaine(String jour){
@@ -111,6 +127,7 @@ public class funcMail {
             long currentTimestamp = System.currentTimeMillis();
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEE");
             String date = dateFormat.format(currentTimestamp);
+System.out.println(date);
             if(date.equals(jour))
             {
                 test = true;

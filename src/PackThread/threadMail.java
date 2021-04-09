@@ -49,17 +49,15 @@ public class threadMail extends Thread{
                 String objet;
                 String message;
                 if(type == "HS"){
-                    message = "Bonjour, \n \n "+
-                            "En date du "+dateFormat.format(auj)+".\n"+
-                            "Les hôtes suivants sont tombés sur le site "+rs.getString("site")+" : \n \n"+
-                            ipIp+" \n \n Cordialement,";
-                    objet = "Perte de connection sur "+rs.getString("site");
+                    message = PackFunc.Var.bundle.getString("thread.mail.messageperte1")+dateFormat.format(auj)+".\n"+
+                            PackFunc.Var.bundle.getString("thread.mail.messageperte2")+rs.getString("site")+" : \n \n"+
+                            ipIp+PackFunc.Var.bundle.getString("thread.mail.messageperte3");
+                    objet = PackFunc.Var.bundle.getString("thread.mail.objetperte")+rs.getString("site");
                 }else{
-                    message = "Bonjour, \n \n "+
-                            "En date du "+dateFormat.format(auj)+".\n"+
-                            "Les hôtes suivants sont revenus sur le site "+rs.getString("site")+" : \n \n"+
-                            ipIp+" \n \n Cordialement,";
-                    objet = "Retour de connection sur "+rs.getString("site");
+                    message = PackFunc.Var.bundle.getString("thread.mail.messageperte1")+dateFormat.format(auj)+".\n"+
+                            PackFunc.Var.bundle.getString("thread.mail.messageretour")+rs.getString("site")+" : \n \n"+
+                            ipIp+PackFunc.Var.bundle.getString("thread.mail.messageperte3");
+                    objet = PackFunc.Var.bundle.getString("thread.mail.objetretour")+rs.getString("site");
                 }
                 funcMail mem = new funcMail();
                 try {

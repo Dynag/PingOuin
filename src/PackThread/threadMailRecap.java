@@ -33,22 +33,28 @@ public class threadMailRecap implements Runnable{
     
     public void run(){
         Date auj = new Date();
+        System.out.println("001");
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
         testEnvoie();
     }
     public void testEnvoie(){
+System.out.println("002");
             boolean mailEnvoie = fm.envoieJour();
             if(mailEnvoie == true){
                 String message = prepaMessage();
                 String objet = prepaObjet();
+System.out.println("007");
                 try {
+System.out.println("008");
                     fm.envoieMail(objet, message);
+System.out.println("009");
                 } catch (MessagingException ex) {
                     Logger.getLogger(threadMailRecap.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println(ex);
                     fun.ecritLogs(ex, " - "+getClass().getName());
                 }
             }
+            System.out.println("003");
             Thread.currentThread().interrupt();
         }
     
@@ -57,6 +63,7 @@ public class threadMailRecap implements Runnable{
     ***************************************************************************/
     
     public String prepaMessage(){
+System.out.println("005");
         String mail = "Etat des périphériques : <br><br>";
         String sql1 = "SELECT * FROM ip ORDER BY nom;";
         try{
@@ -65,15 +72,16 @@ public class threadMailRecap implements Runnable{
             while(rs.next()){
             Integer etat = Integer.parseInt(rs.getString("etat"));
                 if(etat == 0){
-                    mail = mail + "- L'adresse IP <font color=green>"+rs.getString("ip")+"</font>, nommée "+rs.getString("nom")+ " est <font color=green>OK</font><br>";
+                    mail = mail + PackFunc.Var.bundle.getString("thread.mailrecap.message1")+"<font color=green>"+rs.getString("ip")+"</font>, "+PackFunc.Var.bundle.getString("thread.mailrecap.message2")+" "+rs.getString("nom")+ " "+PackFunc.Var.bundle.getString("thread.mailrecap.message3")+" <font color=green>"+PackFunc.Var.bundle.getString("thread.mailrecap.messageok")+"</font><br>";
                 }else{
-                    mail = mail + "- L'adresse IP <font color=red>"+rs.getString("ip")+"</font>, nommée "+rs.getString("nom")+ " est <font color=red>HS</font><br>";
+                    mail = mail + PackFunc.Var.bundle.getString("thread.mailrecap.message1")+"<font color=red>"+rs.getString("ip")+"</font>, "+PackFunc.Var.bundle.getString("thread.mailrecap.message2")+" "+rs.getString("nom")+ " "+PackFunc.Var.bundle.getString("thread.mailrecap.message3")+" <font color=red>"+PackFunc.Var.bundle.getString("thread.mailrecap.messagehs")+"</font><br>";
                 }
             }
         }catch(Exception e){
             System.out.println(e);
             fun.ecritLogs(e, " - "+getClass().getName());
         }
+        System.out.println(mail);
         return mail;
     }
     
@@ -82,12 +90,17 @@ public class threadMailRecap implements Runnable{
     ***************************************************************************/
     
     public String prepaObjet(){
+System.out.println("006");
         String objet = null;
         Date auj =  new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String dateMail = dateFormat.format(auj);
-        objet = "Etat du site "+fdb.paramLire("site", "param")+" au "+dateMail;
+        System.out.println(dateMail);
+        objet = PackFunc.Var.bundle.getString("thread.mailrecap.objet")+" "+fdb.paramLire("site", "param")+" "+PackFunc.Var.bundle.getString("thread.mailrecap.objet2")+" "+dateMail;
+        System.out.println(objet);
         return objet;
+    
+
     }
     
 }

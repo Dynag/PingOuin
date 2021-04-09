@@ -26,6 +26,8 @@ import PackFunc.funcLicence;
 import PackFunc.funcMain;
 import PackFunc.funcMiseAJour;
 import java.awt.event.KeyEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 /**
@@ -39,19 +41,45 @@ public final class FenMain extends javax.swing.JFrame {
     PackFunc.Var funVar = new PackFunc.Var();
     funcDb funDb = new funcDb();
     PackFunc.funcRepareSql rep = new PackFunc.funcRepareSql();
-    
+
     /**
      * Creates new form mainAcc
      */
     public FenMain(){
-    
+
         fun.testOs();
         File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
         initComponents();
-menTest.setVisible(false);
+        
+        labAjout.setText(PackFunc.Var.bundle.getString("main.ajout"));
+        labPingDelais.setText(PackFunc.Var.bundle.getString("main.ping.delais"));
+        labModif.setText(PackFunc.Var.bundle.getString("main.modif"));
+        btnNav.setText(PackFunc.Var.bundle.getString("main.btn.nav"));
+        btnClear.setText(PackFunc.Var.bundle.getString("main.btn.clear"));
+        btnEfface.setText(PackFunc.Var.bundle.getString("main.btn.efface"));
+        
+        menFichier.setText(PackFunc.Var.bundle.getString("menu.fichier"));
+        menFichierExport.setText(PackFunc.Var.bundle.getString("menu.fichier.export"));
+        menFichierImport.setText(PackFunc.Var.bundle.getString("menu.fichier.import"));
+        menFichierSave.setText(PackFunc.Var.bundle.getString("menu.fichier.save"));
+        menFichierSites.setText(PackFunc.Var.bundle.getString("menu.fichier.sites"));
+        menFichierMaj.setText(PackFunc.Var.bundle.getString("menu.fichier.maj"));
+        menFichierQuitter.setText(PackFunc.Var.bundle.getString("menu.fichier.quitter"));
+        
+        menParam.setText(PackFunc.Var.bundle.getString("menu.param"));
+        menParamParam.setText(PackFunc.Var.bundle.getString("menu.param.param"));
+        menParamOption.setText(PackFunc.Var.bundle.getString("menu.param.option"));
+        
+        menAutre.setText(PackFunc.Var.bundle.getString("menu.autre"));
+        menAutreApropos.setText(PackFunc.Var.bundle.getString("menu.autre.apropos"));
+        menAutreSite.setText(PackFunc.Var.bundle.getString("menu.autre.site"));
+        menTest.setText(PackFunc.Var.bundle.getString("menu.autre.test"));
+        menAutreChangelog.setText(PackFunc.Var.bundle.getString("menu.autre.changelog"));
+        
+//menTest.setVisible(false);
         fun.dossCree();
-        labVersion.setText("PingOuin version "+PackFunc.Var.version);
+        labVersion.setText(PackFunc.Var.bundle.getString("PingOuin.version")+" "+PackFunc.Var.version);
         try {
             fun.connectParam();
         } catch (ClassNotFoundException ex) {
@@ -78,19 +106,12 @@ menTest.setVisible(false);
         rep.testDbOk("param");
         rep.testDbOk("options");
         funDb.tableIpCree();
-        licence();
         tfPremIp.setText(funIp.ipPc());
         fun.listeSites();
         threadHisto th = new threadHisto();
         //th.start();
-        
-// Cocher ou non menus
-    if(funDb.paramLire("mail_envoie", "param").equals("1")){ menEnvoieMail.setSelected(true); } else{ menEnvoieMail.setSelected(false); }
-    if(funDb.paramLire("pop_up", "param").equals("1")){ menPopup.setSelected(true); } else{ menPopup.setSelected(false); }
-    if(funDb.paramLire("mail_rapport", "param").equals("1")){ menEnvoieRapports.setSelected(true); } else{ menEnvoieRapports.setSelected(false); }
-    if(funDb.paramLire("archives", "param").equals("1")){ menArchives.setSelected(true); } else{ menArchives.setSelected(false); }
-    if(funDb.paramLire("dbext", "param").equals("1")){ menDbExt.setSelected(true); } else{ menDbExt.setSelected(false); }
-    if(funDb.paramLire("dbext_perte", "param").equals("1")){ menDbExtPerte.setSelected(true); } else{ menDbExtPerte.setSelected(false); }
+
+
     fdb.listeIp();
     }
     
@@ -98,28 +119,7 @@ menTest.setVisible(false);
     /**
      * Test de la licence
      */
-    public void licence(){
-        try {
-            funcLicence fl = new funcLicence();
-            if(fl.validLicense() == true){
-                menEnvoieMail.setVisible(true);
-                menEnvoieRapports.setVisible(true);
-                menArchives.setVisible(true);
-                menDbExt.setVisible(true);
-                menDbExtPerte.setVisible(true);
-                
-                
-            }else{
-                menEnvoieMail.setVisible(false);
-                menEnvoieRapports.setVisible(false);
-                menArchives.setVisible(false);
-                menDbExt.setVisible(false);
-                menDbExtPerte.setVisible(false);
-            }
-        } catch (SocketException ex) {
-            Logger.getLogger(FenMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,13 +138,13 @@ menTest.setVisible(false);
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labAjout = new javax.swing.JLabel();
         tfPremIp = new javax.swing.JTextField();
         spinPlage = new javax.swing.JSpinner();
         cbTout = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnValid = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        labPingDelais = new javax.swing.JLabel();
         labDelaisPing = new javax.swing.JLabel();
         slidDelaisPing = new javax.swing.JSpinner();
         jPanel9 = new javax.swing.JPanel();
@@ -158,46 +158,35 @@ menTest.setVisible(false);
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         tfNom = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        labModif = new javax.swing.JButton();
         labIp = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        btnNav = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        btnEfface = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        menFichier = new javax.swing.JMenu();
+        menFichierExport = new javax.swing.JMenuItem();
+        menFichierImport = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        menFichierSave = new javax.swing.JMenuItem();
+        menFichierSites = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menFichierMaj = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        menEnvoieMail = new javax.swing.JCheckBoxMenuItem();
-        menEnvoieRapports = new javax.swing.JCheckBoxMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        menPopup = new javax.swing.JCheckBoxMenuItem();
-        menArchives = new javax.swing.JCheckBoxMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        menDbExt = new javax.swing.JCheckBoxMenuItem();
-        menDbExtPerte = new javax.swing.JCheckBoxMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        menFichierQuitter = new javax.swing.JMenuItem();
+        menParam = new javax.swing.JMenu();
+        menParamParam = new javax.swing.JMenuItem();
+        menParamOption = new javax.swing.JMenuItem();
+        menAutre = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        menAutreApropos = new javax.swing.JMenuItem();
+        menAutreSite = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         menTest = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        menAutreChangelog = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PingOuin");
@@ -274,8 +263,8 @@ menTest.setVisible(false);
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Ajout IP");
+        labAjout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labAjout.setText("Ajout IP");
 
         tfPremIp.setToolTipText("Première IP");
 
@@ -290,10 +279,10 @@ menTest.setVisible(false);
             }
         });
 
-        jButton1.setText("Valider");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnValid.setText("Valider");
+        btnValid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnValidActionPerformed(evt);
             }
         });
 
@@ -305,17 +294,17 @@ menTest.setVisible(false);
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbTout, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labAjout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tfPremIp)
                     .addComponent(spinPlage)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnValid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(labAjout)
                 .addGap(18, 18, 18)
                 .addComponent(tfPremIp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -323,15 +312,15 @@ menTest.setVisible(false);
                 .addGap(18, 18, 18)
                 .addComponent(cbTout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnValid)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Delais entre 2 pings");
+        labPingDelais.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labPingDelais.setText("Delais entre 2 pings");
 
         labDelaisPing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labDelaisPing.setText("5 s");
@@ -350,7 +339,7 @@ menTest.setVisible(false);
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                    .addComponent(labPingDelais, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                     .addComponent(labDelaisPing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -362,7 +351,7 @@ menTest.setVisible(false);
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(labPingDelais)
                 .addGap(17, 17, 17)
                 .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -500,10 +489,10 @@ menTest.setVisible(false);
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton2.setText("Modifier");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        labModif.setText("Modifier");
+        labModif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                labModifActionPerformed(evt);
             }
         });
 
@@ -517,7 +506,7 @@ menTest.setVisible(false);
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfNom)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(labModif, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addComponent(labIp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -529,16 +518,16 @@ menTest.setVisible(false);
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(labModif)
                 .addContainerGap())
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton3.setText("Ouvrir navigateur");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnNav.setText("Ouvrir navigateur");
+        btnNav.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnNavActionPerformed(evt);
             }
         });
 
@@ -548,31 +537,31 @@ menTest.setVisible(false);
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(btnNav, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3)
+                .addComponent(btnNav)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton4.setText("Clear");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Effacer ip");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnEfface.setText("Effacer ip");
+        btnEfface.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnEffaceActionPerformed(evt);
             }
         });
 
@@ -583,17 +572,17 @@ menTest.setVisible(false);
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEfface, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4)
+                .addComponent(btnClear)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEfface, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -625,161 +614,85 @@ menTest.setVisible(false);
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Fichier");
+        menFichier.setText("Fichier");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem1.setText("Exporter en xls");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menFichierExport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menFichierExport.setText("Exporter en xls");
+        menFichierExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menFichierExportActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menFichier.add(menFichierExport);
 
-        jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem14.setText("Importer depuis un xls");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        menFichierImport.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menFichierImport.setText("Importer depuis un xls");
+        menFichierImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                menFichierImportActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem14);
-        jMenu1.add(jSeparator6);
+        menFichier.add(menFichierImport);
+        menFichier.add(jSeparator6);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem2.setText("Enregistrer la plage");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menFichierSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menFichierSave.setText("Enregistrer la plage");
+        menFichierSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menFichierSaveActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        menFichier.add(menFichierSave);
 
-        jMenuItem8.setText("Gestion des sites");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        menFichierSites.setText("Gestion des sites");
+        menFichierSites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                menFichierSitesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem8);
-        jMenu1.add(jSeparator7);
+        menFichier.add(menFichierSites);
+        menFichier.add(jSeparator7);
 
-        jMenuItem3.setText("Mise a jour");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        menFichierMaj.setText("Mise a jour");
+        menFichierMaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                menFichierMajActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
-        jMenu1.add(jSeparator1);
+        menFichier.add(menFichierMaj);
+        menFichier.add(jSeparator1);
 
-        jMenuItem4.setText("Quitter");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        menFichierQuitter.setText("Quitter");
+        menFichierQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                menFichierQuitterActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        menFichier.add(menFichierQuitter);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menFichier);
 
-        jMenu2.setText("Options");
+        menParam.setText("Paramètres");
 
-        menEnvoieMail.setSelected(true);
-        menEnvoieMail.setText("Envoie de mails");
-        menEnvoieMail.addActionListener(new java.awt.event.ActionListener() {
+        menParamParam.setText("Paramètres généraux");
+        menParamParam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menEnvoieMailActionPerformed(evt);
+                menParamParamActionPerformed(evt);
             }
         });
-        jMenu2.add(menEnvoieMail);
+        menParam.add(menParamParam);
 
-        menEnvoieRapports.setSelected(true);
-        menEnvoieRapports.setText("Envoie de rapports");
-        menEnvoieRapports.addActionListener(new java.awt.event.ActionListener() {
+        menParamOption.setText("Options");
+        menParamOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menEnvoieRapportsActionPerformed(evt);
+                menParamOptionActionPerformed(evt);
             }
         });
-        jMenu2.add(menEnvoieRapports);
-        jMenu2.add(jSeparator3);
+        menParam.add(menParamOption);
 
-        menPopup.setSelected(true);
-        menPopup.setText("PopUp");
-        menPopup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menPopupActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menPopup);
+        jMenuBar1.add(menParam);
 
-        menArchives.setSelected(true);
-        menArchives.setText("Ecrire les archives");
-        menArchives.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menArchivesActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menArchives);
-        jMenu2.add(jSeparator2);
-
-        menDbExt.setSelected(true);
-        menDbExt.setText("Base de donnée externe rapport");
-        menDbExt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menDbExtActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menDbExt);
-
-        menDbExtPerte.setSelected(true);
-        menDbExtPerte.setText("Base de donnée externe perte");
-        menDbExtPerte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menDbExtPerteActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menDbExtPerte);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Paramètres");
-
-        jMenuItem5.setText("Paramètres généraux");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem5);
-
-        jMenuItem6.setText("Envoie Recap");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem6);
-
-        jMenuItem11.setText("Db Externe");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem11);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("?");
-
-        jMenuItem7.setText("License");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem7);
+        menAutre.setText("?");
 
         jMenuItem13.setText("Updater BDD");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
@@ -787,25 +700,25 @@ menTest.setVisible(false);
                 jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem13);
-        jMenu4.add(jSeparator4);
+        menAutre.add(jMenuItem13);
+        menAutre.add(jSeparator4);
 
-        jMenuItem9.setText("A propos");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        menAutreApropos.setText("A propos");
+        menAutreApropos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                menAutreAproposActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem9);
+        menAutre.add(menAutreApropos);
 
-        jMenuItem10.setText("Site internet");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        menAutreSite.setText("Site internet");
+        menAutreSite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                menAutreSiteActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem10);
-        jMenu4.add(jSeparator5);
+        menAutre.add(menAutreSite);
+        menAutre.add(jSeparator5);
 
         menTest.setText("Test");
         menTest.addActionListener(new java.awt.event.ActionListener() {
@@ -813,17 +726,17 @@ menTest.setVisible(false);
                 menTestActionPerformed(evt);
             }
         });
-        jMenu4.add(menTest);
+        menAutre.add(menTest);
 
-        jMenuItem12.setText("Changelog");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        menAutreChangelog.setText("Changelog");
+        menAutreChangelog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+                menAutreChangelogActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem12);
+        menAutre.add(menAutreChangelog);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(menAutre);
 
         setJMenuBar(jMenuBar1);
 
@@ -859,25 +772,15 @@ menTest.setVisible(false);
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void menParamParamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menParamParamActionPerformed
         FenParam pp = new FenParam();
         pp.show();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        FenRecap pr = new FenRecap();
-        pr.show();
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        FenLicence pl = new FenLicence();
-        pl.show();
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_menParamParamActionPerformed
 
     private void listeSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeSiteActionPerformed
         PackFunc.Var.stopPing = true;
         PackFunc.Var.dbSite = (String) listeSite.getSelectedItem()+".pigo";
-        btnLancer.setText("Start");
+        btnLancer.setText(PackFunc.Var.bundle.getString("main.start"));
         btnLancer.setBackground(Color.red);
         fun.connectSite();
         rep.dbRepareIp("ip");
@@ -887,42 +790,42 @@ menTest.setVisible(false);
         
     }//GEN-LAST:event_listeSiteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnValidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidActionPerformed
         if((Integer) spinPlage.getValue() > 255){
-            PackThread.threadPop tpop = new PackThread.threadPop("Veuillez entrer une valeur inférieure à 255");
+            PackThread.threadPop tpop = new PackThread.threadPop(PackFunc.Var.bundle.getString("main.error.255"));
             tpop.start();
         }else{
             threadPrepaAj tpaj = new threadPrepaAj(tfPremIp.getText(), (String) cbTout.getSelectedItem(), (Integer) spinPlage.getValue());
             tpaj.start();
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnValidActionPerformed
 
     private void cbToutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbToutActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbToutActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void menFichierQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menFichierQuitterActionPerformed
         fun.quit();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_menFichierQuitterActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         try {
             fdb.dbErase();
         } catch (ClassNotFoundException ex) {
             fun.ecritLogs(ex, " - "+getClass().getName());
         }
         PackFunc.Var.stopPing = true;
-        btnLancer.setText("Start");
+        btnLancer.setText(PackFunc.Var.bundle.getString("main.start"));
         btnLancer.setBackground(Color.red);
         fdb.listeIp();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnLancerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLancerActionPerformed
         funcDb funDb = new funcDb();
         threadPrepaPing tpp = new threadPrepaPing();
         if(FenMain.btnLancer.isSelected()){
-            FenMain.btnLancer.setText("Stop");
+            FenMain.btnLancer.setText(PackFunc.Var.bundle.getString("main.stop"));
             FenMain.btnLancer.setBackground(Color.green);
             if(funDb.paramLire("archives", "param").equals("1")){
                 
@@ -936,16 +839,16 @@ menTest.setVisible(false);
             lanceThread tpmr = new lanceThread();
             tpmr.start();
         }else{
-            FenMain.btnLancer.setText("Start");
+            FenMain.btnLancer.setText(PackFunc.Var.bundle.getString("main.start"));
             FenMain.btnLancer.setBackground(Color.red);
             PackFunc.Var.stopPing = true;           
         }
     }//GEN-LAST:event_btnLancerActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menFichierSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menFichierSaveActionPerformed
         FenSiteNouveau psn = new FenSiteNouveau();
         psn.show();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menFichierSaveActionPerformed
 
     private void tabPrincMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPrincMouseClicked
 
@@ -954,11 +857,11 @@ menTest.setVisible(false);
         funcIp.rowNum = (tabPrinc.getModel().getValueAt(row, 0).toString());
         
         JPopupMenu menuIp = new JPopupMenu();
-        JMenuItem ouvrir = new JMenuItem("Ouvrir dans le navigateur");
+        JMenuItem ouvrir = new JMenuItem(PackFunc.Var.bundle.getString("main.menu.nav"));
         menuIp.add(ouvrir);
-        JMenuItem suppr = new JMenuItem("Supprimer");
+        JMenuItem suppr = new JMenuItem(PackFunc.Var.bundle.getString("main.menu.sup"));
         menuIp.add(suppr);
-        JMenuItem hist = new JMenuItem("Historique");
+        JMenuItem hist = new JMenuItem(PackFunc.Var.bundle.getString("main.menu.hist"));
         if(fdb.paramLire("archives", "param").equals("1")){
             menuIp.add(hist);
         }
@@ -975,7 +878,7 @@ menTest.setVisible(false);
         suppr.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     fdb.ipSiteErase(funcIp.rowNum);
-                    btnLancer.setText("Start");
+                    btnLancer.setText(PackFunc.Var.bundle.getString("main.start"));
                     btnLancer.setBackground(Color.red);
                     fdb.listeIp();
             }
@@ -1015,72 +918,50 @@ menTest.setVisible(false);
         
     }//GEN-LAST:event_tabPrincMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void labModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labModifActionPerformed
         String nom = tfNom.getText();
         
         fdb.dbIpEcrit(funcIp.rowNum, nom, "nom");
         fdb.listeIp();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_labModifActionPerformed
 
-    private void menEnvoieMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menEnvoieMailActionPerformed
-        if(menEnvoieMail.isSelected() == true){ fdb.paramEcrit("mail_envoie", "1", "param"); }else{ fdb.paramEcrit("mail_envoie", "0", "param"); }
-    }//GEN-LAST:event_menEnvoieMailActionPerformed
-
-    private void menEnvoieRapportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menEnvoieRapportsActionPerformed
-        if(menEnvoieRapports.isSelected() == true){ fdb.paramEcrit("mail_rapport", "1", "param"); }else{ fdb.paramEcrit("mail_rapport", "0", "param"); }
-    }//GEN-LAST:event_menEnvoieRapportsActionPerformed
-
-    private void menPopupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menPopupActionPerformed
-        if(menPopup.isSelected() == true){ fdb.paramEcrit("pop_up", "1", "param"); }else{ fdb.paramEcrit("pop_up", "0", "param"); }
-    }//GEN-LAST:event_menPopupActionPerformed
-
-    private void menArchivesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menArchivesActionPerformed
-        if(menArchives.isSelected() == true){
-            fdb.paramEcrit("archives", "1", "param"); 
-        }else{ 
-            fdb.paramEcrit("archives", "0", "param"); 
-        }
-        //threadHisto th = new threadHisto();
-        //th.start();
-    }//GEN-LAST:event_menArchivesActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnNavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNavActionPerformed
         try {
             Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler \"http://"+labIp.getText()+"\""); //NOI18N
         } catch (IOException ex) {
 
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnNavActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void menFichierSitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menFichierSitesActionPerformed
         FenGestionSite pgs = new FenGestionSite();
         pgs.show();
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_menFichierSitesActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void menFichierMajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menFichierMajActionPerformed
         funcMiseAJour maj = new funcMiseAJour();
         maj.update();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_menFichierMajActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnEffaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffaceActionPerformed
         fdb.ipSiteErase(funcIp.rowNum);
-        btnLancer.setText("Start");
+        btnLancer.setText(PackFunc.Var.bundle.getString("main.start"));
         btnLancer.setBackground(Color.red);
         fdb.listeIp();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnEffaceActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void menAutreSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menAutreSiteActionPerformed
         try {
             Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler \"https://prog.hemge.eu/\""); //NOI18N
         } catch (IOException ex) {
             fun.ecritLogs(ex, " - "+getClass().getName());
         }
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_menAutreSiteActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void menAutreAproposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menAutreAproposActionPerformed
         FenAPropos pap = new FenAPropos();
         pap.show();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_menAutreAproposActionPerformed
 
     private void slidDelaisPingStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slidDelaisPingStateChanged
         // TODO add your handling code here:
@@ -1094,7 +975,7 @@ menTest.setVisible(false);
             delaisPause = delaisPause / 3600;
             labDelaisPing.setText(Long.toString(delaisPause)+" h");
         }else if(delaisPause <= 0){
-            PackThread.threadPop tp = new PackThread.threadPop("Veuillez entrer une valeur supérieure à Zéro");
+            PackThread.threadPop tp = new PackThread.threadPop(PackFunc.Var.bundle.getString("main.error.0"));
             tp.start();
             slidDelaisPing.setValue(5);
         }else{
@@ -1109,14 +990,14 @@ menTest.setVisible(false);
     }//GEN-LAST:event_comboTriItemStateChanged
 
     private void comboTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTriActionPerformed
-        if(comboTri.getSelectedItem().equals("Trier par")){
+        if(comboTri.getSelectedItem().equals(PackFunc.Var.bundle.getString("main.trie"))){
             PackFunc.Var.tri = "IP";
         }else{
             PackFunc.Var.tri = (String) comboTri.getSelectedItem();
         }
         fdb.listeIp();
         PackFunc.Var.stopPing = true;
-        btnLancer.setText("Start");
+        btnLancer.setText(PackFunc.Var.bundle.getString("main.start"));
         btnLancer.setBackground(Color.red);
         System.out.println(PackFunc.Var.tri);
     }//GEN-LAST:event_comboTriActionPerformed
@@ -1139,31 +1020,10 @@ menTest.setVisible(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_tabPrincKeyPressed
 
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        FenDbExt fdb = new FenDbExt();
-        fdb.show();  
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void menDbExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menDbExtActionPerformed
-        if(menDbExt.isSelected() == true){
-            fdb.paramEcrit("dbExt", "1", "param"); 
-        }else{ 
-            fdb.paramEcrit("dbExt", "0", "param"); 
-        }
-    }//GEN-LAST:event_menDbExtActionPerformed
-
-    private void menDbExtPerteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menDbExtPerteActionPerformed
-        if(menDbExtPerte.isSelected() == true){
-            fdb.paramEcrit("dbext_perte", "1", "param"); 
-        }else{ 
-            fdb.paramEcrit("dbext_perte", "0", "param"); 
-        }
-    }//GEN-LAST:event_menDbExtPerteActionPerformed
-
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+    private void menAutreChangelogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menAutreChangelogActionPerformed
         FenChange fenc = new FenChange();
         fenc.show();
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    }//GEN-LAST:event_menAutreChangelogActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         PackFunc.funcRepareSql prsql = new PackFunc.funcRepareSql();
@@ -1172,20 +1032,25 @@ menTest.setVisible(false);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void menTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menTestActionPerformed
-        PackFunc.Test test = new PackFunc.Test();
-        test.main();
+        PackFunc.Test  test = new PackFunc.Test();
+        test.start();
 
     }//GEN-LAST:event_menTestActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menFichierExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menFichierExportActionPerformed
         PackFunc.funcExportXls export = new PackFunc.funcExportXls();
         export.main();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menFichierExportActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+    private void menFichierImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menFichierImportActionPerformed
         PackFunc.funcImportXls Import = new PackFunc.funcImportXls();
         Import.main();
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+    }//GEN-LAST:event_menFichierImportActionPerformed
+
+    private void menParamOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menParamOptionActionPerformed
+        FenOption fenO = new FenOption();
+        fenO.show();
+    }//GEN-LAST:event_menParamOptionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1227,36 +1092,16 @@ menTest.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnEfface;
     public static javax.swing.JToggleButton btnLancer;
+    private javax.swing.JButton btnNav;
+    private javax.swing.JButton btnValid;
     private javax.swing.JComboBox<String> cbTout;
     private javax.swing.JComboBox<String> comboTri;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -1269,25 +1114,34 @@ menTest.setVisible(false);
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JLabel labAjout;
     public static javax.swing.JLabel labDelaisPing;
     public static javax.swing.JLabel labIp;
     public static javax.swing.JLabel labMaj;
+    private javax.swing.JButton labModif;
+    private javax.swing.JLabel labPingDelais;
     public static javax.swing.JLabel labThreadFerme;
     public static javax.swing.JLabel labThreadOuvert;
     private javax.swing.JLabel labVersion;
     public static javax.swing.JComboBox<String> listeSite;
-    private javax.swing.JCheckBoxMenuItem menArchives;
-    private javax.swing.JCheckBoxMenuItem menDbExt;
-    private javax.swing.JCheckBoxMenuItem menDbExtPerte;
-    private javax.swing.JCheckBoxMenuItem menEnvoieMail;
-    private javax.swing.JCheckBoxMenuItem menEnvoieRapports;
-    private javax.swing.JCheckBoxMenuItem menPopup;
+    private javax.swing.JMenu menAutre;
+    private javax.swing.JMenuItem menAutreApropos;
+    private javax.swing.JMenuItem menAutreChangelog;
+    private javax.swing.JMenuItem menAutreSite;
+    private javax.swing.JMenu menFichier;
+    private javax.swing.JMenuItem menFichierExport;
+    private javax.swing.JMenuItem menFichierImport;
+    private javax.swing.JMenuItem menFichierMaj;
+    private javax.swing.JMenuItem menFichierQuitter;
+    private javax.swing.JMenuItem menFichierSave;
+    private javax.swing.JMenuItem menFichierSites;
+    private javax.swing.JMenu menParam;
+    private javax.swing.JMenuItem menParamOption;
+    private javax.swing.JMenuItem menParamParam;
     private javax.swing.JMenuItem menTest;
     public static javax.swing.JProgressBar progerAjout;
     private javax.swing.JSpinner slidDelaisPing;

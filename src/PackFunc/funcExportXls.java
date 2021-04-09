@@ -33,7 +33,7 @@ public class funcExportXls {
     public static void main() {
         String path="";
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        jfc.setDialogTitle("Choisissez ou enregistrer votre fichier : ");
+        jfc.setDialogTitle(PackFunc.Var.bundle.getString("func.export.choix"));
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         int returnValue = jfc.showSaveDialog(null);
@@ -153,12 +153,12 @@ System.out.println("You selected the directory: " + jfc.getSelectedFile());
             FileOutputStream fileOut =  new FileOutputStream(filename);
             hwb.write(fileOut);
             fileOut.close();
-            threadPop t2 = new threadPop("Votre fichier à bien été crée dans "+path+"\\export.xls.");
+            threadPop t2 = new threadPop(PackFunc.Var.bundle.getString("func.export.pop1")+path+PackFunc.Var.bundle.getString("func.export.pop2"));
             t2.start();
 
         } catch ( Exception ex ) {
             System.out.println(ex);
-            threadPop t2 = new threadPop("Une erreur est survenue.");
+            threadPop t2 = new threadPop(PackFunc.Var.bundle.getString("func.export.error"));
             t2.start();
         }
     }

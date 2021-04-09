@@ -7,6 +7,7 @@ package PackFunc;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Var {
     // Version
-    public static String version = "03.03.03";
+    public static String version = "03.03.04";
     //Connections postgrsql
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;
@@ -33,6 +34,8 @@ public class Var {
     public static ArrayList<String> bddParam = new ArrayList<>();
     public static ArrayList<String> bddOptions = new ArrayList<>();
     public static ArrayList<String> bddIp = new ArrayList<>();
+    private static PackFunc.FuncLang lang = new PackFunc.FuncLang();
+    public static ResourceBundle bundle = lang.choixLangue();
     
     /***************************************************************************
      * Modele de la table Param

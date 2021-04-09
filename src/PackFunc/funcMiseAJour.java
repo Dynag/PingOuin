@@ -55,13 +55,12 @@ public class funcMiseAJour {
 		
 		//Si la version est nulle
 		if(versions.size() == 0){
-			JOptionPane.showMessageDialog(null,"Impossible de se connecter au service, vérifiez votre " +
-				"connection internet");
+			JOptionPane.showMessageDialog(null,PackFunc.Var.bundle.getString("func.maj.conn"));
 		}else{
 			//Si la dernière version n'est pas la même que l'actuelle
 			if(!versions.get(versions.size() - 1).equals(version)){
 
-				String versionChoisie = (String)JOptionPane.showInputDialog(null,"Choississez la version à installer","Versions disponibles",JOptionPane.QUESTION_MESSAGE,
+				String versionChoisie = (String)JOptionPane.showInputDialog(null,PackFunc.Var.bundle.getString("func.maj.version"),PackFunc.Var.bundle.getString("func.maj.version2"),JOptionPane.QUESTION_MESSAGE,
 						null,versions.toArray(),versions.get(versions.size() - 1));
 				
 				//S'il veut la télécharger
@@ -99,8 +98,7 @@ public class funcMiseAJour {
 						}
 					}
 					
-					JOptionPane.showMessageDialog(null,"La nouvelle version a été téléchargée, "  + 
-						"le programme va être relancé");
+					JOptionPane.showMessageDialog(null,PackFunc.Var.bundle.getString("func.maj.ok"));
 					
 					File lanceur = new File(lanceurPath);
 					
@@ -111,12 +109,12 @@ public class funcMiseAJour {
 						//On quitte le programme				
 						System.exit(0);
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null,"Impossible de relancer le programme");
+						JOptionPane.showMessageDialog(null,PackFunc.Var.bundle.getString("func.maj.error"));
 					}
 				}
 			}
 			else{
-				JOptionPane.showMessageDialog(null,"Pas de nouvelles version disponible pour le moment");
+				JOptionPane.showMessageDialog(null,PackFunc.Var.bundle.getString("func.maj.no"));
 			}
 		}
 	}

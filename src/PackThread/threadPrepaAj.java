@@ -58,7 +58,7 @@ public class threadPrepaAj extends Thread{
         execute.shutdown();
         if(Objects.equals(PackFunc.Var.threadOuvert, PackFunc.Var.threadFerme)){
             fdb.listeIp();
-            threadPop t2 = new threadPop("La plage IP à bien été ajoutée");
+            threadPop t2 = new threadPop(PackFunc.Var.bundle.getString("thread.prepaaj.ok"));
             t2.start();
         
         }

@@ -1,6 +1,11 @@
 package PackMain;
 
 import PackFunc.funcDb;
+import PackFunc.funcLicence;
+import java.net.SocketException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,12 +19,32 @@ import PackFunc.funcDb;
  */
 public class FenDbExt extends javax.swing.JFrame {
     funcDb fdb = new funcDb();
+
     /**
      * Creates new form pageOption
      */
     public FenDbExt() {
         initComponents();
-        affichage();
+        labTitre.setText(PackFunc.Var.bundle.getString("param.dbext.titre"));
+        labAd.setText(PackFunc.Var.bundle.getString("param.dbext.address"));
+        labPort.setText(PackFunc.Var.bundle.getString("param.dbext.port"));
+        labNom.setText(PackFunc.Var.bundle.getString("param.dbext.nom"));
+        labUser.setText(PackFunc.Var.bundle.getString("param.dbext.user"));
+        labPass.setText(PackFunc.Var.bundle.getString("param.dbext.pass"));
+        labDelais.setText(PackFunc.Var.bundle.getString("param.dbext.delais"));
+        cbPurge.setText(PackFunc.Var.bundle.getString("param.dbext.purge"));
+
+        funcLicence fl = new funcLicence();
+        try {
+            if(fl.validLicense() == true){
+                affichage();
+            }else{
+                labTitre.setText(PackFunc.Var.bundle.getString("licence.invalide"));
+                btnValid.setVisible(false);
+            }
+        } catch (SocketException ex) {
+            Logger.getLogger(FenRecap.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void affichage(){
@@ -54,44 +79,45 @@ public class FenDbExt extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labTitre = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        labAd = new javax.swing.JLabel();
+        labPort = new javax.swing.JLabel();
+        labUser = new javax.swing.JLabel();
+        labPass = new javax.swing.JLabel();
+        labDelais = new javax.swing.JLabel();
         tfAdDb = new javax.swing.JTextField();
         tfPortDb = new javax.swing.JTextField();
         tfUser = new javax.swing.JTextField();
         tfPass = new javax.swing.JTextField();
         tfDelais = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
+        labNom = new javax.swing.JLabel();
         tfDbNom = new javax.swing.JTextField();
         cbPurge = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        btnValid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setResizable(false);
 
-        jLabel1.setBackground(new java.awt.Color(51, 102, 255));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Mail recapitulatif");
-        jLabel1.setOpaque(true);
+        labTitre.setBackground(new java.awt.Color(51, 102, 255));
+        labTitre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labTitre.setForeground(new java.awt.Color(255, 255, 255));
+        labTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labTitre.setText("Mail recapitulatif");
+        labTitre.setOpaque(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel3.setText("Adresse Db : ");
+        labAd.setText("Adresse Db : ");
 
-        jLabel4.setText("Port Db : ");
+        labPort.setText("Port Db : ");
 
-        jLabel5.setText("User Db : ");
+        labUser.setText("User Db : ");
 
-        jLabel6.setText("Pass Db : ");
+        labPass.setText("Pass Db : ");
 
-        jLabel7.setText("Délais :");
+        labDelais.setText("Délais :");
 
         tfDelais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 min", "1 h", "6 h", "24 h", "2 jours", "7 jours" }));
         tfDelais.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +126,7 @@ public class FenDbExt extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Db Nom :");
+        labNom.setText("Db Nom :");
 
         cbPurge.setText("Purger la base");
 
@@ -113,18 +139,18 @@ public class FenDbExt extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(labPass)
+                            .addComponent(labDelais))
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfPass)
-                            .addComponent(tfDelais, 0, 149, Short.MAX_VALUE)))
+                            .addComponent(tfDelais, 0, 203, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel8))
+                            .addComponent(labUser)
+                            .addComponent(labPort)
+                            .addComponent(labAd)
+                            .addComponent(labNom))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfDbNom)
@@ -132,7 +158,6 @@ public class FenDbExt extends javax.swing.JFrame {
                             .addComponent(tfPortDb)
                             .addComponent(tfUser)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
                         .addComponent(cbPurge)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -142,37 +167,37 @@ public class FenDbExt extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(labAd)
                     .addComponent(tfAdDb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(labPort)
                     .addComponent(tfPortDb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(labNom)
                     .addComponent(tfDbNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(labUser)
                     .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(labPass)
                     .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(labDelais)
                     .addComponent(tfDelais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cbPurge)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Valider");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnValid.setText("Valider");
+        btnValid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnValidActionPerformed(evt);
             }
         });
 
@@ -180,30 +205,30 @@ public class FenDbExt extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+            .addComponent(labTitre, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnValid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btnValid)
+                .addGap(19, 19, 19))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnValidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidActionPerformed
 System.out.println(tfDelais.getSelectedItem());
         fdb.paramEcrit("dbext_adress", tfAdDb.getText(), "param");
         fdb.paramEcrit("dbext_port", tfPortDb.getText(), "param");
@@ -225,7 +250,7 @@ System.out.println(tfDelais.getSelectedItem());
         fdb.paramEcrit("dbext_delais", delais, "param");
         fdb.paramEcrit("dbext_purge", purge, "param");
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnValidActionPerformed
 
     private void tfDelaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDelaisActionPerformed
         // TODO add your handling code here:
@@ -282,16 +307,16 @@ System.out.println(tfDelais.getSelectedItem());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnValid;
     private javax.swing.JCheckBox cbPurge;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labAd;
+    private javax.swing.JLabel labDelais;
+    private javax.swing.JLabel labNom;
+    private javax.swing.JLabel labPass;
+    private javax.swing.JLabel labPort;
+    private javax.swing.JLabel labTitre;
+    private javax.swing.JLabel labUser;
     private javax.swing.JTextField tfAdDb;
     private javax.swing.JTextField tfDbNom;
     private javax.swing.JComboBox<String> tfDelais;

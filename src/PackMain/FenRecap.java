@@ -1,6 +1,11 @@
 package PackMain;
 
 import PackFunc.funcDb;
+import PackFunc.funcLicence;
+import java.net.SocketException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,7 +24,30 @@ public class FenRecap extends javax.swing.JFrame {
      */
     public FenRecap() {
         initComponents();
-        affichage();
+        funcLicence fl = new funcLicence();
+        
+        cbLun.setText(PackFunc.Var.bundle.getString("param.recap.lun"));
+        cbMar.setText(PackFunc.Var.bundle.getString("param.recap.mar"));
+        cbMerc.setText(PackFunc.Var.bundle.getString("param.recap.mer"));
+        cbJeu.setText(PackFunc.Var.bundle.getString("param.recap.jeu"));
+        cbVen.setText(PackFunc.Var.bundle.getString("param.recap.ven"));
+        cbSam.setText(PackFunc.Var.bundle.getString("param.recap.sam"));
+        cbDim.setText(PackFunc.Var.bundle.getString("param.recap.dim"));
+        cbActive.setText(PackFunc.Var.bundle.getString("param.recap.active"));
+        btnValid.setText(PackFunc.Var.bundle.getString("btn.valid"));
+        labHeure.setText(PackFunc.Var.bundle.getString("param.recap.heure"));
+        
+        try {
+            if(fl.validLicense() == true){
+                affichage();
+            }else{
+                labParam.setText(PackFunc.Var.bundle.getString("licence.invalide"));
+                btnValid.setVisible(false);
+            }
+        } catch (SocketException ex) {
+            Logger.getLogger(FenRecap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public void affichage(){
@@ -31,6 +59,7 @@ public class FenRecap extends javax.swing.JFrame {
         if(fdb.paramLire("PeriodeVen", "options").equals("1")){ cbVen.setSelected(true); }else{  cbLun.setSelected(false); }
         if(fdb.paramLire("PeriodeSam", "options").equals("1")){ cbSam.setSelected(true); }else{  cbLun.setSelected(false); }
         if(fdb.paramLire("PeriodeDim", "options").equals("1")){ cbDim.setSelected(true); }else{  cbLun.setSelected(false); }
+        if(fdb.paramLire("EnvoieMail", "options").equals("1")){ cbActive.setSelected(true); }else{  cbActive.setSelected(false); }
     }
 
     /**
@@ -42,9 +71,9 @@ public class FenRecap extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labParam = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        labHeure = new javax.swing.JLabel();
         tfHeure = new javax.swing.JFormattedTextField();
         cbLun = new javax.swing.JCheckBox();
         cbMar = new javax.swing.JCheckBox();
@@ -53,21 +82,23 @@ public class FenRecap extends javax.swing.JFrame {
         cbVen = new javax.swing.JCheckBox();
         cbSam = new javax.swing.JCheckBox();
         cbDim = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        cbActive = new javax.swing.JCheckBox();
+        btnValid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setResizable(false);
 
-        jLabel1.setBackground(new java.awt.Color(51, 102, 255));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Mail recapitulatif");
-        jLabel1.setOpaque(true);
+        labParam.setBackground(new java.awt.Color(51, 102, 255));
+        labParam.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labParam.setForeground(new java.awt.Color(255, 255, 255));
+        labParam.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labParam.setText("Mail recapitulatif");
+        labParam.setOpaque(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setText("Heure du mail (hh:mm)");
+        labHeure.setText("Heure du mail (hh:mm)");
 
         tfHeure.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
@@ -85,6 +116,8 @@ public class FenRecap extends javax.swing.JFrame {
 
         cbDim.setText("dim");
 
+        cbActive.setText("jCheckBox1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -93,27 +126,30 @@ public class FenRecap extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(labHeure)
                         .addGap(18, 18, 18)
                         .addComponent(tfHeure))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cbActive, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbLun)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cbLun)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbMar))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cbVen)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbSam)))
                                 .addGap(18, 18, 18)
-                                .addComponent(cbMar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbVen)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbSam)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbMerc)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbJeu))
-                            .addComponent(cbDim))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cbMerc)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbJeu))
+                                    .addComponent(cbDim))))
+                        .addGap(0, 68, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -121,7 +157,7 @@ public class FenRecap extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(labHeure)
                     .addComponent(tfHeure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -134,13 +170,15 @@ public class FenRecap extends javax.swing.JFrame {
                     .addComponent(cbVen)
                     .addComponent(cbSam)
                     .addComponent(cbDim))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cbActive)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Valider");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnValid.setText("Valider");
+        btnValid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnValidActionPerformed(evt);
             }
         });
 
@@ -148,30 +186,30 @@ public class FenRecap extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labParam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnValid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labParam, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnValid)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnValidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidActionPerformed
         if(cbLun.isSelected()){
             fdb.paramEcrit("PeriodeLun", "1", "options");
         }else{
@@ -207,9 +245,14 @@ public class FenRecap extends javax.swing.JFrame {
         }else{
             fdb.paramEcrit("PeriodeDim", "0", "options");
         }
+        if(cbActive.isSelected()){
+            fdb.paramEcrit("EnvoieMail", "1", "options");
+        }else{
+            fdb.paramEcrit("EnvoieMail", "0", "options");
+        }
         fdb.paramEcrit("PeriodeHeure", tfHeure.getText(), "options");
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnValidActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,6 +297,8 @@ public class FenRecap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnValid;
+    private javax.swing.JCheckBox cbActive;
     private javax.swing.JCheckBox cbDim;
     private javax.swing.JCheckBox cbJeu;
     private javax.swing.JCheckBox cbLun;
@@ -261,10 +306,9 @@ public class FenRecap extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbMerc;
     private javax.swing.JCheckBox cbSam;
     private javax.swing.JCheckBox cbVen;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labHeure;
+    private javax.swing.JLabel labParam;
     private javax.swing.JFormattedTextField tfHeure;
     // End of variables declaration//GEN-END:variables
 }
