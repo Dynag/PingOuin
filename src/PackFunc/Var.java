@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  */
 public class Var {
     // Version
-    public static String version = "03.03.04";
+    public static String version = "03.04.01";
     //Connections postgrsql
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;

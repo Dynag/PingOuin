@@ -5,6 +5,7 @@
  */
 package PackFunc;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -14,7 +15,9 @@ import java.util.ResourceBundle;
 public class FuncLang {
     public static ResourceBundle choixLangue(){
         ResourceBundle bundle;
-        bundle = ResourceBundle.getBundle("lang.langue");
+        Locale locale = Locale.getDefault();
+        bundle = ResourceBundle.getBundle("lang.langue",locale);
+
         return bundle;
     }
 }

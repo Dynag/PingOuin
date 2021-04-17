@@ -46,7 +46,7 @@ public final class FenMain extends javax.swing.JFrame {
      * Creates new form mainAcc
      */
     public FenMain(){
-
+        PackFunc.FuncLang.choixLangue();
         fun.testOs();
         File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
@@ -135,7 +135,7 @@ public final class FenMain extends javax.swing.JFrame {
         progerAjout = new javax.swing.JProgressBar();
         labMaj = new javax.swing.JLabel();
         comboTri = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        labImg = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         labAjout = new javax.swing.JLabel();
@@ -220,10 +220,10 @@ public final class FenMain extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PackMain/img/logo.png"))); // NOI18N
-        jLabel3.setOpaque(true);
+        labImg.setBackground(new java.awt.Color(255, 255, 255));
+        labImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PackImg/logo.png"))); // NOI18N
+        labImg.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -231,7 +231,7 @@ public final class FenMain extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labImg, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLancer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -247,7 +247,7 @@ public final class FenMain extends javax.swing.JFrame {
             .addComponent(labMaj, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labImg, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnLancer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(comboTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1032,8 +1032,14 @@ public final class FenMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void menTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menTestActionPerformed
-        PackFunc.Test  test = new PackFunc.Test();
-        test.start();
+        PackFunc.FuncRac rac = new PackFunc.FuncRac();
+        try {
+            rac.creerRacDemarrer();
+        } catch (IOException ex) {
+            Logger.getLogger(FenMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FenMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_menTestActionPerformed
 
@@ -1099,7 +1105,6 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JButton btnValid;
     private javax.swing.JComboBox<String> cbTout;
     private javax.swing.JComboBox<String> comboTri;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JPanel jPanel1;
@@ -1120,6 +1125,7 @@ public final class FenMain extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JLabel labAjout;
     public static javax.swing.JLabel labDelaisPing;
+    public static javax.swing.JLabel labImg;
     public static javax.swing.JLabel labIp;
     public static javax.swing.JLabel labMaj;
     private javax.swing.JButton labModif;

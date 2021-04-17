@@ -8,6 +8,7 @@ package PackMain;
 import PackFunc.funcDb;
 import PackFunc.funcLicence;
 import PackThread.threadPop;
+import java.io.IOException;
 import java.net.SocketException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -36,6 +37,7 @@ public class FenParam extends javax.swing.JFrame {
         btnRecap.setText(PackFunc.Var.bundle.getString("param.recap"));
         btnDbExt.setText(PackFunc.Var.bundle.getString("param.dbext"));
         btnLi.setText(PackFunc.Var.bundle.getString("param.licen"));
+        btnRac.setText(PackFunc.Var.bundle.getString("param.rac"));
         labAutre.setText(PackFunc.Var.bundle.getString("param.autre"));
         
         paramAffiche();
@@ -68,6 +70,7 @@ public class FenParam extends javax.swing.JFrame {
         btnRecap = new javax.swing.JButton();
         btnDbExt = new javax.swing.JButton();
         btnLi = new javax.swing.JButton();
+        btnRac = new javax.swing.JButton();
         btnValid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -151,6 +154,13 @@ public class FenParam extends javax.swing.JFrame {
             }
         });
 
+        btnRac.setText("jButton1");
+        btnRac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRacActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -159,9 +169,10 @@ public class FenParam extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnRac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDbExt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMailParam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnRecap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLi, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -179,7 +190,9 @@ public class FenParam extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDbExt)
                     .addComponent(btnLi))
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRac)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         btnValid.setText("Valider");
@@ -254,6 +267,15 @@ public class FenParam extends javax.swing.JFrame {
             dispose();
     }//GEN-LAST:event_btnLiActionPerformed
 
+    private void btnRacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRacActionPerformed
+        PackFunc.FuncRac rac = new PackFunc.FuncRac();
+        try {
+            rac.creerRacBureau();
+        } catch (IOException | InterruptedException ex) {
+            Logger.getLogger(FenParam.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRacActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -296,6 +318,7 @@ public class FenParam extends javax.swing.JFrame {
     private javax.swing.JButton btnDbExt;
     private javax.swing.JButton btnLi;
     private javax.swing.JButton btnMailParam;
+    private javax.swing.JButton btnRac;
     private javax.swing.JButton btnRecap;
     private javax.swing.JButton btnValid;
     private javax.swing.JPanel jPanel1;

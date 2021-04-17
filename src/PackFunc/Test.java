@@ -7,6 +7,7 @@ package PackFunc;
 
 import PackThread.threadMailPlantage;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -29,9 +30,7 @@ public class Test extends Thread{
       }
 @Override
     public void run(){
-    int corePoolSize = Runtime.getRuntime().availableProcessors();
-        ScheduledExecutorService execute = Executors.newScheduledThreadPool(corePoolSize);
-        q = execute.scheduleAtFixedRate(new threadMailPlantage(), 0, 5, TimeUnit.SECONDS);
+    System.out.println(Locale.getDefault());
     }
         
       
