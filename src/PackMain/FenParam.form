@@ -45,12 +45,12 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="labParam" min="-2" pref="44" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnValid" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,16 +84,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="labSite" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="labMail" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labLangue" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="tfMail" pref="217" max="32767" attributes="0"/>
-                      <Component id="tfSite" max="32767" attributes="0"/>
+                      <Component id="tfMail" max="32767" attributes="0"/>
+                      <Component id="tfSite" pref="217" max="32767" attributes="0"/>
+                      <Component id="cbLangue" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -107,12 +109,17 @@
                       <Component id="labSite" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfSite" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labMail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfMail" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labMail" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbLangue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labLangue" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -131,6 +138,24 @@
         <Component class="javax.swing.JTextField" name="tfMail">
         </Component>
         <Component class="javax.swing.JTextField" name="tfSite">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbLangue">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="2">
+                <StringItem index="0" value="en_US"/>
+                <StringItem index="1" value="fr_FR"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labLangue">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mail &#xe0; envoyer"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

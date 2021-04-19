@@ -22,7 +22,7 @@ public class threadDbExt implements Runnable{
     Statement ps = null;
     
     public void run(){
-        dbc.DbConnectDist();
+        //dbc.DbConnectDist();
         boolean tableCree = dbc.testTableDist(fdb.paramLire("site", "param"));
         if(tableCree = true){ dbc.dbExtRecapCreate(); }
         testEnvoie();

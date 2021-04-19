@@ -15,19 +15,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import PackFunc.funcDb;
 import PackFunc.funcIp;
-import PackFunc.funcLicence;
 import PackFunc.funcMain;
 import PackFunc.funcMiseAJour;
 import java.awt.event.KeyEvent;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 
 /**
@@ -46,12 +42,67 @@ public final class FenMain extends javax.swing.JFrame {
      * Creates new form mainAcc
      */
     public FenMain(){
-        PackFunc.FuncLang.choixLangue();
+    System.out.println("00");    
         fun.testOs();
         File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
-        initComponents();
         
+
+        
+//menTest.setVisible(false);
+        fun.dossCree();
+        
+        try {
+            fun.connectParam();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FenMain.class.getName()).log(Level.SEVERE, null, ex);
+            fun.ecritLogs(ex, " - "+getClass().getName());        }
+        
+        funVar.remplireListeParam();
+        funVar.remplireListeOptions();
+        funVar.remplireListeIp();
+        
+        if(fdb.testTable("param")==false || fdb.testTable("options")==false){ funDb.creerTables(); }
+        funDb.tablesRemplir();
+        
+        rep.testDbOk("param");
+        rep.testDbOk("options");
+        PackFunc.funcRepareSql prsql = new PackFunc.funcRepareSql();
+        prsql.dbRepare("param");
+        prsql.dbRepare("options");
+        PackThread.threadMiseAJour tMaJ = new PackThread.threadMiseAJour();
+        tMaJ.start();
+        initComponents();
+        lang();
+        
+        progerAjout.setVisible(false);
+        btnLancer.setBackground(Color.red);
+        
+System.out.println(PackFunc.Var.dbConParam);
+// Test mise à jour
+        
+        
+// Création des tables
+        
+        
+        
+        fun.connectHist();
+        
+        funDb.tableIpCree();
+        tfPremIp.setText(funIp.ipPc());
+        fun.listeSites();
+        threadHisto th = new threadHisto();
+        //th.start();
+
+    fdb.listeIp();
+    }
+    
+    public void lang(){
+        PackFunc.FuncLang langue= new PackFunc.FuncLang();
+        
+        // Choix de la langue
+        langue.choixLangue();
+        labVersion.setText(PackFunc.Var.bundle.getString("PingOuin.version")+" "+PackFunc.Var.version);
         labAjout.setText(PackFunc.Var.bundle.getString("main.ajout"));
         labPingDelais.setText(PackFunc.Var.bundle.getString("main.ping.delais"));
         labModif.setText(PackFunc.Var.bundle.getString("main.modif"));
@@ -76,43 +127,6 @@ public final class FenMain extends javax.swing.JFrame {
         menAutreSite.setText(PackFunc.Var.bundle.getString("menu.autre.site"));
         menTest.setText(PackFunc.Var.bundle.getString("menu.autre.test"));
         menAutreChangelog.setText(PackFunc.Var.bundle.getString("menu.autre.changelog"));
-        
-//menTest.setVisible(false);
-        fun.dossCree();
-        labVersion.setText(PackFunc.Var.bundle.getString("PingOuin.version")+" "+PackFunc.Var.version);
-        try {
-            fun.connectParam();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FenMain.class.getName()).log(Level.SEVERE, null, ex);
-            fun.ecritLogs(ex, " - "+getClass().getName());        }
-        progerAjout.setVisible(false);
-        btnLancer.setBackground(Color.red);
-        
-        
-// Test mise à jour
-        PackThread.threadMiseAJour tMaJ = new PackThread.threadMiseAJour();
-        tMaJ.start();
-        
-// Création des tables
-        funVar.remplireListeParam();
-        funVar.remplireListeOptions();
-        funVar.remplireListeIp();
-        
-        
-        fun.connectHist();
-        if(fdb.testTable("param")==false || fdb.testTable("options")==false){ funDb.creerTables(); }
-        funDb.tablesRemplir();
-        
-        rep.testDbOk("param");
-        rep.testDbOk("options");
-        funDb.tableIpCree();
-        tfPremIp.setText(funIp.ipPc());
-        fun.listeSites();
-        threadHisto th = new threadHisto();
-        //th.start();
-
-
-    fdb.listeIp();
     }
     
     

@@ -27,7 +27,7 @@ public class funcRepareSql {
         creeArray(nomTable);
         boolean result = testDb(nomTable);
         if(result == false){
-            JOptionPane.showMessageDialog(null, "Les tables doivent être réparés."+nomTable);
+            //JOptionPane.showMessageDialog(null, "Les tables doivent être réparés."+nomTable);
         }
 
         
@@ -86,7 +86,6 @@ public class funcRepareSql {
             ArrayList<String> bddOptimal=new ArrayList();
             if(table.equals("param")){ bddOptimal = PackFunc.Var.bddParam; } else { bddOptimal = PackFunc.Var.bddOptions; }
             if(listCol.equals(bddOptimal)){
-                JOptionPane.showMessageDialog(null, "Aucune réparation n'est nécessaire.");
             }else{
                 
                 
@@ -98,7 +97,6 @@ public class funcRepareSql {
                         creeColone(table, col);
                     }
                 }
-                JOptionPane.showMessageDialog(null, "Les tables ont été réparés.");
                 
                 
             }

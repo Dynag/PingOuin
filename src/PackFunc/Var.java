@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  */
 public class Var {
     // Version
-    public static String version = "03.04.01";
+    public static String version = "03.04.03";
     //Connections postgrsql
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;
@@ -29,13 +29,12 @@ public class Var {
     public static String os;
     public static String path;
     public static String tri = "IP";
-    public static Connection conn;
     // Modeles de tables
     public static ArrayList<String> bddParam = new ArrayList<>();
     public static ArrayList<String> bddOptions = new ArrayList<>();
     public static ArrayList<String> bddIp = new ArrayList<>();
     private static PackFunc.FuncLang lang = new PackFunc.FuncLang();
-    public static ResourceBundle bundle = lang.choixLangue();
+    public static ResourceBundle bundle;
     
     /***************************************************************************
      * Modele de la table Param
@@ -63,6 +62,7 @@ public class Var {
         bddParam.add("dbext");
         bddParam.add("dbext_purge");
         bddParam.add("dbext_perte");
+        bddParam.add("langue");
         
     }
     /***************************************************************************

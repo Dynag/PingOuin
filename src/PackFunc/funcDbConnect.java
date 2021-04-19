@@ -6,6 +6,7 @@
 package PackFunc;
 
 import com.mysql.jdbc.DatabaseMetaData;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -32,13 +33,14 @@ public class funcDbConnect {
      * Connection à la DB mysql
      */
     
-    public static void DbConnectDist(){
+    public static Connection DbConnectDist(){
         String addresse=null;
         String nom=null;
         String user=null;
         String pass=null;
         String port=null;
         funcDb fdb = new funcDb();
+        Connection conn = null;
         
         addresse = fdb.paramLire("dbext_adress", "param");
         nom = fdb.paramLire("dbext_name", "param");
@@ -47,30 +49,24 @@ public class funcDbConnect {
         port = fdb.paramLire("dbext_port", "param");
         
         try {
-        Class.forName("com.mysql.jdbc.Driver");
-          if(Var.conn == null){
-                Var.conn = DriverManager.getConnection("jdbc:mysql://"+addresse+":"+port+"/"+nom+"?useUnicode=true&characterEncoding=utf8", user, pass);
-
-          }else{
-              Var.conn.close();
-              Var.conn = DriverManager.getConnection("jdbc:mysql://"+addresse+":"+port+"/"+nom+"?useUnicode=true&characterEncoding=utf8", user, pass);
-          }
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://"+addresse+":"+port+"/"+nom+"?useUnicode=true&characterEncoding=utf8", user, pass);
         } catch (SQLException ex) {
             Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return conn;
     }
     public void dbExtRecapCreate(){
-        DbConnectDist();
+        Connection conn = DbConnectDist();
         try {
             String nomSite = fdb.paramLire("site", "param");
-            ps1 = PackFunc.Var.conn.createStatement();
+            ps1 = conn.createStatement();
             String sq1 = "CREATE TABLE IF NOT EXISTS `"+nomSite+"` (`id` INTEGER NOT NULL AUTO_INCREMENT , `date` TEXT, `ip` TEXT, `nom` TEXT, `etat` TEXT, PRIMARY KEY(`id`));";
             ps1.execute(sq1);
             ps1.close();
-            Var.conn.close();
+            conn.close();
             
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - creerTables dist recap - "+getClass().getName());
@@ -78,21 +74,21 @@ public class funcDbConnect {
         }
     }
     public void dbExtPerteCreate(){
-        DbConnectDist();
+        Connection conn = DbConnectDist();
         try {
             String nomSite = fdb.paramLire("site", "param");
-            ps1 = PackFunc.Var.conn.createStatement();
+            ps1 = conn.createStatement();
             String sq1 = "CREATE TABLE IF NOT EXISTS `"+nomSite+"_perte` (`id` INTEGER NOT NULL AUTO_INCREMENT , `date` TEXT, `ip` TEXT, `nom` TEXT, `etat` TEXT, PRIMARY KEY(`id`));";
             ps1.execute(sq1);
             ps1.close();
-            Var.conn.close();
+            conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - creerTables dist perte - "+getClass().getName());
             System.out.println(ex);
         }
     }
     public void dbExtEcrire(String ip, String nom, String etat){
-        DbConnectDist();
+        Connection conn = DbConnectDist();
         String date = null;
         Date date1 = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd-HH:mm:ss");  
@@ -100,18 +96,18 @@ public class funcDbConnect {
         
         try {
             String nomSite = fdb.paramLire("site", "param");
-            ps1 = PackFunc.Var.conn.createStatement();
+            ps1 = conn.createStatement();
             String sq1 = "INSERT INTO `"+nomSite+"` (`date`, `ip`, `nom`, `etat`) VALUES ('"+date+"', '"+ip+"', '"+nom+"', '"+etat+"');";
             ps1.execute(sq1);
             ps1.close();
-            Var.conn.close();
+            conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - Ecrire dist recap - "+getClass().getName());
             System.out.println(ex);
         }
     }
     public void dbExtPerteEcrire(String ip, String nom, String etat){
-        DbConnectDist();
+         Connection conn = DbConnectDist();
         String date = null;
         Date date1 = Calendar.getInstance().getTime();  
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd-HH:mm:ss");  
@@ -119,27 +115,27 @@ public class funcDbConnect {
         
         try {
             String nomSite = fdb.paramLire("site", "param");
-            ps1 = PackFunc.Var.conn.createStatement();
+            ps1 = conn.createStatement();
             String sq1 = "INSERT INTO `"+nomSite+"_perte` (`date`, `ip`, `nom`, `etat`) VALUES ('"+date+"', '"+ip+"', '"+nom+"', '"+etat+"');";
 System.out.println(sq1);
             ps1.execute(sq1);
             ps1.close();
-            Var.conn.close();
+            conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - Ecrire dist Perte - "+getClass().getName());
             System.out.println(ex);
         }
     }
     public void dbExtPurge(){
-        DbConnectDist();
+        Connection conn = DbConnectDist();
         
         try {
             String nomSite = fdb.paramLire("site", "param");
-            ps1 = PackFunc.Var.conn.createStatement();
+            ps1 = conn.createStatement();
             String sq1 = "TRUNCATE TABLE `"+nomSite+"` ";
             ps1.execute(sq1);
             ps1.close();
-            Var.conn.close();
+            conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - dbExt purge dist - "+getClass().getName());
             System.out.println(ex);
@@ -147,14 +143,15 @@ System.out.println(sq1);
     }
     
     public boolean testTableDist(String table){
-        DbConnectDist();
+        Connection conn = DbConnectDist();
         boolean tableExist = false;
         try {
-            boolean exists = PackFunc.Var.conn.getMetaData().getTables(null, null, table, null).next();
+            boolean exists = conn.getMetaData().getTables(null, null, table, null).next();
             if(!exists){
                 tableExist = true;
                 System.out.println("Created table " + table);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
         }

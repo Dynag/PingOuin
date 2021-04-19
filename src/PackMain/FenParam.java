@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 public class FenParam extends javax.swing.JFrame {
     funcDb fdb = new funcDb();
     funcLicence fl = new funcLicence();
+    PackFunc.funcMain fun = new PackFunc.funcMain();
     /**
      * Creates new form pageParam
      */
@@ -39,13 +40,14 @@ public class FenParam extends javax.swing.JFrame {
         btnLi.setText(PackFunc.Var.bundle.getString("param.licen"));
         btnRac.setText(PackFunc.Var.bundle.getString("param.rac"));
         labAutre.setText(PackFunc.Var.bundle.getString("param.autre"));
-        
+        labLangue.setText(PackFunc.Var.bundle.getString("param.langue"));
         paramAffiche();
     }
     
     public void paramAffiche(){
         tfSite.setText(fdb.paramLire("site", "param"));
         tfMail.setText(fdb.paramLire("mail", "param"));
+        cbLangue.setSelectedItem(fdb.paramLire("langue", "param"));
         
     }
 
@@ -64,6 +66,8 @@ public class FenParam extends javax.swing.JFrame {
         labMail = new javax.swing.JLabel();
         tfMail = new javax.swing.JTextField();
         tfSite = new javax.swing.JTextField();
+        cbLangue = new javax.swing.JComboBox<>();
+        labLangue = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         labAutre = new javax.swing.JLabel();
         btnMailParam = new javax.swing.JButton();
@@ -91,6 +95,10 @@ public class FenParam extends javax.swing.JFrame {
 
         labMail.setText("Mail à envoyer");
 
+        cbLangue.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "en_US", "fr_FR" }));
+
+        labLangue.setText("Mail à envoyer");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -99,11 +107,13 @@ public class FenParam extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labSite)
-                    .addComponent(labMail))
+                    .addComponent(labMail)
+                    .addComponent(labLangue))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfMail, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                    .addComponent(tfSite))
+                    .addComponent(tfMail)
+                    .addComponent(tfSite, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                    .addComponent(cbLangue, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -113,11 +123,15 @@ public class FenParam extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labSite)
                     .addComponent(tfSite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labMail)
-                    .addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labMail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbLangue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labLangue))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -220,12 +234,12 @@ public class FenParam extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(labParam, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnValid)
                 .addGap(13, 13, 13)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 42, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -235,6 +249,9 @@ public class FenParam extends javax.swing.JFrame {
     private void btnValidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidActionPerformed
         fdb.paramEcrit("site", tfSite.getText(), "param");
         fdb.paramEcrit("mail", tfMail.getText(), "param");
+        fdb.paramEcrit("langue", cbLangue.getSelectedItem().toString(), "param");
+        PackThread.threadPop tpop = new PackThread.threadPop(PackFunc.Var.bundle.getString("param.langue.change"));
+        tpop.start();
         
         dispose();
     }//GEN-LAST:event_btnValidActionPerformed
@@ -271,6 +288,7 @@ public class FenParam extends javax.swing.JFrame {
         PackFunc.FuncRac rac = new PackFunc.FuncRac();
         try {
             rac.creerRacBureau();
+            rac.creerRacDemarrer();
         } catch (IOException | InterruptedException ex) {
             Logger.getLogger(FenParam.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -321,9 +339,11 @@ public class FenParam extends javax.swing.JFrame {
     private javax.swing.JButton btnRac;
     private javax.swing.JButton btnRecap;
     private javax.swing.JButton btnValid;
+    private javax.swing.JComboBox<String> cbLangue;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labAutre;
+    private javax.swing.JLabel labLangue;
     private javax.swing.JLabel labMail;
     private javax.swing.JLabel labParam;
     private javax.swing.JLabel labSite;
