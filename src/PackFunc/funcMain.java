@@ -115,7 +115,23 @@ public class funcMain {
         } catch (IOException e) {
             ecritLogs(e, " - "+getClass().getName()); //NOI18N
         }
-        JOptionPane.showMessageDialog(null,"Une erreur est survenue, vérifiez les logs");
+        //JOptionPane.showMessageDialog(null,"Une erreur est survenue, vérifiez les logs");
+        
+    }
+    public static void ecritLogsStat(Exception log1, String page)
+    {
+        Exception log = log1;
+        Date auj =  new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //NOI18N
+
+        try { 
+            PrintWriter fich = new PrintWriter(new BufferedWriter(new FileWriter(PackFunc.Var.path+"/logs.txt", true))); //NOI18N
+            fich.println(dateFormat.format(auj)+" - "+page+" / "+log); //NOI18N
+            fich.close();
+        } catch (IOException e) {
+            //ecritLogs(e, " - "+getClass().getName()); //NOI18N
+        }
+        //JOptionPane.showMessageDialog(null,"Une erreur est survenue, vérifiez les logs");
         
     }
     

@@ -37,7 +37,7 @@ public class threadMailPlantage implements Runnable{
             ps = PackFunc.Var.dbConSite.createStatement();
             rs = ps.executeQuery(sql1);
             while(rs.next()){
-                if(Integer.parseInt(rs.getString("etat")) == 3){
+                if(Integer.parseInt(rs.getString("etat")) == PackFunc.Var.nbrHs){
                     ipHsMail = ipHsMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
                     
                     fdb.dbIpEcrit(rs.getString("ip"), "4", "etat");

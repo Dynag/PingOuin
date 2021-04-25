@@ -36,7 +36,7 @@ public class threadPopUp implements Runnable{
             ps = PackFunc.Var.dbConSite.createStatement();
             rs = ps.executeQuery(sql1);
             while(rs.next()){
-                if(Integer.parseInt(rs.getString("popup")) == 3){
+                if(Integer.parseInt(rs.getString("popup")) == PackFunc.Var.nbrHs){
                     ipHsMail = ipHsMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
                     fdb.dbIpEcrit(rs.getString("ip"), "4", "popup");
                 }

@@ -5,6 +5,7 @@
  */
 package PackMain;
 
+import PackFunc.Var;
 import PackThread.threadHisto;
 import PackThread.threadPrepaPing;
 import PackThread.lanceThread;
@@ -109,6 +110,7 @@ System.out.println(PackFunc.Var.dbConParam);
         btnNav.setText(PackFunc.Var.bundle.getString("main.btn.nav"));
         btnClear.setText(PackFunc.Var.bundle.getString("main.btn.clear"));
         btnEfface.setText(PackFunc.Var.bundle.getString("main.btn.efface"));
+        labNbrHs.setText(PackFunc.Var.bundle.getString("main.nbrHs"));
         
         menFichier.setText(PackFunc.Var.bundle.getString("menu.fichier"));
         menFichierExport.setText(PackFunc.Var.bundle.getString("menu.fichier.export"));
@@ -161,6 +163,8 @@ System.out.println(PackFunc.Var.dbConParam);
         labPingDelais = new javax.swing.JLabel();
         labDelaisPing = new javax.swing.JLabel();
         slidDelaisPing = new javax.swing.JSpinner();
+        labNbrHs = new javax.swing.JLabel();
+        spinNbrHs = new javax.swing.JSpinner();
         jPanel9 = new javax.swing.JPanel();
         listeSite = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
@@ -346,31 +350,53 @@ System.out.println(PackFunc.Var.dbConParam);
             }
         });
 
+        labNbrHs.setText("jLabel1");
+
+        spinNbrHs.setValue(3);
+        spinNbrHs.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinNbrHsStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labPingDelais, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(labDelaisPing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labPingDelais, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(labDelaisPing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labNbrHs, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                                    .addComponent(spinNbrHs))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labPingDelais)
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labDelaisPing)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labNbrHs)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spinNbrHs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -1072,6 +1098,11 @@ System.out.println(PackFunc.Var.dbConParam);
         fenO.show();
     }//GEN-LAST:event_menParamOptionActionPerformed
 
+    private void spinNbrHsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinNbrHsStateChanged
+        Var.nbrHs = (Integer) spinNbrHs.getValue();
+        System.out.println(Var.nbrHs);
+    }//GEN-LAST:event_spinNbrHsStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -1143,6 +1174,7 @@ System.out.println(PackFunc.Var.dbConParam);
     public static javax.swing.JLabel labIp;
     public static javax.swing.JLabel labMaj;
     private javax.swing.JButton labModif;
+    private javax.swing.JLabel labNbrHs;
     private javax.swing.JLabel labPingDelais;
     public static javax.swing.JLabel labThreadFerme;
     public static javax.swing.JLabel labThreadOuvert;
@@ -1165,6 +1197,7 @@ System.out.println(PackFunc.Var.dbConParam);
     private javax.swing.JMenuItem menTest;
     public static javax.swing.JProgressBar progerAjout;
     private javax.swing.JSpinner slidDelaisPing;
+    private javax.swing.JSpinner spinNbrHs;
     private javax.swing.JSpinner spinPlage;
     public static javax.swing.JTable tabPrinc;
     public static javax.swing.JTextField tfNom;

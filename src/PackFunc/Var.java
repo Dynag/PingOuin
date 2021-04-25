@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  */
 public class Var {
     // Version
-    public static String version = "03.04.03";
+    public static String version = "03.04.04";
     //Connections postgrsql
     public static Connection dbConParam = null;
     public static Connection dbConSite = null;
@@ -24,6 +24,7 @@ public class Var {
     // options
     public static boolean stopPing = false;
     public static Integer delaisPause = 5;
+    public static Integer nbrHs = 3;
     public static Integer threadOuvert = 0;
     public static Integer threadFerme = 0;
     public static String os;

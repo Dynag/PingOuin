@@ -31,6 +31,7 @@ public class funcDbConnect {
     funcMain fun = new funcMain();
     /**
      * Connection à la DB mysql
+     * @return 
      */
     
     public static Connection DbConnectDist(){
@@ -53,8 +54,10 @@ public class funcDbConnect {
             conn = DriverManager.getConnection("jdbc:mysql://"+addresse+":"+port+"/"+nom+"?useUnicode=true&characterEncoding=utf8", user, pass);
         } catch (SQLException ex) {
             Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
+            PackFunc.funcMain.ecritLogsStat(ex, "funcDbConnect");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
+            PackFunc.funcMain.ecritLogsStat(ex, "funcDbConnect");
         }
         return conn;
     }
@@ -70,6 +73,7 @@ public class funcDbConnect {
             
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - creerTables dist recap - "+getClass().getName());
+            PackFunc.funcMain.ecritLogsStat(ex, "funcDbConnect");
             System.out.println(ex);
         }
     }
@@ -154,6 +158,7 @@ System.out.println(sq1);
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
+            PackFunc.funcMain.ecritLogsStat(ex, "funcDbConnect");
         }
         return tableExist;
     }

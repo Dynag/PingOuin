@@ -50,7 +50,7 @@ public class lanceThread extends Thread{
                     q = execute.scheduleAtFixedRate(new threadMailPlantage(), 0, 60, TimeUnit.SECONDS);
                 }
                 if(fdb.paramLire("pop_up", "param").equals("1")){
-                    r = execute.scheduleAtFixedRate( new threadPopUp(), 0, 60, TimeUnit.SECONDS);
+                    r = execute.scheduleAtFixedRate( new threadPopUp(), 0, 5, TimeUnit.SECONDS);
                 }
                 if(fdb.paramLire("dbext_perte", "param").equals("1")){
                     u = execute.scheduleAtFixedRate(new threadDbExtPerte(),2 , 60, TimeUnit.SECONDS);
