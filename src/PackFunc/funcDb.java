@@ -37,7 +37,6 @@ public class funcDb {
             boolean exists = PackFunc.Var.dbConParam.getMetaData().getTables(null, null, table, null).next();
             if(!exists){
                 tableExist = false;
-                System.out.println("Created table " + table);
             }
         } catch (SQLException ex) {
             Logger.getLogger(funcDbConnect.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,21 +51,16 @@ public class funcDb {
         try{
             ps = PackFunc.Var.dbConParam.createStatement();
             String listColParam = listeCol("param");
-System.out.println(listColParam);
             String sq1 = "CREATE TABLE IF NOT EXISTS param ("+listColParam+")";
             ps.execute(sq1);
-System.out.println("2");
             ps.close();
-            System.out.println("123");
 // Table option
             String listColOptions = listeCol("options");
-System.out.println(listColOptions);
             ps = PackFunc.Var.dbConParam.createStatement();
             String sq2 = "CREATE TABLE IF NOT EXISTS options ("+listColOptions+")"; //NOI18N
             ps.execute(sq2);
             ps.close();
         }catch (SQLException e) {
-System.out.println(e);
             fun.ecritLogs(e, " - creerTables - "+getClass().getName());
         }
     }

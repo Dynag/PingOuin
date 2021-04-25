@@ -25,7 +25,6 @@ public class funcMail {
     funcMain fun = new funcMain();
     funcDb fdb = new funcDb();
     public void envoieMail(String objet, String message) throws MessagingException{
-System.out.println("mail_start");
         Properties properties = new Properties();
         properties.setProperty("mail.transport.protocol", "smtp");
         properties.setProperty("mail.smtp.host", fdb.paramLire("smtp_serv", "param"));
@@ -46,9 +45,7 @@ System.out.println("mail_start");
                     toClient[i] =  new InternetAddress(mailSpliter[i]);
                 } catch (AddressException ex) {
                     fun.ecritLogs(ex, " - "+getClass().getName());
-                    System.out.println(ex);
                 } catch (MessagingException ex) {
-                    System.out.println(ex);
                     fun.ecritLogs(ex, " - "+getClass().getName());
                 }
             }
@@ -66,17 +63,13 @@ System.out.println("mail_start");
             transport.connect(fdb.paramLire("smtp_user", "param"), fdb.paramLire("smtp_pass", "param"));   
             try{
                 transport.sendMessage(message1, toClient); 
-                System.out.println("mail_ok");
             }catch(Exception e){ 
-            System.out.println(e);
             }
             transport.close();
             
-System.out.println("mail_Stop");
     }
     
     public boolean envoieJour(){
-System.out.println("201");
         boolean test = false;
         long currentTimestamp = System.currentTimeMillis();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
@@ -118,7 +111,6 @@ System.out.println("201");
                 }
             }
         }
-System.out.println(test);
         return test;
     }
      public boolean testJourSemaine(String jour){
@@ -127,7 +119,6 @@ System.out.println(test);
             long currentTimestamp = System.currentTimeMillis();
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEE");
             String date = dateFormat.format(currentTimestamp);
-System.out.println(date);
             if(date.equals(jour))
             {
                 test = true;

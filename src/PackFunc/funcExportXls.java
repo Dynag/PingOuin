@@ -40,7 +40,6 @@ public class funcExportXls {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             if (jfc.getSelectedFile().isDirectory()) {
                 path = jfc.getSelectedFile().toString();
-System.out.println("You selected the directory: " + jfc.getSelectedFile());
             }
         }
         
@@ -157,7 +156,6 @@ System.out.println("You selected the directory: " + jfc.getSelectedFile());
             t2.start();
 
         } catch ( Exception ex ) {
-            System.out.println(ex);
             threadPop t2 = new threadPop(PackFunc.Var.bundle.getString("func.export.error"));
             t2.start();
         }

@@ -93,7 +93,6 @@ public class funcRepareSql {
                 {
                     if(listCol.contains(col)==false){
                         String colAjout = col;
-                        System.out.println(col);
                         creeColone(table, col);
                     }
                 }
@@ -111,7 +110,6 @@ public class funcRepareSql {
             String sql = "ALTER TABLE "+nomTable+" ADD "+nomColone+" TEXT DEFAULT '0';";
             ps = PackFunc.Var.dbConParam.createStatement();
             ps.execute(sql);
-            System.out.println("2");
             ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(funcRepareSql.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,21 +165,15 @@ public class funcRepareSql {
          */
         public void dbRepareIp(String table){
             creeArrayIp(table);
-System.out.println("Repare maison ");
             // Afficher les noms et les types des colonne sur le console
             ArrayList<String> bddOptimal=new ArrayList();
             bddOptimal = PackFunc.Var.bddIp;
             if(listCol.equals(PackFunc.Var.bddIp)){
-System.out.println("Tout OK ");
-System.out.println(listCol);
-System.out.println(bddOptimal);
             }else{
                 for (String col : bddOptimal) 
                 {
                     if(listCol.contains(col)==false){
-System.out.println("Repare necessaire ");
                         String colAjout = col;
-                        System.out.println(col);
                         creeColoneIp(table, col);
                     }
                 }
@@ -197,9 +189,7 @@ System.out.println("Repare necessaire ");
             String sql = "ALTER TABLE ip ADD "+nomColone+" TEXT DEFAULT '0';";
             ps = PackFunc.Var.dbConSite.createStatement();
             ps.execute(sql);
-            System.out.println("2");
             ps.close();
-System.out.println("Col ajoutée "+nomColone);
         } catch (SQLException ex) {
             Logger.getLogger(funcRepareSql.class.getName()).log(Level.SEVERE, null, ex);
         }

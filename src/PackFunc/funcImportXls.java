@@ -59,7 +59,6 @@ public class funcImportXls {
             Integer c = 0;
             while (iterator.hasNext()) {
                 Integer i = 0;
-System.out.println(c);
                 
                     String ip = null;
                     String nom = null;

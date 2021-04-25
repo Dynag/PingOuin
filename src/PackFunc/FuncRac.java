@@ -37,7 +37,6 @@ public class FuncRac {
                             "cscript CreateShortcut.vbs &&" +
                             "del CreateShortcut.vbs";
 
-System.out.println(commande1);
         Runtime rt = Runtime.getRuntime();
         try {
             rt.exec(new String[]{"cmd.exe","/c "+commande1, "start"});
@@ -47,7 +46,6 @@ System.out.println(commande1);
         }
     }
         public void creerRacDemarrer() throws IOException, InterruptedException{
-System.out.println(PackFunc.Var.path);
         // Il est également possible de spécifier des options de copie.
         // Ici : écrase le fichier destination s'il existe et copie les attributs de la source sur la destination.
         //Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
@@ -63,7 +61,6 @@ System.out.println(PackFunc.Var.path);
                             "del CreateShortcut.vbs";
         
 
-System.out.println(commande1);
         Runtime rt = Runtime.getRuntime();
         try {
             rt.exec(new String[]{"cmd.exe","/c "+commande1, "start"});

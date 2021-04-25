@@ -33,7 +33,6 @@ public class FenRecap extends javax.swing.JFrame {
         cbVen.setText(PackFunc.Var.bundle.getString("param.recap.ven"));
         cbSam.setText(PackFunc.Var.bundle.getString("param.recap.sam"));
         cbDim.setText(PackFunc.Var.bundle.getString("param.recap.dim"));
-        cbActive.setText(PackFunc.Var.bundle.getString("param.recap.active"));
         btnValid.setText(PackFunc.Var.bundle.getString("btn.valid"));
         labHeure.setText(PackFunc.Var.bundle.getString("param.recap.heure"));
         
@@ -59,7 +58,6 @@ public class FenRecap extends javax.swing.JFrame {
         if(fdb.paramLire("PeriodeVen", "options").equals("1")){ cbVen.setSelected(true); }else{  cbLun.setSelected(false); }
         if(fdb.paramLire("PeriodeSam", "options").equals("1")){ cbSam.setSelected(true); }else{  cbLun.setSelected(false); }
         if(fdb.paramLire("PeriodeDim", "options").equals("1")){ cbDim.setSelected(true); }else{  cbLun.setSelected(false); }
-        if(fdb.paramLire("EnvoieMail", "options").equals("1")){ cbActive.setSelected(true); }else{  cbActive.setSelected(false); }
     }
 
     /**
@@ -82,7 +80,6 @@ public class FenRecap extends javax.swing.JFrame {
         cbVen = new javax.swing.JCheckBox();
         cbSam = new javax.swing.JCheckBox();
         cbDim = new javax.swing.JCheckBox();
-        cbActive = new javax.swing.JCheckBox();
         btnValid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -116,8 +113,6 @@ public class FenRecap extends javax.swing.JFrame {
 
         cbDim.setText("dim");
 
-        cbActive.setText("jCheckBox1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,25 +125,22 @@ public class FenRecap extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(tfHeure))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cbActive, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cbLun)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbMar))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cbVen)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbSam)))
+                                .addComponent(cbLun)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cbMerc)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbJeu))
-                                    .addComponent(cbDim))))
+                                .addComponent(cbMar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbVen)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbSam)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbMerc)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbJeu))
+                            .addComponent(cbDim))
                         .addGap(0, 68, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -170,9 +162,7 @@ public class FenRecap extends javax.swing.JFrame {
                     .addComponent(cbVen)
                     .addComponent(cbSam)
                     .addComponent(cbDim))
-                .addGap(18, 18, 18)
-                .addComponent(cbActive)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         btnValid.setText("Valider");
@@ -245,11 +235,6 @@ public class FenRecap extends javax.swing.JFrame {
         }else{
             fdb.paramEcrit("PeriodeDim", "0", "options");
         }
-        if(cbActive.isSelected()){
-            fdb.paramEcrit("EnvoieMail", "1", "options");
-        }else{
-            fdb.paramEcrit("EnvoieMail", "0", "options");
-        }
         fdb.paramEcrit("PeriodeHeure", tfHeure.getText(), "options");
         dispose();
     }//GEN-LAST:event_btnValidActionPerformed
@@ -298,7 +283,6 @@ public class FenRecap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnValid;
-    private javax.swing.JCheckBox cbActive;
     private javax.swing.JCheckBox cbDim;
     private javax.swing.JCheckBox cbJeu;
     private javax.swing.JCheckBox cbLun;

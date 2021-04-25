@@ -30,7 +30,6 @@ public class FenParamMail extends javax.swing.JFrame {
         labUser.setText(PackFunc.Var.bundle.getString("param.mail.user"));
         labPass.setText(PackFunc.Var.bundle.getString("param.mail.pass"));
         labMail.setText(PackFunc.Var.bundle.getString("param.mail.mail"));
-        cbEnvoieMail.setText(PackFunc.Var.bundle.getString("param.mail.envoie"));
         butValid.setText(PackFunc.Var.bundle.getString("btn.valid"));
         try {
             if(fl.validLicense() == true){
@@ -52,11 +51,7 @@ public class FenParamMail extends javax.swing.JFrame {
         tfSmtpUser.setText(fdb.paramLire("smtp_user", "param"));
         tfSmtpPass.setText(fdb.paramLire("smtp_pass", "param"));
         tfSmtpMail.setText(fdb.paramLire("smtp_mail", "param"));
-        if(fdb.paramLire("mail_rapport", "param").equals("1")){
-            cbEnvoieMail.setSelected(true);
-        }else{
-            cbEnvoieMail.setSelected(false);
-        }
+       
     }
 
     /**
@@ -80,7 +75,6 @@ public class FenParamMail extends javax.swing.JFrame {
         tfSmtpUser = new javax.swing.JTextField();
         tfSmtpMail = new javax.swing.JTextField();
         tfSmtpPass = new javax.swing.JTextField();
-        cbEnvoieMail = new javax.swing.JCheckBox();
         butValid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -107,8 +101,6 @@ public class FenParamMail extends javax.swing.JFrame {
 
         labPass.setText("Pass SMTP");
 
-        cbEnvoieMail.setText("jCheckBox1");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -118,13 +110,8 @@ public class FenParamMail extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labPass)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(cbEnvoieMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(tfSmtpPass))))
+                        .addGap(58, 58, 58)
+                        .addComponent(tfSmtpPass, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labServ)
@@ -162,9 +149,7 @@ public class FenParamMail extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labPass)
                     .addComponent(tfSmtpPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(cbEnvoieMail)
-                .addContainerGap())
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         butValid.setText("Valider");
@@ -191,10 +176,10 @@ public class FenParamMail extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(labParam, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(butValid)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,7 +240,6 @@ public class FenParamMail extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butValid;
-    private javax.swing.JCheckBox cbEnvoieMail;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labMail;
     private javax.swing.JLabel labParam;

@@ -74,7 +74,6 @@ public class funcDbConnect {
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - creerTables dist recap - "+getClass().getName());
             PackFunc.funcMain.ecritLogsStat(ex, "funcDbConnect");
-            System.out.println(ex);
         }
     }
     public void dbExtPerteCreate(){
@@ -88,7 +87,6 @@ public class funcDbConnect {
             conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - creerTables dist perte - "+getClass().getName());
-            System.out.println(ex);
         }
     }
     public void dbExtEcrire(String ip, String nom, String etat){
@@ -107,7 +105,6 @@ public class funcDbConnect {
             conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - Ecrire dist recap - "+getClass().getName());
-            System.out.println(ex);
         }
     }
     public void dbExtPerteEcrire(String ip, String nom, String etat){
@@ -121,13 +118,11 @@ public class funcDbConnect {
             String nomSite = fdb.paramLire("site", "param");
             ps1 = conn.createStatement();
             String sq1 = "INSERT INTO `"+nomSite+"_perte` (`date`, `ip`, `nom`, `etat`) VALUES ('"+date+"', '"+ip+"', '"+nom+"', '"+etat+"');";
-System.out.println(sq1);
             ps1.execute(sq1);
             ps1.close();
             conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - Ecrire dist Perte - "+getClass().getName());
-            System.out.println(ex);
         }
     }
     public void dbExtPurge(){
@@ -142,7 +137,6 @@ System.out.println(sq1);
             conn.close();
         } catch (SQLException ex) {
             fun.ecritLogs(ex, " - dbExt purge dist - "+getClass().getName());
-            System.out.println(ex);
         }
     }
     
@@ -153,7 +147,6 @@ System.out.println(sq1);
             boolean exists = conn.getMetaData().getTables(null, null, table, null).next();
             if(!exists){
                 tableExist = true;
-                System.out.println("Created table " + table);
             }
             conn.close();
         } catch (SQLException ex) {

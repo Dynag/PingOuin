@@ -238,7 +238,6 @@ public class funcMiseAJour {
 	      } catch (IOException e) { 
                   JOptionPane.showMessageDialog(null,e);
 	        e.printStackTrace();
-                System.out.println(e);
 	      } finally{
 	    	  try {
 	    		  is.close();

@@ -43,14 +43,13 @@ public final class FenMain extends javax.swing.JFrame {
      * Creates new form mainAcc
      */
     public FenMain(){
-    System.out.println("00");    
         fun.testOs();
         File fichier = new File(PackFunc.Var.path+"/db/ip.pigo");
         fichier.delete();
         
 
         
-//menTest.setVisible(false);
+
         fun.dossCree();
         
         try {
@@ -75,11 +74,12 @@ public final class FenMain extends javax.swing.JFrame {
         tMaJ.start();
         initComponents();
         lang();
+        menTest.setVisible(false);
+        jMenuItem13.setVisible(false);
         
         progerAjout.setVisible(false);
         btnLancer.setBackground(Color.red);
         
-System.out.println(PackFunc.Var.dbConParam);
 // Test mise à jour
         
         
@@ -107,10 +107,10 @@ System.out.println(PackFunc.Var.dbConParam);
         labAjout.setText(PackFunc.Var.bundle.getString("main.ajout"));
         labPingDelais.setText(PackFunc.Var.bundle.getString("main.ping.delais"));
         labModif.setText(PackFunc.Var.bundle.getString("main.modif"));
-        btnNav.setText(PackFunc.Var.bundle.getString("main.btn.nav"));
         btnClear.setText(PackFunc.Var.bundle.getString("main.btn.clear"));
         btnEfface.setText(PackFunc.Var.bundle.getString("main.btn.efface"));
         labNbrHs.setText(PackFunc.Var.bundle.getString("main.nbrHs"));
+        labHote.setText(PackFunc.Var.bundle.getString("main.nbrHote"));
         
         menFichier.setText(PackFunc.Var.bundle.getString("menu.fichier"));
         menFichierExport.setText(PackFunc.Var.bundle.getString("menu.fichier.export"));
@@ -150,7 +150,6 @@ System.out.println(PackFunc.Var.dbConParam);
         btnLancer = new javax.swing.JToggleButton();
         progerAjout = new javax.swing.JProgressBar();
         labMaj = new javax.swing.JLabel();
-        comboTri = new javax.swing.JComboBox<>();
         labImg = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -159,14 +158,10 @@ System.out.println(PackFunc.Var.dbConParam);
         spinPlage = new javax.swing.JSpinner();
         cbTout = new javax.swing.JComboBox<>();
         btnValid = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        labPingDelais = new javax.swing.JLabel();
-        labDelaisPing = new javax.swing.JLabel();
-        slidDelaisPing = new javax.swing.JSpinner();
-        labNbrHs = new javax.swing.JLabel();
-        spinNbrHs = new javax.swing.JSpinner();
+        labHote = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         listeSite = new javax.swing.JComboBox<>();
+        comboTri = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         labThreadOuvert = new javax.swing.JLabel();
         labThreadFerme = new javax.swing.JLabel();
@@ -178,11 +173,15 @@ System.out.println(PackFunc.Var.dbConParam);
         tfNom = new javax.swing.JTextField();
         labModif = new javax.swing.JButton();
         labIp = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        btnNav = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         btnClear = new javax.swing.JButton();
         btnEfface = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        labPingDelais = new javax.swing.JLabel();
+        labDelaisPing = new javax.swing.JLabel();
+        slidDelaisPing = new javax.swing.JSpinner();
+        labNbrHs = new javax.swing.JLabel();
+        spinNbrHs = new javax.swing.JSpinner();
         jMenuBar1 = new javax.swing.JMenuBar();
         menFichier = new javax.swing.JMenu();
         menFichierExport = new javax.swing.JMenuItem();
@@ -218,25 +217,13 @@ System.out.println(PackFunc.Var.dbConParam);
             }
         });
 
-        progerAjout.setMaximum(254);
+        progerAjout.setForeground(new java.awt.Color(255, 255, 0));
+        progerAjout.setMaximum(255);
 
         labMaj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         labMaj.setForeground(new java.awt.Color(255, 255, 255));
         labMaj.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labMaj.setText("A jour");
-
-        comboTri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trier par", "IP", "Nom" }));
-        comboTri.setMaximumSize(new java.awt.Dimension(47, 20));
-        comboTri.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboTriItemStateChanged(evt);
-            }
-        });
-        comboTri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTriActionPerformed(evt);
-            }
-        });
 
         labImg.setBackground(new java.awt.Color(255, 255, 255));
         labImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -252,11 +239,9 @@ System.out.println(PackFunc.Var.dbConParam);
                 .addComponent(labImg, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLancer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(comboTri, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(117, 117, 117)
                 .addComponent(progerAjout, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(labMaj, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -266,9 +251,7 @@ System.out.println(PackFunc.Var.dbConParam);
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labImg, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnLancer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnLancer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -304,6 +287,9 @@ System.out.println(PackFunc.Var.dbConParam);
             }
         });
 
+        labHote.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labHote.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -311,11 +297,12 @@ System.out.println(PackFunc.Var.dbConParam);
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbTout, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbTout, 0, 125, Short.MAX_VALUE)
                     .addComponent(labAjout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tfPremIp)
                     .addComponent(spinPlage)
-                    .addComponent(btnValid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnValid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labHote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -326,77 +313,14 @@ System.out.println(PackFunc.Var.dbConParam);
                 .addGap(18, 18, 18)
                 .addComponent(tfPremIp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(labHote)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spinPlage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cbTout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnValid)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        labPingDelais.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labPingDelais.setText("Delais entre 2 pings");
-
-        labDelaisPing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labDelaisPing.setText("5 s");
-
-        slidDelaisPing.setValue(5);
-        slidDelaisPing.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                slidDelaisPingStateChanged(evt);
-            }
-        });
-
-        labNbrHs.setText("jLabel1");
-
-        spinNbrHs.setValue(3);
-        spinNbrHs.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spinNbrHsStateChanged(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labPingDelais, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                            .addComponent(labDelaisPing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(labNbrHs, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                                    .addComponent(spinNbrHs))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labPingDelais)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labDelaisPing)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labNbrHs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spinNbrHs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -407,13 +331,28 @@ System.out.println(PackFunc.Var.dbConParam);
             }
         });
 
+        comboTri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trier par", "IP", "Nom" }));
+        comboTri.setMaximumSize(new java.awt.Dimension(47, 20));
+        comboTri.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTriItemStateChanged(evt);
+            }
+        });
+        comboTri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTriActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(listeSite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(listeSite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboTri, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -421,7 +360,9 @@ System.out.println(PackFunc.Var.dbConParam);
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(listeSite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(comboTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -432,7 +373,6 @@ System.out.println(PackFunc.Var.dbConParam);
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -441,9 +381,7 @@ System.out.println(PackFunc.Var.dbConParam);
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -562,32 +500,6 @@ System.out.println(PackFunc.Var.dbConParam);
                 .addContainerGap())
         );
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnNav.setText("Ouvrir navigateur");
-        btnNav.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNavActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNav, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNav)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -626,6 +538,70 @@ System.out.println(PackFunc.Var.dbConParam);
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        labPingDelais.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labPingDelais.setText("Delais entre 2 pings");
+
+        labDelaisPing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labDelaisPing.setText("5 s");
+
+        slidDelaisPing.setValue(5);
+        slidDelaisPing.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slidDelaisPingStateChanged(evt);
+            }
+        });
+
+        labNbrHs.setText("jLabel1");
+
+        spinNbrHs.setValue(3);
+        spinNbrHs.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinNbrHsStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labPingDelais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labNbrHs, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(spinNbrHs))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labDelaisPing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(14, 14, 14)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labPingDelais)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(slidDelaisPing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labDelaisPing))
+                .addGap(26, 26, 26)
+                .addComponent(labNbrHs)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spinNbrHs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -633,13 +609,11 @@ System.out.println(PackFunc.Var.dbConParam);
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -647,9 +621,9 @@ System.out.println(PackFunc.Var.dbConParam);
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -789,7 +763,7 @@ System.out.println(PackFunc.Var.dbConParam);
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -965,14 +939,6 @@ System.out.println(PackFunc.Var.dbConParam);
         fdb.listeIp();
     }//GEN-LAST:event_labModifActionPerformed
 
-    private void btnNavActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNavActionPerformed
-        try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler \"http://"+labIp.getText()+"\""); //NOI18N
-        } catch (IOException ex) {
-
-        }
-    }//GEN-LAST:event_btnNavActionPerformed
-
     private void menFichierSitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menFichierSitesActionPerformed
         FenGestionSite pgs = new FenGestionSite();
         pgs.show();
@@ -1039,7 +1005,6 @@ System.out.println(PackFunc.Var.dbConParam);
         PackFunc.Var.stopPing = true;
         btnLancer.setText(PackFunc.Var.bundle.getString("main.start"));
         btnLancer.setBackground(Color.red);
-        System.out.println(PackFunc.Var.tri);
     }//GEN-LAST:event_comboTriActionPerformed
 
     private void tabPrincFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabPrincFocusLost
@@ -1100,7 +1065,6 @@ System.out.println(PackFunc.Var.dbConParam);
 
     private void spinNbrHsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinNbrHsStateChanged
         Var.nbrHs = (Integer) spinNbrHs.getValue();
-        System.out.println(Var.nbrHs);
     }//GEN-LAST:event_spinNbrHsStateChanged
 
     /**
@@ -1146,7 +1110,6 @@ System.out.println(PackFunc.Var.dbConParam);
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnEfface;
     public static javax.swing.JToggleButton btnLancer;
-    private javax.swing.JButton btnNav;
     private javax.swing.JButton btnValid;
     private javax.swing.JComboBox<String> cbTout;
     private javax.swing.JComboBox<String> comboTri;
@@ -1160,7 +1123,6 @@ System.out.println(PackFunc.Var.dbConParam);
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -1170,6 +1132,7 @@ System.out.println(PackFunc.Var.dbConParam);
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JLabel labAjout;
     public static javax.swing.JLabel labDelaisPing;
+    private javax.swing.JLabel labHote;
     public static javax.swing.JLabel labImg;
     public static javax.swing.JLabel labIp;
     public static javax.swing.JLabel labMaj;

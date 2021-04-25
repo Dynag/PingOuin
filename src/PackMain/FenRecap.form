@@ -87,31 +87,26 @@
                           <Component id="tfHeure" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="cbActive" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cbLun" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cbMar" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cbVen" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cbSam" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cbLun" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="cbMerc" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cbJeu" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="cbDim" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="cbMar" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cbVen" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cbSam" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="cbMerc" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cbJeu" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="cbDim" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="68" max="32767" attributes="0"/>
                       </Group>
@@ -141,9 +136,7 @@
                       <Component id="cbSam" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbDim" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="cbActive" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -194,11 +187,6 @@
         <Component class="javax.swing.JCheckBox" name="cbDim">
           <Properties>
             <Property name="text" type="java.lang.String" value="dim"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="cbActive">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jCheckBox1"/>
           </Properties>
         </Component>
       </SubComponents>
