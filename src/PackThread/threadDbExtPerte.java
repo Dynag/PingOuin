@@ -45,19 +45,20 @@ System.out.println("perte depart");
             ps = PackFunc.Var.dbConSite.createStatement();
             rs = ps.executeQuery(sql1);
             while(rs.next()){
-                if(Integer.parseInt(rs.getString("bdext_perte")) == PackFunc.Var.nbrHs){
-                    ipHsMail = ipHsMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
-                    fdb.dbIpEcrit(rs.getString("ip"), "4", "bdext_perte");
-                    dbc.dbExtPerteEcrire(rs.getString("ip"), rs.getString("nom"), "HS");
-System.out.println("Ecrit HS");
-                }
-                if(Integer.parseInt(rs.getString("bdext_perte")) == 5)
+                if(Integer.parseInt(rs.getString("bdext_perte")) == 500)
                {
                     ipOkMail = ipOkMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
                     fdb.dbIpEcrit(rs.getString("ip"), "0", "bdext_perte");
                     dbc.dbExtPerteEcrire(rs.getString("ip"), rs.getString("nom"), "OK");
 System.out.println("Ecrit OK");
                }
+                else if(Integer.parseInt(rs.getString("bdext_perte")) == PackFunc.Var.nbrHs){
+                    ipHsMail = ipHsMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
+                    fdb.dbIpEcrit(rs.getString("ip"), "400", "bdext_perte");
+                    dbc.dbExtPerteEcrire(rs.getString("ip"), rs.getString("nom"), "HS");
+System.out.println("Ecrit HS");
+                }
+                
                 
            }
             ps.close();

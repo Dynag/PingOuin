@@ -25,6 +25,7 @@ public class funcMail {
     funcMain fun = new funcMain();
     funcDb fdb = new funcDb();
     public void envoieMail(String objet, String message) throws MessagingException{
+System.out.println("Le mail part");
         Properties properties = new Properties();
         properties.setProperty("mail.transport.protocol", "smtp");
         properties.setProperty("mail.smtp.host", fdb.paramLire("smtp_serv", "param"));
@@ -63,6 +64,7 @@ public class funcMail {
             transport.connect(fdb.paramLire("smtp_user", "param"), fdb.paramLire("smtp_pass", "param"));   
             try{
                 transport.sendMessage(message1, toClient); 
+                System.out.println("Le mail est partit");
             }catch(Exception e){ 
             }
             transport.close();

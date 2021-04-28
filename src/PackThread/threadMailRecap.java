@@ -64,17 +64,19 @@ System.out.println("009");
     
     public String prepaMessage(){
 System.out.println("005");
-        String mail = "Etat des périphériques : <br><br>";
+        String mail = "<p style='font-size: 15px; font-weight: bold; font-family: arial, times, serif; background-color: #9DFFAF; border-radius:10px; text-align: center; padding:5px;border-style: groove;'>"
+                + "Etat des périphériques : </p>";
         String sql1 = "SELECT * FROM ip ORDER BY nom;";
         try{
             ps = PackFunc.Var.dbConSite.createStatement();
             rs = ps.executeQuery(sql1);
             while(rs.next()){
             Integer etat = Integer.parseInt(rs.getString("etat"));
+System.out.println(etat);
                 if(etat == 0){
-                    mail = mail + PackFunc.Var.bundle.getString("thread.mailrecap.message1")+"<font color=green>"+rs.getString("ip")+"</font>, "+PackFunc.Var.bundle.getString("thread.mailrecap.message2")+" "+rs.getString("nom")+ " "+PackFunc.Var.bundle.getString("thread.mailrecap.message3")+" <font color=green>"+PackFunc.Var.bundle.getString("thread.mailrecap.messageok")+"</font><br>";
+                    mail = mail + "<table alig=center width=90% bgcolor=#8AFBB1><tr><td width=33%>" +PackFunc.Var.bundle.getString("thread.mailrecap.message1")+" "+rs.getString("ip")+"</td><td width=33%>, "+PackFunc.Var.bundle.getString("thread.mailrecap.message2")+" "+rs.getString("nom")+ "</td><td width=33%>"+PackFunc.Var.bundle.getString("thread.mailrecap.message3")+" "+PackFunc.Var.bundle.getString("thread.mailrecap.messageok")+"</td></tr></table>";
                 }else{
-                    mail = mail + PackFunc.Var.bundle.getString("thread.mailrecap.message1")+"<font color=red>"+rs.getString("ip")+"</font>, "+PackFunc.Var.bundle.getString("thread.mailrecap.message2")+" "+rs.getString("nom")+ " "+PackFunc.Var.bundle.getString("thread.mailrecap.message3")+" <font color=red>"+PackFunc.Var.bundle.getString("thread.mailrecap.messagehs")+"</font><br>";
+                    mail = mail + "<table align=center width=90% bgcolor=#FA9493><tr><td width=33%>" +PackFunc.Var.bundle.getString("thread.mailrecap.message1")+" "+rs.getString("ip")+"</td><td width=33%>, "+PackFunc.Var.bundle.getString("thread.mailrecap.message2")+" "+rs.getString("nom")+ "</td><td width=33%>"+PackFunc.Var.bundle.getString("thread.mailrecap.message3")+" "+PackFunc.Var.bundle.getString("thread.mailrecap.messagehs")+"</td></tr></table>";
                 }
             }
         }catch(Exception e){

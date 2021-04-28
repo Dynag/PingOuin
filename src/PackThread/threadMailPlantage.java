@@ -29,6 +29,7 @@ public class threadMailPlantage implements Runnable{
     
     @Override
     public void run(){
+System.out.println("Mail HS "+PackFunc.Var.nbrHs);
         Integer nbr = 0;
         String ipHsMail = "";
         String ipOkMail = "";
@@ -37,16 +38,17 @@ public class threadMailPlantage implements Runnable{
             ps = PackFunc.Var.dbConSite.createStatement();
             rs = ps.executeQuery(sql1);
             while(rs.next()){
-                if(Integer.parseInt(rs.getString("etat")) == PackFunc.Var.nbrHs){
-                    ipHsMail = ipHsMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
-                    
-                    fdb.dbIpEcrit(rs.getString("ip"), "4", "etat");
-                }
-                if(Integer.parseInt(rs.getString("etat")) == 5)
+                if(Integer.parseInt(rs.getString("etat")) == 500)
                {
-                    ipOkMail = ipOkMail + rs.getString("ip")+" : "+rs.getString("nom") + " \n ";
+                    ipOkMail = ipOkMail + "<table width=90% align=center><tr><td width=50%>"+rs.getString("ip")+"</tD><td width=50%>"+rs.getString("nom") + "</td></tr></table>";
                     fdb.dbIpEcrit(rs.getString("ip"), "0", "etat");
                }
+                else if(Integer.parseInt(rs.getString("etat")) == PackFunc.Var.nbrHs){
+                    ipHsMail = ipHsMail + "<table width=90% align=center><tr><td width=50%>"+rs.getString("ip")+"</tD><td width=50%>"+rs.getString("nom") + "</td></tr></table>";
+                    
+                    fdb.dbIpEcrit(rs.getString("ip"), "400", "etat");
+                }
+                
             }
             ps.close();
         }catch(SQLException e){

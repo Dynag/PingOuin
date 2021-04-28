@@ -44,33 +44,33 @@ public class threadPing implements Runnable{
         Integer ipDbExt = Integer.parseInt(fdb.dbIpLire(ip, "bdext_perte"));
         if(ipTest == "500"){
             result = "HS";
-            if(ipPresent <= PackFunc.Var.nbrHs){
+            if(ipPresent < PackFunc.Var.nbrHs){
                 ipPresent = ipPresent+1;
             }
-            if(ipPopup <= PackFunc.Var.nbrHs){
+            if(ipPopup < PackFunc.Var.nbrHs){
                 ipPopup = ipPopup+1;
             }
-            if(ipDbExt <= PackFunc.Var.nbrHs){
+            if(ipDbExt < PackFunc.Var.nbrHs){
                 ipDbExt = ipDbExt+1;
             }
             
             }else{
             result = "OK";
-            if(ipPresent == 4){
-                ipPresent = 5;
-            }else if(ipPresent <= PackFunc.Var.nbrHs || ipPresent == 5){
+            if(ipPresent == 400){
+                ipPresent = 500;
+            }else if(ipPresent <= 399){
                 ipPresent = 0;
             }
             
-            if(ipPresent == 4){
-                ipPresent = 5;
-            }else if(ipPopup <= PackFunc.Var.nbrHs || ipPopup == 5){
+            if(ipPopup == 400){
+                ipPopup = 500;
+            }else if(ipPopup <= 399){
                 ipPopup = 0;
             }
             
-            if(ipDbExt == 4){
-                ipDbExt = 5;
-            }else if(ipDbExt <= PackFunc.Var.nbrHs || ipDbExt == 5){
+            if(ipDbExt == 400){
+                ipDbExt = 500;
+            }else if(ipDbExt <= 399){
                 ipDbExt = 0;
             }
             

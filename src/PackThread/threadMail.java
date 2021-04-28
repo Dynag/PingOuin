@@ -35,6 +35,7 @@ public class threadMail extends Thread{
     }
     public void run(){
         while(running == true){
+System.out.println("Envoie du mail");
         try{
             String sql = "SELECT * FROM param";
             try{
@@ -49,13 +50,16 @@ public class threadMail extends Thread{
                 String objet;
                 String message;
                 if(type == "HS"){
-                    message = PackFunc.Var.bundle.getString("thread.mail.messageperte1")+dateFormat.format(auj)+".\n"+
-                            PackFunc.Var.bundle.getString("thread.mail.messageperte2")+rs.getString("site")+" : \n \n"+
+                    message = PackFunc.Var.bundle.getString("thread.mail.messageperte1")+dateFormat.format(auj)+"."+
+                            "<p style='font-size: 15px; font-weight: bold; font-family: arial, times, serif; background-color: #FA9493; border-radius:10px; text-align: center; padding:5px;border-style: groove;'>"
+                            +PackFunc.Var.bundle.getString("thread.mail.messageperte2")+rs.getString("site")+" : </p>"+
                             ipIp+PackFunc.Var.bundle.getString("thread.mail.messageperte3");
+                    
                     objet = PackFunc.Var.bundle.getString("thread.mail.objetperte")+rs.getString("site");
                 }else{
-                    message = PackFunc.Var.bundle.getString("thread.mail.messageperte1")+dateFormat.format(auj)+".\n"+
-                            PackFunc.Var.bundle.getString("thread.mail.messageretour")+rs.getString("site")+" : \n \n"+
+                    message = PackFunc.Var.bundle.getString("thread.mail.messageperte1")+dateFormat.format(auj)+"."+
+                            "<p style='font-size: 15px; font-weight: bold; font-family: arial, times, serif; background-color: #9DFFAF; border-radius:10px; text-align: center; padding:5px;border-style: groove;'>"+
+                            PackFunc.Var.bundle.getString("thread.mail.messageretour1")+rs.getString("site")+" : </p>"+
                             ipIp+PackFunc.Var.bundle.getString("thread.mail.messageperte3");
                     objet = PackFunc.Var.bundle.getString("thread.mail.objetretour")+rs.getString("site");
                 }
